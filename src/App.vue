@@ -1,29 +1,27 @@
 <template>
   <div id="app">
-    <navbar/>
-    <hello-world/>
+    <cc-navbar/>
+    <br>
+    <router-view></router-view>
+    <br>
+    <cc-footer/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Navbar from './components/Navbar.vue'
+import ccNavbar from './components/Navbar.vue'
+import ccFooter from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar, HelloWorld
+    ccNavbar, ccFooter
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .selector-for-some-widget {
+    box-sizing: content-box;
+  }
 </style>
