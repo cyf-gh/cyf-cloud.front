@@ -30,7 +30,7 @@
       <b-carousel-slide img-src="https://gitee.com/cyf-my/imgs/raw/master/assets/c-skin.jpg">
       <h1>Minecraft 皮肤站点</h1>
       <h5>享受皮肤带来的乐趣与进行外置验证资格的获取</h5>
-      <b-button href="http://se.cyf-cloud.cn:8228" target="_blank" security="restricted" sandbox="" pill variant="outline-secondary">前往注册</b-button>
+      <b-button href="#/mc/skin" pill variant="outline-secondary">前往注册</b-button>
       </b-carousel-slide>
       <!-- Slides with custom text -->
       <b-carousel-slide img-src="https://gitee.com/cyf-my/imgs/raw/master/assets/c-karajan.jpg">

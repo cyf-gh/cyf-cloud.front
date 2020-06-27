@@ -12,7 +12,8 @@
         <b-nav-item href="#/music">音乐</b-nav-item>
 
         <b-nav-item-dropdown text="个人" right>
-            <b-dropdown-item href="#">博客</b-dropdown-item>
+            <b-dropdown-item href="#/blog">博客</b-dropdown-item>
+            <b-dropdown-item href="https://github.com/cyf-gh">Github</b-dropdown-item>
             <b-dropdown-item href="https://space.bilibili.com/3087782">哔哩哔哩</b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item href="#/donate">捐赠</b-dropdown-item>

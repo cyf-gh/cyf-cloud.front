@@ -31,6 +31,11 @@
                 </svg>
                 <small class="d-block mb-3 text-muted">cyf 2020</small>
             </div>
+                <div class="col-12 col-md">
+                    <b-badge pill variant="light">
+                    <span id="busuanzi_container_site_pv">访问量<span id="busuanzi_value_site_pv"></span>次</span>
+                    </b-badge>
+                    </div>
         </div>
     </footer>
 </template>

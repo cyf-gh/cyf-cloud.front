@@ -5,11 +5,14 @@ import ccMcWebmap from "./components/minecraft/Webmap"
 import ccMcHome from "./components/minecraft/Home"
 import ccMcSkin from "./components/minecraft/Skin"
 
+import ccCyfBlog from "./components/cyf/Blog"
 import ccCyfDonate from "./components/cyf/Donate"
+
 import ccMusic from "./components/music/Music"
 import ccMusicUpload from "./components/music/Upload"
 
 import Vue from "vue";
+
 
 const routes = [
     { path: '/mc/skin', component: ccMcSkin },
@@ -19,6 +22,7 @@ const routes = [
     { path: '/music', component: ccMusic },
     { path: '/music/upload', component: ccMusicUpload },
     { path: '/donate', component: ccCyfDonate },
+    { path: '/blog', component: ccCyfBlog },
     { path: '*', redirect: '/home' }
 ]
 
