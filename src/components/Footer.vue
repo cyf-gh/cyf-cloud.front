@@ -2,6 +2,23 @@
 <template>
     <footer class=" navbar-fixed-bottom container py-5">
         <div class="row">
+            <div class="col-6 col-md">
+                <h5>联系方式</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted">QQ：1026279833</a></li>
+                    <li><a class="text-muted">微信：cyf_tx</a></li>
+                    <li><a class="text-muted">邮箱：cyf-ms@hotmail.com</a></li>
+                    <li><a class="text-muted" href="github.com/cyf-gh">Github</a></li>
+                    <li><a class="text-muted" href="https://space.bilibili.com/3087782">哔哩哔哩</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>捐赠</h5>
+                <ul class="list-unstyled text-small">
+                    <li></li>
+                    <li><a class="text-muted" href="#/donate">前往捐赠</a></li>
+                </ul>
+            </div>
             <div class="col-12 col-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
@@ -13,16 +30,6 @@
                     </path>
                 </svg>
                 <small class="d-block mb-3 text-muted">cyf 2020</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>联系方式</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted">QQ：1026279833</a></li>
-                    <li><a class="text-muted">微信：cyf_tx</a></li>
-                    <li><a class="text-muted">邮箱：cyf-ms@hotmail.com</a></li>
-                    <li><a class="text-muted" href="github.com/cyf-gh">Github</a></li>
-                    <li><a class="text-muted" href="https://space.bilibili.com/3087782">哔哩哔哩</a></li>
-                </ul>
             </div>
         </div>
     </footer>

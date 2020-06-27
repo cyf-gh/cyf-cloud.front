@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <cc-navbar/>
-    <br>
     <router-view></router-view>
-    <br>
     <cc-footer/>
   </div>
 </template>
@@ -16,6 +14,14 @@ export default {
   name: 'App',
   components: {
     ccNavbar, ccFooter
+  },
+  mounted(){
+    window.addEventListener('hashchange',()=>{
+        var currentPath = window.location.hash.slice(1); // 获取输入的路由
+        if(this.$router.path !== currentPath){
+            this.$router.push(currentPath); // 动态跳转
+        }
+    },false);
   }
 }
 </script>
@@ -24,4 +30,6 @@ export default {
   .selector-for-some-widget {
     box-sizing: content-box;
   }
+
+
 </style>

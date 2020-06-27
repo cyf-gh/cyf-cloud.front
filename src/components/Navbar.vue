@@ -4,19 +4,21 @@
     <div>
     <b-navbar type="dark" variant="dark">
         <b-navbar-nav>
-        <b-navbar-brand>cyf-cloud</b-navbar-brand>
-        <b-nav-item href="#">个人博客</b-nav-item>
+        <b-navbar-brand href="/">
+            <img src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png" alt="Kitten" height="30" width="30">
+        </b-navbar-brand>
+        <b-nav-item href="#/">主页</b-nav-item>
+        <b-nav-item href="#/mc">我的世界</b-nav-item>
+        <b-nav-item href="#/music">音乐</b-nav-item>
 
-        <!-- Navbar dropdowns -->
-        <b-nav-item-dropdown text="Minecraft" right>
-            <b-dropdown-item href="http://lod.tpddns.cn:8123">1.14.4 纯净服网页地图</b-dropdown-item>
-            <b-dropdown-item href="http://lod.tpddns.cn:8124">1.12.2 Mod 服网页地图</b-dropdown-item>
+        <b-nav-item-dropdown text="个人" right>
+            <b-dropdown-item href="#">博客</b-dropdown-item>
+            <b-dropdown-item href="https://space.bilibili.com/3087782">哔哩哔哩</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item href="#/donate">捐赠</b-dropdown-item>
         </b-nav-item-dropdown>
 
-        <b-nav-item-dropdown text="音乐服务" right>
-            <b-dropdown-item href="http://lod.tpddns.cn:5555/">Web站点</b-dropdown-item>
-            <b-dropdown-item href="http://lod.tpddns.cn:5225/">上传音乐文件</b-dropdown-item>
-        </b-nav-item-dropdown>
+
         </b-navbar-nav>
     </b-navbar>
     </div>
