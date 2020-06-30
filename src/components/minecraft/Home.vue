@@ -5,9 +5,9 @@
       <h2>
         <strong>快速了解 Minecraft 服务器的现状</strong>
       </h2>
-      <b-button href="#/mc/map" pill variant="outline-secondary">查看卫星地图</b-button>
+      <b-button href="/mc/map" pill variant="outline-secondary">查看卫星地图</b-button>
 
-    <b-button href="#/mc/skin" pill variant="outline-secondary" >前往注册皮肤账户</b-button>
+    <b-button href="/mc/skin" pill variant="outline-secondary" >前往注册皮肤账户</b-button>
       <hr style="width: 10rem;" />
     </div>
     <div>
@@ -26,10 +26,10 @@
         </b-tab>
 
         <b-tab title="1.12 Mod">
-          <b-jumbotron text-variant="white" header="Minecraft 1.12.2 MOD服" lead="适合喜欢Mod的玩家。"  style="background-image: url(https://gitee.com/cyf-my/imgs/raw/master/assets/c-mod.jpg); background-size: 100%;">
-            <b-button pill variant="outline-secondary" id="popover-target-1">Mod列表</b-button>
+          <b-jumbotron text-variant="white" header="Minecraft 1.12.2 MOD服" lead="适合喜欢Mod的玩家。"  style="background-image: url(https://gitee.com/cyf-my/imgs/raw/master/assets/c-mod.jpg); background-size: cover;">
+            <b-button pill variant="primary" id="popover-target-1">Mod列表</b-button>
             <b-popover target="popover-target-1" triggers="hover" placement="top">
-              <template v-slot:title>Mod一览</template>
+              <template v-slot:title>Mod 一览</template>
               <h6 class="text-left">
                 [更多实用设备2]extrautils2
                 <br />[工业时代2]industrialcraft

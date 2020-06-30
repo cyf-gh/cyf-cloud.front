@@ -1,33 +1,20 @@
 import VueRouter from 'vue-router'
-import ccHome from "./components/home/Home";
-
-import ccMcWebmap from "./components/minecraft/Webmap"
-import ccMcHome from "./components/minecraft/Home"
-import ccMcSkin from "./components/minecraft/Skin"
-
-import ccCyfBlog from "./components/cyf/Blog"
-import ccCyfDonate from "./components/cyf/Donate"
-
-import ccMusic from "./components/music/Music"
-import ccMusicUpload from "./components/music/Upload"
-
 import Vue from "vue";
 
-
 const routes = [
-    { path: '/mc/skin', component: ccMcSkin },
-    { path: '/home', component: ccHome },
-    { path: '/mc', component: ccMcHome },
-    { path: '/mc/map', component: ccMcWebmap },
-    { path: '/music', component: ccMusic },
-    { path: '/music/upload', component: ccMusicUpload },
-    { path: '/donate', component: ccCyfDonate },
-    { path: '/blog', component: ccCyfBlog },
+    { path: '/mc/skin', component: () => import( "./components/minecraft/Skin") },
+    { path: '/home', component: () => import( "./components/home/Home" ) },
+    { path: '/mc', component: () => import("./components/minecraft/Home") },
+    { path: '/mc/map', component: () => import("./components/minecraft/Webmap") },
+    { path: '/music', component: () => import("./components/music/Music")},
+    { path: '/music/upload', component: () => import("./components/music/Upload") },
+    { path: '/donate', component: () => import("./components/cyf/Donate") },
+    { path: '/blog', component: () => import( "./components/cyf/Blog") },
     { path: '*', redirect: '/home' }
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes
 })
 

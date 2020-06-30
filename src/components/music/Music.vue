@@ -6,7 +6,7 @@
     <b-badge pill variant="info" href="http://www.subsonic.org/">Powered by Subsonic©</b-badge>
     <b-badge pill variant="warning" href="https://jq.qq.com/?_wv=1027&k=isIw44iL">加入QQ群以获取账户密码</b-badge>
     <br>
-    <b-badge pill variant="primary" href="#/music/upload">上传歌曲</b-badge>
+    <b-badge pill variant="primary" href="/music/upload">上传歌曲</b-badge>
 
 </div>
 </template>
