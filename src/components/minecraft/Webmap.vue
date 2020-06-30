@@ -2,9 +2,9 @@
   <div class="container">
     <div class="text-center my-3">
       <b-button-group>
-        <b-button v-on:click="mapSrc='http://se.cyf-cloud.cn:8124'">1.14 纯净服</b-button>
-        <b-button v-on:click="mapSrc='http://se.cyf-cloud.cn:8123'">1.12 Mod服</b-button>
-        <b-button v-on:click="mapSrc='http://se.cyf-cloud.cn:8125'">1.16 纯净服</b-button>
+        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/114'">1.14 纯净服</b-button>
+        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/112'">1.12 Mod服</b-button>
+        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/116'">1.16 纯净服</b-button>
       </b-button-group>
     </div>
 
@@ -19,7 +19,7 @@ export default {
     name: "ccMcWebmap",
     data: function() {
         return {
-            mapSrc: "http://se.cyf-cloud.cn:8124"
+            mapSrc: "https://se.cyf-cloud.cn:8123/mc/map/114"
         }
     }
 };

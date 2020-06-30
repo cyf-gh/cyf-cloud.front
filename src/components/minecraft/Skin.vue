@@ -2,7 +2,7 @@
     <div class="container text-center">
         <br>
               <b-button
-        href="http://se.cyf-cloud.cn:8228"
+        href="https://se.cyf-cloud.cn:8228"
         target="_blank"
         security="restricted"
         sandbox
