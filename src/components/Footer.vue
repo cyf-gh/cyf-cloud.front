@@ -16,7 +16,7 @@
                 <h5>捐赠</h5>
                 <ul class="list-unstyled text-small">
                     <li></li>
-                    <li><a class="text-muted" href="/donate">前往捐赠</a></li>
+                    <li><a class="text-muted" href="#/donate">前往捐赠</a></li>
                 </ul>
             </div>
             <div class="col-12 col-md">
