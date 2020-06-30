@@ -70,11 +70,6 @@ module.exports = {
 			threshold: 10240,
 			minRatio: 0.8
 		  }))
-		  config.externals = {
-			'vue': 'Vue',
-			'vue-router': 'VueRouter',
-			'bootstrap-vue': 'BootstrapVue'
-		  }
 		}
 	  }
   };
