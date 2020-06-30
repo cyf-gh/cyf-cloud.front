@@ -2,14 +2,14 @@ import VueRouter from 'vue-router'
 import Vue from "vue";
 
 const routes = [
-    { path: '/mc/skin', component: () => import( "./components/minecraft/Skin") },
-    { path: '/home', component: () => import( "./components/home/Home" ) },
-    { path: '/mc', component: () => import("./components/minecraft/Home") },
-    { path: '/mc/map', component: () => import("./components/minecraft/Webmap") },
-    { path: '/music', component: () => import("./components/music/Music")},
-    { path: '/music/upload', component: () => import("./components/music/Upload") },
-    { path: '/donate', component: () => import("./components/cyf/Donate") },
-    { path: '/blog', component: () => import( "./components/cyf/Blog") },
+    { path: '/mc/skin', component: resolve => require( ["./components/minecraft/Skin"], resolve ) },
+    { path: '/home', component: resolve => require( [ "./components/home/Home"], resolve ) },
+    { path: '/mc', component: resolve => require( ["./components/minecraft/Home"], resolve ) },
+    { path: '/mc/map', component: resolve => require( ["./components/minecraft/Webmap"], resolve ) },
+    { path: '/music', component: resolve => require( ["./components/music/Music"], resolve )},
+    { path: '/music/upload', component: resolve => require( ["./components/music/Upload"], resolve ) },
+    { path: '/donate', component: resolve => require( ["./components/cyf/Donate"], resolve ) },
+    { path: '/blog', component: resolve => require( [ "./components/cyf/Blog"], resolve ) },
     { path: '*', redirect: '/home' }
 ]
 

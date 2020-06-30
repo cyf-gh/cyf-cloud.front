@@ -1,6 +1,9 @@
 // vue.config.js 配置说明
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
 // 这里只列一部分，具体配置参考文档
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const productionGzipExtensions = ['js', 'css'];
+const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
 	// 部署生产环境和开发环境下的URL。
 	// 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
@@ -56,5 +59,18 @@ module.exports = {
 		  target: "<other_url>"
 		}
 	  }
-	}
+	},
+
+	configureWebpack: config => {
+		if (isProduction) {
+		  config.plugins.push(new CompressionWebpackPlugin({
+			algorithm: 'gzip',
+			test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+			threshold: 10240,
+			minRatio: 0.8
+		  }))
+		}
+	  }
+
+	  
   };
