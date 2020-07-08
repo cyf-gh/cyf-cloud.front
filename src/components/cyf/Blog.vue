@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div>
     <iframe class="cc-iframe" src="https://cyf-my.gitee.io" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
 </div>
 </template>
