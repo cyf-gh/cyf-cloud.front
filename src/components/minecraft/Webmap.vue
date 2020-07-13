@@ -9,7 +9,7 @@
     </div>
 
     <div class="text-center my-3">
-    <iframe class="cc-iframe" :src="mapSrc" ></iframe>
+    <iframe class="cc-iframe"  frameborder="no"  :src="mapSrc" ></iframe>
     </div>
   </div>
 </template>

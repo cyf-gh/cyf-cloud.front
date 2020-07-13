@@ -14,7 +14,7 @@
       <b-tabs content-class="mt-3" align="center">
         <b-tab title="1.14 纯净生存" active>
           <div>
-            <b-jumbotron text-variant="white" header="Minecraft 1.14.4 纯净生存服" lead="适合喜欢原版Minecraft的玩家、生电玩家、建筑玩家。" style="background-image: url(https://gitee.com/cyf-my/imgs/raw/master/assets/mc1.png); background-size: cover;">
+            <b-jumbotron text-variant="white" header="Minecraft 1.14.4 纯净生存服" lead="适合喜欢原版Minecraft的玩家、生电玩家、建筑玩家。" style="background-image: url(https://s1.ax1x.com/2020/07/13/UJBTtP.jpg); background-size: cover;">
               <div class="inline">
                 <a
                   href="https://jq.qq.com/?_wv=1027&k=6JyKdbXR"
@@ -26,7 +26,7 @@
         </b-tab>
 
         <b-tab title="1.12 Mod">
-          <b-jumbotron text-variant="white" header="Minecraft 1.12.2 MOD服" lead="适合喜欢Mod的玩家。"  style="background-image: url(https://gitee.com/cyf-my/imgs/raw/master/assets/c-mod.jpg); background-size: cover;">
+          <b-jumbotron text-variant="white" header="Minecraft 1.12.2 MOD服" lead="适合喜欢Mod的玩家。"  style="background-image: url(https://s1.ax1x.com/2020/07/13/UJBWOH.jpg); background-size: cover;">
             <b-button pill variant="primary" id="popover-target-1">Mod列表</b-button>
             <b-popover target="popover-target-1" triggers="hover" placement="top">
               <template v-slot:title>Mod 一览</template>
@@ -65,7 +65,7 @@
 
         <b-tab title="1.16 纯净生存">
           <div>
-            <b-jumbotron text-variant="white" header="Minecraft 1.16 纯净生存服" lead="积聚硬核生电与建筑大佬，需要审核才能进入。" style="background-image: url(https://gitee.com/cyf-my/imgs/raw/master/assets/c-16.png); background-size: cover;">
+            <b-jumbotron text-variant="white" header="Minecraft 1.16 纯净生存服" lead="积聚硬核生电与建筑大佬，需要审核才能进入。" style="background-image: url(https://s1.ax1x.com/2020/07/13/UJDbU1.jpg); background-size: cover;">
           <div class="inline">
             <a
               href="https://jq.qq.com/?_wv=1027&k=9InTnRhL"

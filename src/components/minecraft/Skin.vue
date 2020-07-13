@@ -1,8 +1,9 @@
 <template>
     <div class="container text-center">
         <br>
+        <b-alert show variant="warning"><a>请不要使用国产浏览器进行注册！请使用诸如Edge Chrome等浏览器进行网站操作！</a></b-alert>
               <b-button
-        href="https://se.cyf-cloud.cn:8228"
+        href="http://se.cyf-cloud.cn:8228"
         target="_blank"
         security="restricted"
         sandbox
@@ -11,7 +12,7 @@
       >前往注册官网</b-button>
         <div class="mask">
         <br>
-        <iframe class="cc-iframe" src="https://cyf-my.gitee.io/2020/06/27/register_skin_and_server_activate/#more" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+        <iframe class="cc-iframe" src="https://cyf-my.gitee.io/2020/06/27/register_skin_and_server_activate/#more"  frameborder="no" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups" disabled></iframe>
         </div>
     </div>
 </template>
