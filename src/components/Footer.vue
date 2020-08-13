@@ -24,7 +24,7 @@
             <a class="text-muted" href="#/donate">&#128155;我要捐赠</a>
           </li>
           <li>
-            <a class="text-muted" href="#/donate/rank">捐赠榜</a>
+            <a class="text-muted" href="#/donate/rank">&#128511;  捐赠榜</a>
           </li>
 
         </ul>

@@ -1,13 +1,14 @@
 <template>
   <div class="container text-center">
     <br>
-    <h2>捐赠榜</h2>
+    <h2>捐赠榜 &#128511;</h2>
+    <br>
     <b-table
+      striped
       rank="my-table"
       :items="donaters"
       :per-page="perPage"
       :current-page="currentPage"
-      small
     ></b-table>
     <b-pagination
       align="center"
@@ -25,7 +26,7 @@ import axios from 'axios'
     mounted:function(){
         axios.get("/v1/donate/rank","")
         .then(res => {
-            this.donaters = JSON.parse(res);
+          this.donaters = res.data;
         })
         .catch(err => {
             console.error(err);

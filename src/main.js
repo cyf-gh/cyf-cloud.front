@@ -9,7 +9,7 @@ import VueAxios from 'vue-axios'
 import qs from 'qs'
 
 Vue.prototype.axios = axios
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 Vue.use(qs)
 Vue.use(VueAxios, axios)

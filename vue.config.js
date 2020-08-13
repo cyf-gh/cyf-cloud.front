@@ -43,11 +43,11 @@ module.exports = {
 	  // 配置多个代理
 	  proxy: {
 			'/v1': {
-			  target: 'http://localhost:2334',
+			  target: 'http://api.cyf-cloud.cn:2334',
 			  ws: true,
 			  changeOrigin: true,
 			  pathRewrite: {
-				'^/v1': '/', // rewrite path
+				'^/v1': '/v1', // rewrite path
 			  }
 			}
 	  }
