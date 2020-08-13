@@ -14,21 +14,19 @@
           <li>
             <a class="text-muted">邮箱：cyf-ms@hotmail.com</a>
           </li>
-          <li>
-            <a class="text-muted" href="github.com/cyf-gh">Github</a>
-          </li>
-          <li>
-            <a class="text-muted" href="https://space.bilibili.com/3087782">哔哩哔哩</a>
-          </li>
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>捐赠</h5>
+        <h5>帮助我</h5>
         <ul class="list-unstyled text-small">
           <li></li>
           <li>
-            <a class="text-muted" href="#/donate">前往捐赠</a>
+            <a class="text-muted" href="#/donate">&#128155;我要捐赠</a>
           </li>
+          <li>
+            <a class="text-muted" href="#/donate/rank">捐赠榜</a>
+          </li>
+
         </ul>
       </div>
       <div class="col-12 col-md">

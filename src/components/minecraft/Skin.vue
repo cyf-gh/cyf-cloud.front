@@ -12,7 +12,7 @@
       >前往注册官网</b-button>
         <div class="mask">
         <br>
-        <iframe class="cc-iframe" src="https://cyf-my.gitee.io/2020/06/27/register_skin_and_server_activate/#more"  frameborder="no" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups" disabled></iframe>
+        <iframe class="cc-iframe" src="http://discuz.cyf-cloud.cn:8233/forum.php?mod=viewthread&tid=3&extra=page%3D1"  frameborder="no" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups" disabled></iframe>
         </div>
     </div>
 </template>

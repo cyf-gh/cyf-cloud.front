@@ -29,7 +29,7 @@
       </b-carousel-slide>
       <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJB6fK.jpg">
       <h1>Minecraft 皮肤站点</h1>
-      <h5>享受皮肤带来的乐趣与进行外置验证资格的获取</h5>
+      <h5>获取皮肤与外置登录服务</h5>
       <b-button href="#/mc/skin" pill variant="outline-secondary">前往注册</b-button>
       </b-carousel-slide>
       <!-- Slides with custom text -->

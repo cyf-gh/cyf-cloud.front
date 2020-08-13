@@ -1,17 +1,22 @@
 <template>
 
-<div class="container">
-    <b-alert show >您的捐赠能更好的帮助我进行网络服务建设！</b-alert>
+<div class="container text-center">
+    <b-alert show >您的捐赠能更好的帮助我进行网络服务建设！感谢各位衣食父母！</b-alert>
+    <b-row class= "text-center">
+    <b-col>
+      <b-img thumbnail fluid src="https://s1.ax1x.com/2020/07/13/UJB7ff.jpg" width="200" height="200"></b-img>
+      <small class="d-block mb-3 text-muted">支付宝</small>
+    </b-col>
+    <b-col>
+      <b-img thumbnail fluid src="https://s1.ax1x.com/2020/07/13/UJBokt.jpg" width="200" height="200"></b-img>
+      <small class="d-block mb-3 text-muted">微信</small>
+    </b-col>
+    </b-row>
+    <div class="container text-center">
+      <br>
+      <b-button href="#/donate/rank" size="lg" pill variant="outline-warning">查看捐赠榜</b-button>
+    </div>
     <br>
-    <b-card-group deck>
-      <b-card img-src="https://s1.ax1x.com/2020/07/13/UJB7ff.jpg" img-alt="Card image" img-top>
-        <b-card-text>支付宝</b-card-text>
-      </b-card>
-
-      <b-card img-src="https://s1.ax1x.com/2020/07/13/UJBokt.jpg" img-alt="Card image" img-bottom>
-        <b-card-text>微信</b-card-text>
-      </b-card>
-    </b-card-group>
   </div>
 </template>
 

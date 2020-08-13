@@ -9,9 +9,12 @@ import ccMcSkin from "./components/minecraft/Skin"
 
 import ccCyfBlog from "./components/cyf/Blog"
 import ccCyfDonate from "./components/cyf/Donate"
+import ccCyfDonateRank from "./components/cyf/DonateRank"
 
 import ccMusic from "./components/music/Music"
 import ccMusicUpload from "./components/music/Upload"
+
+import ccVt from "./components/vt/VtHome"
 
 const routes = [
     { path: '/mc/skin', component: ccMcSkin },
@@ -21,7 +24,9 @@ const routes = [
     { path: '/music', component: ccMusic },
     { path: '/music/upload', component: ccMusicUpload },
     { path: '/donate', component: ccCyfDonate },
+    { path: '/donate/rank', component: ccCyfDonateRank },
     { path: '/blog', component: ccCyfBlog },
+    { path: '/vt', component: ccVt },
     { path: '*', redirect: '/home' }
 ]
 
