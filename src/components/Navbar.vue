@@ -31,8 +31,8 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown text="账户" class="text-primary" right>
-          <b-nav-item disabled href="#/">登录</b-nav-item>
-          <b-nav-item disabled href="#/">注册</b-nav-item>
+            <b-dropdown-item disabled href="#/">登录</b-dropdown-item>
+            <b-dropdown-item disabled href="#/">注册</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
