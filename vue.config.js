@@ -50,6 +50,15 @@ module.exports = {
 				pathRewrite: {
 					'^/v1': '', // rewrite path
 				}
+			},
+			'/vt': {
+				enable: true,
+				target: 'http://localhost:2334/',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {
+					'^/vt': '', // rewrite path
+				}
 			}
 		}
 	},

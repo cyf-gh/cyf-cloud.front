@@ -27,6 +27,9 @@
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item href="#/donate">捐赠</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item-dropdown text="开发中" right>
+            <b-dropdown-item href="#/vt">开黑看视频（预览版）</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown text="账户" class="text-primary" right>
