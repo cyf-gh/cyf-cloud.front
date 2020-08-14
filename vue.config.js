@@ -8,10 +8,10 @@ module.exports = {
 	// 部署生产环境和开发环境下的URL。
 	// 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
 	//例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 baseUrl 为 /my-app/。
-		//baseUrl 从 Vue CLI 3.3 起已弃用，请使用publicPath
-	  //baseUrl: process.env.NODE_ENV === "production" ? "./" : "/",
+	//baseUrl 从 Vue CLI 3.3 起已弃用，请使用publicPath
+	//baseUrl: process.env.NODE_ENV === "production" ? "./" : "/",
 	publicPath: process.env.NODE_ENV === "production" ? "/cyf-gh.github.io/" : "/",
-   
+
 	// outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称
 	outputDir: "mycli3",
 	//用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）
@@ -20,7 +20,7 @@ module.exports = {
 	// indexPath: "myIndex.html",
 	//默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。你可以通过将这个选项设为 false 来关闭文件名哈希。(false的时候就是让原来的文件名不改变)
 	filenameHashing: false,
-   
+
 	//   lintOnSave：{ type:Boolean default:true } 问你是否使用eslint
 	// lintOnSave: true,
 	//如果你想要在生产构建时禁用 eslint-loader，你可以用如下配置
@@ -37,30 +37,31 @@ module.exports = {
 	 *  有了map就可以像未加密的代码一样，准确的输出是哪一行哪一列有错。
 	 * */
 	productionSourceMap: false,
-   
+
 	// 它支持webPack-dev-server的所有选项
 	devServer: {
-	  // 配置多个代理
-	  proxy: {
+		// 配置多个代理
+		proxy: {
 			'/v1': {
-			  target: 'http://api.cyf-cloud.cn:2334',
-			  ws: true,
-			  changeOrigin: true,
-			  pathRewrite: {
-				'^/v1': '/v1', // rewrite path
-			  }
+				enable: true,
+				target: 'https://se.cyf-cloud.cn:2344/v1',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {
+					'^/v1': '', // rewrite path
+				}
 			}
-	  }
+		}
 	},
 
 	configureWebpack: config => {
 		if (isProduction) {
-		  config.plugins.push(new CompressionWebpackPlugin({
-			algorithm: 'gzip',
-			test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-			threshold: 10240,
-			minRatio: 0.8
-		  }))
+			config.plugins.push(new CompressionWebpackPlugin({
+				algorithm: 'gzip',
+				test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+				threshold: 10240,
+				minRatio: 0.8
+			}))
 		}
-	  }
-  };
+	}
+};

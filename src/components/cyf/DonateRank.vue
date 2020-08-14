@@ -17,16 +17,24 @@
       :per-page="perPage"
       aria-controls="my-table"
     ></b-pagination>
+    <p>共计：{{totalRmb}} </p>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+
   export default {
     mounted:function(){
-        axios.get("/v1/donate/rank","")
+      console.log(process.env.VUE_APP_API_DONATE_RANK)
+        this.axios.get(process.env.VUE_APP_API_DONATE_RANK)
         .then(res => {
           this.donaters = res.data;
+          this.donaters.forEach( el => {
+            if( !isNaN( el["RMB"] ) ) {
+              this.totalRmb += parseFloat( el["RMB"] );
+            }
+          });
+          this.totalRmb = this.totalRmb.toFixed(2);
         })
         .catch(err => {
             console.error(err);
@@ -37,7 +45,8 @@ import axios from 'axios'
         perPage: 10,
         currentPage: 1,
         donaters: [
-        ]
+        ],
+        totalRmb:0
       }
     },
     computed: {
