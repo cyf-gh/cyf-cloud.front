@@ -1,3 +1,10 @@
+/*
+ * @Date: 2020-08-13 20:58:42
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-16 18:29:18
+ * @FilePath: \cyf-cloud.front\vue.config.js
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+ */
 // vue.config.js 配置说明
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
 // 这里只列一部分，具体配置参考文档
@@ -53,7 +60,7 @@ module.exports = {
 			},
 			'/vt': {
 				enable: true,
-				target: 'http://localhost:2334/',
+				target: 'http://localhost:2334/v1/vt/',
 				secure: false,
 				changeOrigin: true,
 				pathRewrite: {
