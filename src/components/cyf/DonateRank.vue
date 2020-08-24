@@ -1,3 +1,10 @@
+<!--
+ * @Date: 2020-08-13 20:58:42
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-24 23:01:54
+ * @FilePath: \cyf-cloud.front\src\components\cyf\DonateRank.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 <template>
   <div class="container text-center">
     <br>
@@ -25,8 +32,8 @@
 
   export default {
     mounted:function(){
-      console.log(process.env.VUE_APP_API_DONATE_RANK)
-        this.axios.get(process.env.VUE_APP_API_DONATE_RANK)
+      console.log("/v1/donate/rank")
+        this.axios.get("/v1/donate/rank")
         .then(res => {
           this.donaters = res.data;
           this.donaters.forEach( el => {
