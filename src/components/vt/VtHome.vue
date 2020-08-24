@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-16 22:40:31
+ * @LastEditTime: 2020-08-24 22:54:03
  * @FilePath: \cyf-cloud.front\src\components\vt\VtHome.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -25,7 +25,7 @@
           <div>
             <b-badge pill variant="dark" v-if="vt.isHost">你是房主</b-badge>
             <b-badge pill variant="light" v-else>你是观众</b-badge>
-            <b-badge pill variant="warning" v-if="vt.isIdle">未在房间中</b-badge>
+            <b-badge pill variant="warning" v-if="vt.isIdle == true">未在房间中</b-badge>
             <b-badge pill variant="success" v-else>在房间中</b-badge>
             <br />
             <b-container>
@@ -143,7 +143,7 @@ export default {
         url:
           "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4?_=1", // test
         statusInfo: "当前不在任何房间中",
-        serverUri: "https://se.cyf-cloud.cn:2345/v1/vt/",
+        serverUri: "/vt",
         isHost: false,
         lobbyname: "",
         name: "",
