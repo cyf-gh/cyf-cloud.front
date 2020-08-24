@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-24 22:54:03
+ * @LastEditTime: 2020-08-25 01:22:55
  * @FilePath: \cyf-cloud.front\src\components\vt\VtHome.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -122,6 +122,7 @@
 
 <script>
 import md5 from 'js-md5';
+import apiServer from "../../server"
 export default {
   data() {
     return {
@@ -143,7 +144,7 @@ export default {
         url:
           "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4?_=1", // test
         statusInfo: "当前不在任何房间中",
-        serverUri: "/vt",
+        serverUri: apiServer + "/v1/vt/",
         isHost: false,
         lobbyname: "",
         name: "",

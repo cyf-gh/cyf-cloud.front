@@ -1,9 +1,17 @@
+<!--
+ * @Date: 2020-08-13 20:58:42
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-25 01:33:02
+ * @FilePath: \cyf-cloud.front\src\components\Footer.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 // src/components/Footer.vue
 <template>
   <footer class="navbar-fixed-bottom container py-5">
+    <hr>
     <div class="row">
       <div class="col-6 col-md">
-        <h5>联系方式</h5>
+        <h5>关于我</h5>
         <ul class="list-unstyled text-small">
           <li>
             <a class="text-muted">QQ：1026279833</a>
@@ -14,6 +22,19 @@
           <li>
             <a class="text-muted">邮箱：cyf-ms@hotmail.com</a>
           </li>
+          <li>
+
+          <b-dropdown id="dropdown-dropup" dropup text="更多" variant="outline-secondary" class="m-2">
+            <b-dropdown-item href="#/blog">博客</b-dropdown-item>
+            <b-dropdown-item target="_blank" href="https://github.com/cyf-gh">Github</b-dropdown-item>
+            <b-dropdown-item target="_blank" href="https://space.bilibili.com/3087782">哔哩哔哩</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item href="#/music">音乐服务</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item href="#/donate">捐赠</b-dropdown-item>
+  </b-dropdown>
+          </li>
+
         </ul>
       </div>
       <div class="col-6 col-md">

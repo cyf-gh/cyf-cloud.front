@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-24 23:01:54
+ * @LastEditTime: 2020-08-25 01:20:33
  * @FilePath: \cyf-cloud.front\src\components\cyf\DonateRank.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-
+  import apiServer from "../../server"
   export default {
     mounted:function(){
       console.log("/v1/donate/rank")
-        this.axios.get("/v1/donate/rank")
+        this.axios.get( apiServer + "/v1/donate/rank")
         .then(res => {
           this.donaters = res.data;
           this.donaters.forEach( el => {

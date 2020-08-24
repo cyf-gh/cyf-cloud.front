@@ -1,3 +1,10 @@
+<!--
+ * @Date: 2020-08-13 20:58:42
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-25 01:33:30
+ * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 // src/components/Navbar.vue
 // static
 <template>
@@ -18,20 +25,13 @@
           <b-nav-item href="#/">主页</b-nav-item>
           <b-nav-item href="#/mc">我的世界</b-nav-item>
           <b-nav-item target="_blank" href="http://discuz.cyf-cloud.cn:8233/">论坛</b-nav-item>
-          <b-nav-item-dropdown text="个人" right>
-            <b-dropdown-item href="#/blog">博客</b-dropdown-item>
-            <b-dropdown-item target="_blank" href="https://github.com/cyf-gh">Github</b-dropdown-item>
-            <b-dropdown-item target="_blank" href="https://space.bilibili.com/3087782">哔哩哔哩</b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item href="#/music">音乐服务</b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item href="#/donate">捐赠</b-dropdown-item>
-          </b-nav-item-dropdown>
-          <b-nav-item-dropdown text="开发中" right>
+
+          <b-nav-item-dropdown text="云应用" right>
             <b-dropdown-item href="#/vt">开黑看视频（预览版）</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
+          <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item-dropdown text="账户" class="text-primary" right>
             <b-dropdown-item disabled href="#/">登录</b-dropdown-item>
             <b-dropdown-item disabled href="#/">注册</b-dropdown-item>
