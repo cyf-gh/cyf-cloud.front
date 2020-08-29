@@ -1,13 +1,15 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-25 01:22:55
+ * @LastEditTime: 2020-08-29 23:20:03
  * @FilePath: \cyf-cloud.front\src\components\vt\VtHome.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 
 <template>
   <div>
+                                 <b-alert show variant="warning">这是一个测试版本，功能完善程度可能较低，bug较多。</b-alert>
+
     <b-modal id="modal-1" title="输入房间密码" ref="modalPasswd" @ok="enterLobby">
       <b-form-input
         id="input-passwd"
@@ -37,13 +39,14 @@
             </b-container>
 <br/>
                         <b-container>
+
             <b-table
               id="lobby-table"
               hover
               :items="lobbies"
               :current-page="table.curp"
               :per-page="table.perp"
-              @row-clicked="myRowClickHandler"
+              @click="myRowClickHandler"
               small
             ></b-table>
             </b-container>

@@ -1,10 +1,17 @@
+<!--
+ * @Date: 2020-06-30 14:41:46
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-29 18:30:58
+ * @FilePath: \cyf-cloud.front\src\components\minecraft\Webmap.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 <template>
   <div class="container">
     <div class="text-center my-3">
       <b-button-group>
-        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/114'">1.14 纯净服</b-button>
-        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/112'">1.12 Mod服</b-button>
+        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/114'" disabled>1.14 纯净服</b-button>
         <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/116'">1.16 纯净服</b-button>
+        <b-button v-on:click="mapSrc='https://se.cyf-cloud.cn:8123/mc/map/112'">1.12 Mod服</b-button>
       </b-button-group>
     </div>
 
@@ -19,7 +26,7 @@ export default {
     name: "ccMcWebmap",
     data: function() {
         return {
-            mapSrc: "https://se.cyf-cloud.cn:8123/mc/map/114"
+            mapSrc: "https://se.cyf-cloud.cn:8123/mc/map/116"
         }
     }
 };

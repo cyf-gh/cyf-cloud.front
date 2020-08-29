@@ -1,3 +1,10 @@
+/*
+ * @Date: 2020-08-13 20:58:42
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-08-29 21:58:11
+ * @FilePath: \cyf-cloud.front\src\Router.js
+ * @Description: What is mind? No matter. What is matter? Nevermin
+ */
 import VueRouter from 'vue-router'
 import Vue from "vue";
 
@@ -16,6 +23,8 @@ import ccMusicUpload from "./components/music/Upload"
 
 import ccVt from "./components/vt/VtHome"
 
+import ccMcdrPlg from "./components/mcdrPlg/mcdrPlgHome"
+
 const routes = [
     { path: '/mc/skin', component: ccMcSkin },
     { path: '/home', component: ccHome },
@@ -27,6 +36,7 @@ const routes = [
     { path: '/donate/rank', component: ccCyfDonateRank },
     { path: '/blog', component: ccCyfBlog },
     { path: '/vt', component: ccVt },
+    { path: '/util/mcdrPlg', component: ccMcdrPlg },
     { path: '*', redirect: '/home' }
 ]
 
