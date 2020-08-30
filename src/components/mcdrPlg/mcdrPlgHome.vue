@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-29 21:54:19
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-30 18:24:41
+ * @LastEditTime: 2020-08-30 18:37:19
  * @FilePath: \cyf-cloud.front\src\components\mcdrPlg\mcdrPlgHome.vue
  * @Descrion: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -127,13 +127,13 @@
       <b-button @click="openCreatescr">下一步</b-button>
       <b-button variant="info" v-b-toggle.sidebar-plg-market>打开插件市场</b-button>
       </b-button-group>
-      <hr>
       <br>
       
 
     </div>
     <b-container v-if="scr.src!='' ">
-      <small>如果插件有变动则请重新生成脚本</small>
+      <hr>
+      <b-alert show variant="warning">如果插件有变动则请重新生成脚本</b-alert>
       <label>复制到终端并运行</label>
       <b-form-input id="input-large" size="lg" placeholder="Code..." v-model="runScript"></b-form-input>
       <br>
@@ -172,6 +172,7 @@ export default {
     try {
       this.getscr();
       console.log("getscr");
+      this.runScript += this.uuid + ")"
     } catch (error) {
       console.error(error)
     }
@@ -205,7 +206,7 @@ export default {
         sum: 0,
       },
       uuid:"",
-      runScript: ". <(curl -s -S -L  https://api.cyf-cloud.cn/v1/util/mcdr/plg/scripts?u=ee00dad9-2759-4c20-95f6-5797c5306948)"
+      runScript: ". <(curl -s -S -L https://api.cyf-cloud.cn/v1/util/mcdr/plg/scripts?u="
     };
   },
   methods: {
@@ -319,10 +320,10 @@ export default {
       for (var i in this.selectedPlgs) {
         if (this.selectedPlgs[i].name == clickedPlg.name) {
           this.$delete(this.selectedPlgs, i);
+          this.saveSelectedPlg();
           return;
         }
       }
-      this.saveSelectedPlg();
     },
     msg(title, msg, v = "default") {
       this.view.tCount++;
