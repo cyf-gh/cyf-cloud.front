@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-29 21:58:11
+ * @LastEditTime: 2020-09-05 01:04:20
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -17,6 +17,7 @@ import ccMcSkin from "./components/minecraft/Skin"
 import ccCyfBlog from "./components/cyf/Blog"
 import ccCyfDonate from "./components/cyf/Donate"
 import ccCyfDonateRank from "./components/cyf/DonateRank"
+import ccCyfInfo from "./components/cyf/My.vue"
 
 import ccMusic from "./components/music/Music"
 import ccMusicUpload from "./components/music/Upload"
@@ -37,6 +38,7 @@ const routes = [
     { path: '/blog', component: ccCyfBlog },
     { path: '/vt', component: ccVt },
     { path: '/util/mcdrPlg', component: ccMcdrPlg },
+    { path: '/my/info', component: ccCyfInfo },
     { path: '*', redirect: '/home' }
 ]
 
