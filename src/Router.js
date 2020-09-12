@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-05 01:04:20
+ * @LastEditTime: 2020-09-12 15:08:57
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -13,6 +13,7 @@ import ccHome from "./components/home/Home";
 import ccMcWebmap from "./components/minecraft/Webmap"
 import ccMcHome from "./components/minecraft/Home"
 import ccMcSkin from "./components/minecraft/Skin"
+import ccMcAbout from "./components/minecraft/About"
 
 import ccCyfBlog from "./components/cyf/Blog"
 import ccCyfDonate from "./components/cyf/Donate"
@@ -31,6 +32,7 @@ const routes = [
     { path: '/home', component: ccHome },
     { path: '/mc', component: ccMcHome },
     { path: '/mc/map', component: ccMcWebmap },
+    { path: '/mc/about', component: ccMcAbout },
     { path: '/music', component: ccMusic },
     { path: '/music/upload', component: ccMusicUpload },
     { path: '/donate', component: ccCyfDonate },

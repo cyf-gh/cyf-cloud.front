@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-30 01:23:25
+ * @LastEditTime: 2020-09-12 18:56:52
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -26,9 +26,11 @@
            <b-nav-item-dropdown text="我的世界" right>
             <b-dropdown-item href="#/mc">主页</b-dropdown-item>
             <b-dropdown-item href="#/mc/skin">外置登录</b-dropdown-item>
+            <b-dropdown-item href="#/mc/map">卫星地图</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item href="#/mc/about">关于</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item target="_blank" href="http://discuz.cyf-cloud.cn:8233/">论坛</b-nav-item>
+          <b-nav-item target="_blank" href="http://discuz.cyf-cloud.cn:8233/" disabled>论坛</b-nav-item>
 
           <b-nav-item-dropdown text="云应用" right>
             <b-dropdown-item href="#/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>

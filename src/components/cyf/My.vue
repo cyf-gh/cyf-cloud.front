@@ -1,44 +1,30 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-05 02:01:46
+ * @LastEditTime: 2020-09-12 18:34:35
  * @FilePath: \cyf-cloud.front\src\components\cyf\My.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-    <b-container>
-    <div id="id-cc-cyf-info"></div>
-    </b-container>
+    <div>
+        <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer" ></ccMd>
+    </div>
 </template>
 
 <script>
-
-var marked = require('marked');
+import ccMd from '../cc-templates/markdown'
 export default {
+    components: {
+        ccMd
+    },
     data() {
         return {
-            infoMd:""
+            mrUrl:"https://raw.githubusercontent.com/cyf-gh/cyf-gh/master/README.md",
+            divId:"id-cc-cyf-info",
+            ccServer: false
         }
     },
     mounted() {
-        this.axios.get("https://raw.githubusercontent.com/cyf-gh/cyf-gh/master/README.md")
-        .then(res => {
-            this.infoMd = res.data
-            document.getElementById('id-cc-cyf-info').innerHTML = (marked(this.infoMd))
-        })
-        .catch(err => {
-            console.error(err); 
-        })
-        marked.setOptions({
-            renderer: new marked.Renderer(),
-            gfm: true,
-            tables: true,
-            breaks: false,
-            pedantic: false,
-            sanitize: false,
-            smartLists: true,
-            smartypants: false
-        });
     },
 }
 </script>

@@ -23,14 +23,7 @@
               text-variant="white"
               header="Minecraft 1.14.4 纯净生存服"
               lead="适合喜欢原版Minecraft的玩家、生电玩家、建筑玩家。"
-              style="background-image: url(https://s1.ax1x.com/2020/07/13/UJBTtP.jpg); background-size: cover;"
-            >
-              <div class="inline">
-                <a
-                  href="https://jq.qq.com/?_wv=1027&k=6JyKdbXR"
-                  class="badge badge-primary"
-                >加入QQ群：897754430</a>
-              </div>
+              style="background-image: url(https://s1.ax1x.com/2020/07/13/UJBTtP.jpg); background-size: cover;">
             </b-jumbotron>
             <b-alert show variant="warning">
                 <h4 class="alert-heading">1.14.4 服务器生命周期已结束！</h4>

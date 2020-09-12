@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-30 14:41:46
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-29 18:30:58
+ * @LastEditTime: 2020-09-12 15:14:53
  * @FilePath: \cyf-cloud.front\src\components\minecraft\Webmap.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -17,6 +17,9 @@
 
     <div class="text-center my-3">
     <iframe class="cc-iframe"  frameborder="no"  :src="mapSrc" ></iframe>
+    </div>
+    <div class="text-center my-3">
+      <b-button  target="_blank" pill :href="mapSrc">打开卫星地图原网页</b-button>
     </div>
   </div>
 </template>
