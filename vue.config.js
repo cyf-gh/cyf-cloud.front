@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 20:03:45
+ * @LastEditTime: 2020-09-13 20:58:56
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -52,15 +52,6 @@ module.exports = {
 		disableHostCheck: true,
 		// 配置多个代理
 		proxy: {
-			'/v1': {
-				enable: true,
-				target: 'http://localhost:2334/v1/',
-				secure: false,
-				changeOrigin: true,
-				pathRewrite: {
-					'^/v1': '', // rewrite path
-				}
-			},
 			'/vt': {
 				enable: true,
 				target: 'http://localhost:2334/v1/vt/',

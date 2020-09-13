@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 13:35:36
+ * @LastEditTime: 2020-09-13 21:51:28
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -22,9 +22,9 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#/">主页</b-nav-item>
+          <b-nav-item href="/">主页</b-nav-item>
            <b-nav-item-dropdown text="我的世界" right>
-            <b-dropdown-item href="#/mc">主页</b-dropdown-item>
+            <b-dropdown-item href="#/mc">概况</b-dropdown-item>
             <b-dropdown-item href="#/mc/skin">外置登录</b-dropdown-item>
             <b-dropdown-item href="#/mc/map">卫星地图</b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>

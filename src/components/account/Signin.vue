@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-13 13:07:47
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 20:05:28
+ * @LastEditTime: 2020-09-13 22:04:27
  * @FilePath: \cyf-cloud.front\src\components\account\SignIn.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -60,7 +60,7 @@
         type="password"
         trim
       ></b-form-input>
-      <b-form-invalid-feedback id="input-pswd-feedback">请输入至少六位的密码</b-form-invalid-feedback>
+      <b-form-invalid-feedback id="input-pswd-feedback">请输入至少六位的密码，且密码不能与用户名一致</b-form-invalid-feedback>
       <b-form-text id="input-pswd-help">输入你的密码</b-form-text>
     </div>
     <br>
@@ -89,9 +89,11 @@
       <br>
       <b-img :src="capSrc"></b-img>
       <b-button v-on:click="getNewCap" variant="primary" pill>点击获取新验证码</b-button>
+      <b-form-text id="input-cap-help">请输入4位验证码</b-form-text>
     </div>
     <br />
-    <b-button block pill variant="info" v-on:click="goRegister">注册</b-button>
+    <b-button block pill variant="info" disabled v-if="show" class="text-center">{{count}} 秒后跳转</b-button>
+    <b-button block pill variant="info" v-else v-on:click="goRegister">注册</b-button>
     <br>
   </b-container>
 </template>
@@ -105,22 +107,42 @@ const capSrcRaw = apiSe + "/v1x1/security/captcha";
 export default {
   methods: {
       getNewCap() {
+            if(!( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState ))  {
+              bvu.Msg("提示","请先填写完信息后再获取验证码！","warning")
+              return
+            }
           this.capTime++;
+          if ( this.capTime >= 7 ) {
+            bvu.Msg("刷新次数太多","请刷新页面后重新生成验证码","danger")
+            return
+          }
           this.capSrc = capSrcRaw + "?cid=" + ids.GetCid() + "&time=" + this.capTime
       },
       goRegister() {
           if( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState )  {
-            this.axios.withCredentials = true
-            this.axios.post( "/v1x1/account/register/",this.rgst)
+            this.axios.post( "/v1x1/account/register",this.rgst,{withCredentials: true})
             .then(res => {
-              if ( res.data.err_cod == 0 ) {
-                alert("ok")
+              if ( res.data.ErrCod == 0 ) {
+                bvu.Msg("注册成功","已成功注册，将在3秒后跳转至登陆页面","success")
+                this.count = 3
+                this.timer = setInterval(() => {
+                  if (this.count > 0 && this.count <= 3) {
+                    this.count--
+                    this.show = true
+                  } else {
+                    this.show = false
+                    clearInterval(this.timer)
+                    this.timer = null
+                    this.$router.push('/account/login')
+                  }
+                }, 1000)
               } else {
-                console.log(res)
+                bvu.Msg("注册失败","信息：\n"+res.data.Desc,"danger")
               }
             })
             .catch(err => {
-                console.error(err); 
+                bvu.Msg("注册失败！","请查看控制台并联系网站管理员","danger")
+                console.error(err);
             })
           } else {
             bvu.Msg("错误","有信息错误，请检查后重新点击注册","danger")
@@ -139,6 +161,9 @@ export default {
       pswdRp:"",
       capSrc: "",
       capTime: 0,
+      count: 3,
+      show: false,
+      timer: null,
     };
   },
   mounted() {
@@ -165,10 +190,10 @@ export default {
       }
     },
     pswdState() {
-      return this.rgst.pswd.length >= 6 ? true : false;
+      return this.rgst.pswd.length >= 6 && this.rgst.pswd != this.rgst.name;
     },
     pswdRpState() {
-        return this.rgst.pswd == this.pswdRp && this.rgst.pswd.length >= 6
+      return this.rgst.pswd == this.pswdRp && this.pswdState
     }
   },
 };

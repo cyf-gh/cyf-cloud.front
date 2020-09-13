@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 13:33:23
+ * @LastEditTime: 2020-09-13 21:46:01
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -28,7 +28,7 @@ import ccVt from "./components/vt/VtHome"
 import ccMcdrPlg from "./components/mcdrPlg/mcdrPlgHome"
 
 import ccAccountSignin from './components/account/Signin.vue'
-
+import ccAccountLogin from  './components/account/Login.vue'
 const routes = [
     { path: '/mc/skin', component: ccMcSkin },
     { path: '/home', component: ccHome },
@@ -44,11 +44,12 @@ const routes = [
     { path: '/util/mcdrPlg', component: ccMcdrPlg },
     { path: '/my/info', component: ccCyfInfo },
     { path: '/account/signin', component: ccAccountSignin },
+    { path: '/account/login', component: ccAccountLogin },
     { path: '*', redirect: '/home' }
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes
 })
 
