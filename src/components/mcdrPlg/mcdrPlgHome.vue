@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-29 21:54:19
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-30 18:37:19
+ * @LastEditTime: 2020-09-13 16:38:50
  * @FilePath: \cyf-cloud.front\src\components\mcdrPlg\mcdrPlgHome.vue
  * @Descrion: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -151,9 +151,12 @@
 
 <script>
 import apiServer from "../../server"
+import bvu from '../../cc/bvUtil'
+import rd from '../../cc/random'
 export default {
   mounted: function () {
     try {
+      bvu.InitToast(this.$bvToast)
       this.updateFeedSource();
       var localSelectedPlgs = localStorage.getItem('selectedPlgs');
       this.selectedPlgs = localSelectedPlgs == null ? [] : JSON.parse( localSelectedPlgs );
@@ -165,7 +168,7 @@ export default {
     }
     var _uuid = localStorage.getItem('mcdrplguuid')
     if( _uuid == null ) {
-      _uuid = this._uuid().toString();
+      _uuid = rd.CreateUuid().toString();
       localStorage.setItem('mcdrplguuid', _uuid )
     }
     this.uuid = _uuid
@@ -210,39 +213,13 @@ export default {
     };
   },
   methods: {
-    _uuid() {
-      var d = Date.now();
-      if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
-        d += performance.now(); //use high-precision timer if available
-      }
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-    },
-    noncestr(randomFlag, min, max) {
-      var str = "",
-        range = min,
-        arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-      // 随机产生
-      if (randomFlag) {
-        range = Math.round(Math.random() * (max - min)) + min;
-      }
-      for (var i = 0; i < range; i++) {
-        var pos = Math.round(Math.random() * (arr.length - 1));
-        str += arr[pos];
-      }
-      return str;
-    },
     createscr(){
       if ( !this.scrPathState ) {
-        this.msg( "错误", "路径未填写正确", "danger" )
+        bvu.Msg( "错误", "路径未填写正确", "danger" )
         return;
       }
       if ( !this.validateAnswer ) {
-        this.msg( "错误", "验证问题错误", "danger" )
+        bvu.Msg( "错误", "验证问题错误", "danger" )
         return;
       }
       this.axios.post(apiServer+"/v1/util/mcdr/plg/script/generate",
@@ -256,12 +233,12 @@ export default {
       .then(res => {
 
         if ( res.data == "OK" ) {
-          this.msg( "提示","成功生成脚本，请复制命令至终端继续。","success")
+          bvu.Msg( "提示","成功生成脚本，请复制命令至终端继续。","success")
           this.getscr();
         }
       })
       .catch(err => {
-        this.msg( "错误","请查看控制条","danger")
+        bvu.Msg( "错误","请查看控制条","danger")
         console.error(err); 
       })
     },
@@ -273,14 +250,14 @@ export default {
         console.log(res.data);
         this.scr.src = res.data;
         if (this.scr.src == "") {
-          this.msg( "提示", "你还未生成过脚本")
+          bvu.Msg( "提示", "你还未生成过脚本")
         } else {
-          this.msg( "提示", "成功获取脚本", "success")
+          bvu.Msg( "提示", "成功获取脚本", "success")
         }
       })
       .catch(err => {
         console.error(err); 
-        this.msg( "错误", "获取脚本失败", "danger")
+        bvu.Msg( "错误", "获取脚本失败", "danger")
       })
     },
     updateFeedSource() {
@@ -289,14 +266,14 @@ export default {
         .then((res) => {
           this.feed = res.data;
           if ( this.feed.length == 0 ) {
-            this.msg( "提示", "插件源中没有任何插件")
+            bvu.Msg( "提示", "插件源中没有任何插件")
           }
           this.curPlgItems = this.feed[0].plg;
-          this.msg( "提示", "插件源更新成功")
+          bvu.Msg( "提示", "插件源更新成功")
         })
         .catch((err) => {
           console.error(err);
-          this.msg( "提示", "源获取失败，请更换源", "danger")
+          bvu.Msg( "提示", "源获取失败，请更换源", "danger")
         });
     },
     selectChanged() {},
@@ -341,8 +318,8 @@ export default {
       localStorage.setItem('mcdrPath', this.scr.mcdrPath )
     },
     openCreatescr() {
-       this.validate.dig1 = this.noncestr(true, 1,2);
-       this.validate.dig2 = this.noncestr(true, 1,2);
+       this.validate.dig1 = rd.noncestr(true, 1,2);
+       this.validate.dig2 = rd.noncestr(true, 1,2);
        this.validate.sum = 0;
        this.$refs["modalCreatescr"].show();
     }

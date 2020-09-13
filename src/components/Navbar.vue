@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-12 18:56:52
+ * @LastEditTime: 2020-09-13 13:35:36
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -40,8 +40,8 @@
         <b-navbar-nav class="ml-auto">
           <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item-dropdown text="账户" class="text-primary" right>
-            <b-dropdown-item disabled href="#/">登录</b-dropdown-item>
-            <b-dropdown-item disabled href="#/">注册</b-dropdown-item>
+            <b-dropdown-item href="#/account/login">登录</b-dropdown-item>
+            <b-dropdown-item href="#/account/signin">注册</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

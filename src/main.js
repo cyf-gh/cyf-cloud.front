@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-12 15:03:51
+ * @LastEditTime: 2020-09-13 15:55:07
  * @FilePath: \cyf-cloud.front\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -14,6 +14,7 @@ import  router from './Router'
 import qs from 'qs'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import cookie from 'vue-cookie'
 
 // import VueMarkdown from 'vue-simple-markdown'
 /*
@@ -26,6 +27,7 @@ Vue.use(qs)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false
+Vue.prototype.$cookie = cookie;
 
 new Vue({
   el: '#app',

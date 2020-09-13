@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-08-30 16:15:40
+ * @LastEditTime: 2020-09-13 20:03:45
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -69,6 +69,15 @@ module.exports = {
 				pathRewrite: {
 					'^/vt': '', // rewrite path
 				}
+			},
+			'/v1x1': {
+				enable: true,
+				target: 'http://localhost:2334/v1x1/',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {
+					'^/v1x1': '', // rewrite path
+				}				
 			}
 		}
 	},

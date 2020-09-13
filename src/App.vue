@@ -1,3 +1,10 @@
+<!--
+ * @Date: 2020-06-29 10:44:45
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-09-13 16:59:10
+ * @FilePath: \cyf-cloud.front\src\App.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 <template>
   <div id="app">
     <cc-navbar/>
@@ -9,7 +16,7 @@
 <script>
 import ccNavbar from './components/Navbar.vue'
 import ccFooter from './components/Footer.vue'
-
+import ids from './cc/v1x1/Identity'
 export default {
   name: 'App',
   components: {
@@ -22,6 +29,9 @@ export default {
           this.$router.push(currentPath); // 动态跳转
         }
     },false);
+    // 完成客户端cid的编写
+    ids.InitCookie(this.$cookie)
+    ids.GenerateBasicIds();
   }
 }
 </script>
@@ -30,6 +40,4 @@ export default {
   .selector-for-some-widget {
     box-sizing: content-box;
   }
-
-
 </style>
