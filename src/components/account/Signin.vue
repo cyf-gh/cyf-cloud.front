@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-13 13:07:47
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 22:04:27
+ * @LastEditTime: 2020-09-14 19:33:42
  * @FilePath: \cyf-cloud.front\src\components\account\SignIn.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -107,16 +107,17 @@ const capSrcRaw = apiSe + "/v1x1/security/captcha";
 export default {
   methods: {
       getNewCap() {
-            if(!( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState ))  {
+            if(!( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState )) {
               bvu.Msg("提示","请先填写完信息后再获取验证码！","warning")
               return
             }
           this.capTime++;
+          this.countP++;
           if ( this.capTime >= 7 ) {
             bvu.Msg("刷新次数太多","请刷新页面后重新生成验证码","danger")
             return
           }
-          this.capSrc = capSrcRaw + "?cid=" + ids.GetCid() + "&time=" + this.capTime
+          this.capSrc = capSrcRaw + "?cid=" + ids.GetCid() + "&time=" + this.capTime + "&uni=" + this.countP
       },
       goRegister() {
           if( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState )  {
@@ -162,6 +163,7 @@ export default {
       capSrc: "",
       capTime: 0,
       count: 3,
+      countP: 0,
       show: false,
       timer: null,
     };
