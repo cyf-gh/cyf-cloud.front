@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 16:59:10
+ * @LastEditTime: 2020-09-15 15:19:53
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -22,6 +22,11 @@ export default {
   components: {
     ccNavbar, ccFooter
   },
+  data() {
+    return {
+      initing: true,
+    }
+  },
   mounted(){
     window.addEventListener('hashchange',()=>{
         var currentPath = window.location.hash.slice(1); // 获取输入的路由
@@ -32,6 +37,8 @@ export default {
     // 完成客户端cid的编写
     ids.InitCookie(this.$cookie)
     ids.GenerateBasicIds();
+
+    this.initing = false;
   }
 }
 </script>

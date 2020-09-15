@@ -1,8 +1,16 @@
+<!--
+ * @Date: 2020-06-29 10:44:45
+ * @LastEditors: cyf
+ * @LastEditTime: 2020-09-15 15:19:09
+ * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
+-->
 // static
 <template>
 <div class="container">
   <br>
    <b-carousel
+      v-if="!isLoginIn"
       id="carousel-1"
       v-model="slide"
       :interval="7000"
@@ -41,18 +49,27 @@
       <h1>探索</h1>
       <h5>了解和获取更多cyf的信息与提供的服务</h5>
       </b-carousel-slide>
-    </b-carousel>
+   </b-carousel>
+  <div v-if="isLoginIn">
+    Logged In!!!
+  </div>
 </div>
 </template>
 
 <script>
+import idy from "../../cc/v1x1/Identity"
 export default {
     name: "ccHome",
         data() {
       return {
         slide: 0,
-        sliding: null
+        sliding: null,
+        initing: true,
       }
+    },
+    mounted() {
+      idy.InitCookie(this.$cookie)
+      this.initing = false;
     },
     methods: {
       onSlideStart() {
@@ -61,7 +78,16 @@ export default {
       onSlideEnd() {
         this.sliding = false;
       }
-    }
+    },
+    computed: {
+      isLoginIn() {
+        if ( this.initing ) {
+          return false
+        } else {
+          return idy.IsLogin()
+        }
+      }
+    },
 }    
 </script>
 

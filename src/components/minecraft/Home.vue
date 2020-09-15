@@ -7,12 +7,6 @@
       </h2>
       <b-button href="#/mc/map" pill variant="outline-secondary">查看卫星地图</b-button>
       <b-button href="#/mc/skin" pill variant="outline-secondary">前往注册皮肤账户</b-button>
-      <b-button
-        target="_blank"
-        href="http://discuz.cyf-cloud.cn:8233/"
-        pill
-        variant="outline-secondary"
-      >前往论坛</b-button>
       <hr style="width: 20%;" />
     </div>
     <div>

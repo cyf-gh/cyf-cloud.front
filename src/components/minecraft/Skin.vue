@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-12 17:40:34
+ * @LastEditTime: 2020-09-15 13:55:48
  * @FilePath: \cyf-cloud.front\src\components\minecraft\Skin.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -23,13 +23,13 @@
     </div>
     <div class="mask">
       <br />
-      <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer"></ccMd>
+      <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer" :mdData="infoMd"></ccMd>
     </div>
   </div>
 </template>
 
 <script>
-import ccMd from "../cc-templates/markdown";
+import ccMd from "../cc-templates/Markdown";
 export default {
   components: {
     ccMd,
@@ -39,6 +39,7 @@ export default {
       mrUrl: "how-to-register.md",
       divId: "id-cc-md-how-to-register",
       ccServer: true,
+      infoMd: "",
     };
   },
   mounted() {},

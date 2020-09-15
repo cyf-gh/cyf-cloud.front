@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 21:46:01
+ * @LastEditTime: 2020-09-14 20:07:54
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -29,6 +29,8 @@ import ccMcdrPlg from "./components/mcdrPlg/mcdrPlgHome"
 
 import ccAccountSignin from './components/account/Signin.vue'
 import ccAccountLogin from  './components/account/Login.vue'
+
+import ccPostEditor from './components/post/Editor.vue'
 const routes = [
     { path: '/mc/skin', component: ccMcSkin },
     { path: '/home', component: ccHome },
@@ -45,6 +47,7 @@ const routes = [
     { path: '/my/info', component: ccCyfInfo },
     { path: '/account/signin', component: ccAccountSignin },
     { path: '/account/login', component: ccAccountLogin },
+    { path: '/post/editor', component: ccPostEditor },
     { path: '*', redirect: '/home' }
 ]
 

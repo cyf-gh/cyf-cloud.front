@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 21:51:28
+ * @LastEditTime: 2020-09-15 15:18:20
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -39,9 +39,12 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-dropdown-divider></b-dropdown-divider>
-          <b-nav-item-dropdown text="账户" class="text-primary" right>
+          <b-nav-item-dropdown v-if="!isLoginIn" text="账户" class="text-primary" right>
             <b-dropdown-item href="#/account/login">登录</b-dropdown-item>
             <b-dropdown-item href="#/account/signin">注册</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown v-else>
+            <b-dropdown-item v-on:click="logout">登出</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -50,7 +53,31 @@
 </template>
 
 <script>
+import idy from "../cc/v1x1/Identity"
 export default {
   name: "ccNavbar",
+  data() {
+    return {
+      initing: true
+    }
+  },
+  mounted() {
+      idy.InitCookie(this.$cookie)
+      this.initing = false;
+  },
+  methods: {
+    logout() {
+      idy.Logout();
+    }
+  },
+  computed: {
+    isLoginIn() {
+      if ( this.initing ) {
+        return false
+      } else {
+        return idy.IsLogin()
+      }
+    }
+  },
 };
 </script>

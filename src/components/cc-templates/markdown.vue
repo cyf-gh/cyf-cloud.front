@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-12 18:34:13
+ * @LastEditTime: 2020-09-15 14:03:59
  * @FilePath: \cyf-cloud.front\src\components\cc-templates\markdown.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
   <div>
     <br />
     <b-container class="border">
-      <div v-if="infoMd==''">
+      <div v-if="infoMdStatus">
         <br />
         <p>
           您正在阅读
@@ -40,15 +40,31 @@ export default {
     mdUrl: String,
     divId: String,
     ccServer: Boolean,
+    mdData: String,   // 长度非0则直接解析markdown
   },
   mounted() {
-    md.SetMarkdownToDiv(
-      this.mdUrl,
-      this.infoMd,
-      this.divId,
-      this.axios,
-      this.ccServer
-    );
-  }
+    console.log( "mdData: " + this.mdData )
+    if ( this.mdData.length != 0 ) {
+      console.log("in mddata length not 0")
+      this.infoMd = this.mdData
+      md.SetRawMarkdownToDiv(
+        this.infoMd,
+        this.divId
+      )
+    } else {
+      md.SetMarkdownToDiv(
+        this.mdUrl,
+        this.infoMd,
+        this.divId,
+        this.axios,
+        this.ccServer
+      );
+    }
+  },
+  computed: {
+    infoMdStatus() {
+      return true
+    }
+  },
 };
 </script>

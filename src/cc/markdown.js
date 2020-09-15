@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-12 15:11:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-12 18:31:33
+ * @LastEditTime: 2020-09-15 14:02:28
  * @FilePath: \cyf-cloud.front\src\cc\markdown.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -13,7 +13,7 @@ var marked = require('marked');
  * @description: 将某个markdown url链接内容渲染为html并嵌入div
  * @test: NA
  * @param {
- * md_url：markdown的url链接，获取方式为get
+ * md_url：markdown的url链接，获取方式为get，如果为""，则直接将 md_data解析
  * md_data：markdown数据（非html）
  * div_id：要渲染的div的id
  * axios：axios实例（this.axios）
@@ -25,6 +25,7 @@ async function SetMarkdownToDiv( md_url, md_data, div_id, axios, is_cc_server = 
     if ( is_cc_server ) {
         md_url = "https://se.cyf-cloud.cn:2346/v1x1/raw?d=" + md_url
     }
+
     await new Promise(() => {
         axios.get( md_url )
         .then(res => {
@@ -34,20 +35,38 @@ async function SetMarkdownToDiv( md_url, md_data, div_id, axios, is_cc_server = 
         .catch(err => {
             console.error(err);
         })
-        marked.setOptions({
-            renderer: new marked.Renderer(),
-            gfm: true,
-            tables: true,
-            breaks: false,
-            pedantic: false,
-            sanitize: false,
-            smartLists: true,
-            smartypants: false
-        });
     })
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    });
     return md_data
 }
 
+function SetRawMarkdownToDiv( md_data, div_id ) {
+    var md2html = marked(md_data)
+    console.log(md2html)
+    document.getElementById(div_id).innerHTML = (md2html)
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    })
+}
+
+
 export default {
-    SetMarkdownToDiv
+    SetMarkdownToDiv,
+    SetRawMarkdownToDiv
 };
