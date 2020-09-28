@@ -1,14 +1,16 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 15:19:53
+ * @LastEditTime: 2020-09-28 23:38:42
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
   <div id="app">
     <cc-navbar/>
+    <br>
     <router-view></router-view>
+    <br>
     <cc-footer/>
   </div>
 </template>

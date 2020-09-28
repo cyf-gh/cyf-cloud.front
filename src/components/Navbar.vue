@@ -1,8 +1,8 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 17:50:05
- * @FilePath: \ccfront\src\components\Navbar.vue
+ * @LastEditTime: 2020-09-28 23:09:45
+ * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // src/components/Navbar.vue
@@ -27,16 +27,17 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <b-form-input class="mr-sm-2" placeholder="搜索..."></b-form-input>
+          <b-form-input class="mr-sm-2" placeholder="手气不错"></b-form-input>
           <b-button class="my-2 my-sm-0" type="submit">搜索</b-button>
         </b-nav-form>
           <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item-dropdown v-if="!isLoginIn" text="账户" class="text-primary" right>
-            <b-dropdown-item href="#/account/login">登录</b-dropdown-item>
-            <b-dropdown-item href="#/account/signin">注册</b-dropdown-item>
+            <b-dropdown-item href="/account/login">登录</b-dropdown-item>
+            <b-dropdown-item href="/account/signin">注册</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item-dropdown v-else>
-            <b-dropdown-item v-on:click="logout">登出</b-dropdown-item>
+          <b-nav-item-dropdown v-else text="账户" class="text-primary" right>
+            <b-dropdown-item href="/account/login">个人信息</b-dropdown-item>
+            <b-dropdown-item v-on:click="logout">注销</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

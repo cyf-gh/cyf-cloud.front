@@ -1,8 +1,8 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 17:47:01
- * @FilePath: \ccfront\src\components\Footer.vue
+ * @LastEditTime: 2020-09-28 22:41:26
+ * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // src/components/Footer.vue
@@ -41,7 +41,7 @@
       </div>
       <div class="col-12 col-md">
         <h5 style="color:gray">一言</h5>
-        <small class="d-block mb-3 text-muted" id="hitokoto">正在加载一言...</small>
+        <small class="border d-block mb-3 text-muted" id="hitokoto">正在加载一言...</small>
       </div>
       <div class="col-12 col-md">
         <b-badge pill variant="light">
@@ -78,7 +78,12 @@ export default {
 </script>
 
 <style scoped>
-#cc-footer{
-  background-color:  #eee
+#cc-footer{  
+  background-color: #eee;
+  transition:all 0.6s;
+  transition-timing-function:ease-in-out;
+}
+#cc-footer:hover{
+  background-color: rgb(223, 223, 223);
 }
 </style>
