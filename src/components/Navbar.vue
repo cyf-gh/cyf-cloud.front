@@ -1,8 +1,8 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 15:18:20
- * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
+ * @LastEditTime: 2020-09-28 17:50:05
+ * @FilePath: \ccfront\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // src/components/Navbar.vue
@@ -22,22 +22,14 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/">主页</b-nav-item>
-           <b-nav-item-dropdown text="我的世界" right>
-            <b-dropdown-item href="#/mc">概况</b-dropdown-item>
-            <b-dropdown-item href="#/mc/skin">外置登录</b-dropdown-item>
-            <b-dropdown-item href="#/mc/map">卫星地图</b-dropdown-item>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item href="#/mc/about">关于</b-dropdown-item>
-          </b-nav-item-dropdown>
-          <b-nav-item target="_blank" href="http://discuz.cyf-cloud.cn:8233/" disabled>论坛</b-nav-item>
-
-          <b-nav-item-dropdown text="云应用" right>
-            <b-dropdown-item href="#/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>
-            <b-dropdown-item href="#/vt">开黑看视频（预览版）</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-nav-item href="/">主站</b-nav-item>
+          <b-nav-item href="/bbs">论坛</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input class="mr-sm-2" placeholder="搜索..."></b-form-input>
+          <b-button class="my-2 my-sm-0" type="submit">搜索</b-button>
+        </b-nav-form>
           <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item-dropdown v-if="!isLoginIn" text="账户" class="text-primary" right>
             <b-dropdown-item href="#/account/login">登录</b-dropdown-item>

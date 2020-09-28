@@ -1,8 +1,8 @@
 /*
  * @Date: 2020-09-13 13:17:39
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 14:56:22
- * @FilePath: \cyf-cloud.front\src\cc\bvUtil.js
+ * @LastEditTime: 2020-09-28 16:34:25
+ * @FilePath: \ccfront\src\cc\bvUtil.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 

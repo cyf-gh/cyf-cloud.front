@@ -1,8 +1,8 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-14 20:07:54
- * @FilePath: \cyf-cloud.front\src\Router.js
+ * @LastEditTime: 2020-09-28 17:38:50
+ * @FilePath: \ccfront\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
 import VueRouter from 'vue-router'
@@ -44,7 +44,7 @@ const routes = [
     { path: '/blog', component: ccCyfBlog },
     { path: '/vt', component: ccVt },
     { path: '/util/mcdrPlg', component: ccMcdrPlg },
-    { path: '/my/info', component: ccCyfInfo },
+    { path: '/info/about', component: ccCyfInfo },
     { path: '/account/signin', component: ccAccountSignin },
     { path: '/account/login', component: ccAccountLogin },
     { path: '/post/editor', component: ccPostEditor },
