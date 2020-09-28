@@ -1,8 +1,8 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 13:58:17
- * @FilePath: \cyf-cloud.front\src\components\cyf\My.vue
+ * @LastEditTime: 2020-09-28 15:50:20
+ * @FilePath: \ccfront\src\components\cyf\My.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ccMd from '../cc-templates/Markdown'
+import ccMd from '../cc-templates/markdown'
 export default {
     components: {
         ccMd

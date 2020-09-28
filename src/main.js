@@ -1,8 +1,8 @@
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 15:55:07
- * @FilePath: \cyf-cloud.front\src\main.js
+ * @LastEditTime: 2020-09-28 15:50:01
+ * @FilePath: \ccfront\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 import Vue from 'vue'
@@ -16,7 +16,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import cookie from 'vue-cookie'
 
-// import VueMarkdown from 'vue-simple-markdown'
 /*
 Vue.prototype.$axios = axios
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
