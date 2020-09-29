@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 23:09:45
+ * @LastEditTime: 2020-09-29 15:29:02
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -36,7 +36,7 @@
             <b-dropdown-item href="/account/signin">注册</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown v-else text="账户" class="text-primary" right>
-            <b-dropdown-item href="/account/login">个人信息</b-dropdown-item>
+            <b-dropdown-item href="/account/info">个人信息</b-dropdown-item>
             <b-dropdown-item v-on:click="logout">注销</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 14:03:59
+ * @LastEditTime: 2020-09-29 15:22:52
  * @FilePath: \cyf-cloud.front\src\components\cc-templates\markdown.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -43,9 +43,7 @@ export default {
     mdData: String,   // 长度非0则直接解析markdown
   },
   mounted() {
-    console.log( "mdData: " + this.mdData )
     if ( this.mdData.length != 0 ) {
-      console.log("in mddata length not 0")
       this.infoMd = this.mdData
       md.SetRawMarkdownToDiv(
         this.infoMd,

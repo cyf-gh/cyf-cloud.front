@@ -1,8 +1,8 @@
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 15:50:01
- * @FilePath: \ccfront\src\main.js
+ * @LastEditTime: 2020-09-29 17:13:19
+ * @FilePath: \cyf-cloud.front\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 import Vue from 'vue'
@@ -15,13 +15,16 @@ import qs from 'qs'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import cookie from 'vue-cookie'
-
 /*
 Vue.prototype.$axios = axios
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.baseURL = 'https://se.cyf-cloud.cn:2344/v1';
 */
+// CDN
+// Vue.use(window['vue-cropper'])
+
 Vue.use(VueAxios,axios)
+// Vue.use(VueCropper)
 Vue.use(qs)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
