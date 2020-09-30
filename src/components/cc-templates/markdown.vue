@@ -1,14 +1,13 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-29 15:22:52
+ * @LastEditTime: 2020-09-30 22:16:42
  * @FilePath: \cyf-cloud.front\src\components\cc-templates\markdown.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-  <div>
-    <br />
-    <b-container class="border">
+  <b-card>
+    <b-container id="id-cc-markdown">
       <div v-if="infoMdStatus">
         <br />
         <p>
@@ -25,7 +24,7 @@
         <p>请联系网站管理员</p>
       </div>
     </b-container>
-  </div>
+  </b-card>
 </template>
 
 <script>
@@ -66,3 +65,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#id-cc-markdown {
+background-color: white;
+}
+.card {
+  border: none;
+  margin: 1rem;
+  background-color: #F8F8F8;
+  transition:all 0.6s;
+  transition-timing-function:ease-in-out;
+}
+.card:hover{
+  background-color: #eee;
+}
+</style>

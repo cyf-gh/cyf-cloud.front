@@ -2,17 +2,15 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 15:56:09
- * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
+ * @LastEditTime: 2020-09-30 22:37:49
+ * @FilePath: \cyf-cloud.front\src\components\post\Editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-    <b-container>
-        <br>
-        <b-tabs content-class="mt-3" align="center">
-        <b-tab title="编辑" active>
-            <input v-model="title" placeholder="文章标题" type="text" class="form-control">
-            <br>
+    <b-container fluid>
+        <b-card-group deck>
+        <b-card title="编辑" content-class="mt-3" align="center">
+            <input v-model="title" placeholder="文章标题" type="text" class="form-control mb-3">
             <b-form-textarea
             id="textarea"
             v-model="text"
@@ -28,18 +26,18 @@
             placeholder="使用半角逗号，分号，空格隔开"
             no-add-on-enter
             ></b-form-tags>
-        </b-tab>
-        <b-tab title="预览" v-on:click="refreshPreview">
-            <b-container class="border">
+        </b-card>
+        <b-card title="预览" v-on:click="refreshPreview">
+            <b-container style="background-color:white">
                 <br>
                 <h2>{{title}}</h2>
                 <div>
-                    <b-badge variant="primary" :herf="auth_href">作者：{{meta.auth_name}}</b-badge>
-                    <div>&nbsp;</div>
-                    <b-badge variant="secondary">最后编辑：{{meta.last_edit}}</b-badge>
-                    <div>&nbsp;</div>
-                    <small>标签：</small>
-                     <b-badge variant="info" pill v-for="tag in tags">
+                    <b-badge variant="light" :herf="auth_href">作者：{{meta.auth_name}}</b-badge>
+                    <br>
+                    <b-badge variant="light">最后编辑：{{meta.last_edit}}</b-badge>
+                    <br>
+                    <b-badge variant="light" class="mr-1">标签：</b-badge>
+                     <b-badge variant="dark" v-for="tag in tags" class="mr-1">
                          {{tag}}
                     </b-badge>
                 </div>
@@ -47,10 +45,13 @@
                 <div :id="divId"></div>
                 <br>
             </b-container>
-        </b-tab>
-        </b-tabs>
+        </b-card>
+        </b-card-group>
         <br>
-        <b-button block pill variant="info" v-on:click="goPost">发表</b-button>
+        <b-navbar fixed="bottom" toggleable="lg" type="light" variant="light" >
+            <b-button variant="light" v-on:click="goPost" >发表</b-button>
+            <b-button variant="light" v-on:click="refreshPreview" class="ml-2">预览刷新</b-button>
+        </b-navbar>
     </b-container>
 </template>
 
@@ -69,7 +70,8 @@ export default {
             auth_name: "cyf",
             auth_href: "#",
             last_edit: '',
-        }
+        },
+        isDuo: true
       }
     },  
     props: {

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 23:36:38
+ * @LastEditTime: 2020-09-30 22:56:07
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -69,10 +69,33 @@
       </b-carousel>
     </b-card>
     <b-card>
-      <h6>服务功能</h6>
-      
+      <h4>博客</h4>
+      <div class="mt-3">
+      <b-button variant="light" class="mr-2">写一篇</b-button>
+      <b-button variant="light">随便看看</b-button>
+      </div>
+      <div class="mt-3">
+        我的博客...
+        <div id="id-cc-my-posts-list">id-cc-my-posts-list</div>
+      </div>
     </b-card>
     <b-card>
+      <h4>快速剪切板</h4>
+      <b-overlay :show="hasteTextHide" rounded="sm" class="mt-3"
+            spinner-variant="light"
+      spinner-type="grow"
+      spinner-small
+      >
+        <b-form-textarea
+        id="id-cc-haste-textarea"
+        v-model="hasteText"
+        placeholder="复制你需要备忘的文字在这里..."
+        rows="10"
+        max-rows="15"
+        ></b-form-textarea>
+      </b-overlay>
+      <br>
+      <b-form-checkbox switch v-model="hasteTextHide" class="ml-2">隐藏内容</b-form-checkbox>
     </b-card>
   </b-card-group>
   </div>
@@ -81,6 +104,7 @@
 
 <script>
 import idy from "../../cc/v1x1/Identity"
+import '../../cc/css/cc-card.css'
 export default {
     name: "ccHome",
         data() {
@@ -88,6 +112,8 @@ export default {
         slide: 0,
         sliding: null,
         initing: true,
+        hasteText: "",
+        hasteTextHide: false,
       }
     },
     mounted() {
@@ -100,7 +126,7 @@ export default {
       },
       onSlideEnd() {
         this.sliding = false;
-      }
+      },
     },
     computed: {
       isLoginIn() {
@@ -113,15 +139,3 @@ export default {
     },
 }    
 </script>
-<style scoped>
-.card {
-  border: none;
-  margin: 1rem;
-  background-color: #F8F8F8;
-  transition:all 0.6s;
-  transition-timing-function:ease-in-out;
-}
-.card:hover{
-  background-color: #eee;
-}
-</style>

@@ -1,14 +1,14 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 17:37:52
- * @FilePath: \ccfront\src\components\cyf\My.vue
+ * @LastEditTime: 2020-09-30 22:17:20
+ * @FilePath: \cyf-cloud.front\src\components\cyf\My.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
     <b-container>
         <b-card-group>
-        <b-card >
+        <b-card>
             <h2>关于站长</h2>
             <br>
             <b-container>
@@ -35,17 +35,20 @@
             </ul>
         </b-container>
         </b-card>
-        <b-card>
             <h2>Github信息：</h2>
+            <!--
             <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer" :mdData="infoMd" ></ccMd>
-        </b-card>
+            -->
         </b-card-group>
     </b-container>
 </template>
 
 <script>
-import ccMd from '../cc-templates/markdown'
+// import ccMd from '../cc-templates/markdown'
+import '../../cc/css/cc-card.css'
+
 export default {
+    /*
     components: {
         ccMd
     },
@@ -57,13 +60,8 @@ export default {
             infoMd: "",
         }
     },
+    */
     mounted() {
     },
 }
 </script>
-
-<style scoped>
-.card {
-  border: none;
-}
-</style>

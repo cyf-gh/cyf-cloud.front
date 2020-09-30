@@ -1,12 +1,13 @@
 <!--
  * @Date: 2020-09-13 13:07:47
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-14 19:33:42
- * @FilePath: \cyf-cloud.front\src\components\account\SignIn.vue
+ * @LastEditTime: 2020-09-30 21:50:48
+ * @FilePath: \cyf-cloud.front\src\components\account\Signin.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-  <b-container class="border">
+  <b-container>
+<b-card>
     <br>
     <h2 class="text-center">账户注册</h2>
     <p class="text-center">立马注册享受更多在线服务！</p>
@@ -64,7 +65,7 @@
       <b-form-text id="input-pswd-help">输入你的密码</b-form-text>
     </div>
     <br>
-        <div role="group">
+      <div role="group">
       <b-form-input
         id="input-pswdRp"
         v-model="pswdRp"
@@ -88,13 +89,14 @@
       ></b-form-input>
       <br>
       <b-img :src="capSrc"></b-img>
-      <b-button v-on:click="getNewCap" variant="primary" pill>点击获取新验证码</b-button>
-      <b-form-text id="input-cap-help">请输入4位验证码</b-form-text>
+      <b-button v-on:click="getNewCap" variant="light">点击获取新验证码</b-button>
+      <b-form-text id="input-cap-help" class="ml-3">请输入4位验证码</b-form-text>
     </div>
     <br />
-    <b-button block pill variant="info" disabled v-if="show" class="text-center">{{count}} 秒后跳转</b-button>
-    <b-button block pill variant="info" v-else v-on:click="goRegister">注册</b-button>
+    <b-button block variant="light" disabled v-if="show" class="text-center">{{count}} 秒后跳转</b-button>
+    <b-button block variant="light" v-else v-on:click="goRegister">注册</b-button>
     <br>
+  </b-card>
   </b-container>
 </template>
 

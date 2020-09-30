@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-28 22:41:26
+ * @LastEditTime: 2020-09-30 21:26:29
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 #cc-footer{  
-  background-color: #eee;
+  background-color: #F8F8F8;
   transition:all 0.6s;
   transition-timing-function:ease-in-out;
 }

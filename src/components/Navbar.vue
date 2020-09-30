@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-29 15:29:02
+ * @LastEditTime: 2020-09-30 21:45:42
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
 // static
 <template>
   <div>
-    <b-navbar toggleable="lg" type="light" variant="light">
+    <b-navbar id="id-cc-navbar" fixed="top" toggleable="lg" small type="light" variant="light">
       <b-navbar-brand href="/">
         <img
           src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
@@ -22,13 +22,15 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
+          <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item href="/">主站</b-nav-item>
           <b-nav-item href="/bbs">论坛</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
+        <b-dropdown-divider></b-dropdown-divider>
         <b-nav-form>
           <b-form-input class="mr-sm-2" placeholder="手气不错"></b-form-input>
-          <b-button class="my-2 my-sm-0" type="submit">搜索</b-button>
+          <b-button class="my-2 my-sm-0" variant="light">搜索</b-button>
         </b-nav-form>
           <b-dropdown-divider></b-dropdown-divider>
           <b-nav-item-dropdown v-if="!isLoginIn" text="账户" class="text-primary" right>

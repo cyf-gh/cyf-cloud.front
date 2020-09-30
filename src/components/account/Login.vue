@@ -1,26 +1,24 @@
 <!--
  * @Date: 2020-09-13 13:07:33
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-14 19:51:06
- * @FilePath: \cyf-cloud.front\src\components\account\login.vue
+ * @LastEditTime: 2020-09-30 21:25:16
+ * @FilePath: \cyf-cloud.front\src\components\account\Login.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-  <b-container class="border">
-    <br />
-    <h2 class="text-center">账户登录</h2>
-    <br />
-    <div role="group">
+  <b-container>
+    <b-card>
+    <h2 class="text-center mb-5 mt-3">账户登录</h2>
+    <div role="group" class="mb-4">
       <b-form-input id="input-login-login" v-model="login" :state="getType" placeholder="用户名/邮箱/手机" trim></b-form-input>
       <small>{{loginTypeShowText}}</small>
     </div>
-    <br />
-    <div role="group">
+    <div role="group" class="mb-4">
       <b-form-input id="input-login-paswd" type="password" v-model="pswd" placeholder="密码" trim></b-form-input>
     </div>
+    <b-button block variant="light" v-on:click="goLogin">登录</b-button>
     <br />
-    <b-button block pill variant="info" v-on:click="goLogin">登录</b-button>
-    <br />
+    </b-card>
   </b-container>
 </template>
 

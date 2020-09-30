@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-29 17:42:00
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-29 20:37:36
+ * @LastEditTime: 2020-09-30 20:44:39
  * @FilePath: \cyf-cloud.front\src\cc\Image.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -18,7 +18,7 @@ const blobMaxSize = 750*1334
 
 function CompressBase64(
     base64,        // 源图片
-    w, h,    // 缩放比例
+    w, h,          // 目标图片的长宽
     callback       // 回调
 ) {
     //处理缩放，转格式
@@ -31,7 +31,8 @@ function CompressBase64(
         _canvas.getContext("2d").drawImage(this, 0, 0, w, h);
         var base64 = _canvas.toDataURL("image/jpeg");
         _canvas.toBlob( function(blob) {
-            if(blob.size > blobMaxSize){        //如果还大，继续压缩
+            // 递归压缩
+            if(blob.size > blobMaxSize){
                 CompressBase64(base64, w, h, callback);
             }else{
                 callback(base64);
