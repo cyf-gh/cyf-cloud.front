@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-13 13:07:47
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 21:50:48
+ * @LastEditTime: 2020-10-02 15:54:29
  * @FilePath: \cyf-cloud.front\src\components\account\Signin.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -123,7 +123,7 @@ export default {
       },
       goRegister() {
           if( this.nameState && this.emailState && this.phoneState && this.pswdState && this.pswdRpState )  {
-            this.axios.post( "/v1x1/account/register",this.rgst,{withCredentials: true})
+            this.axios.post( apiSe + "/v1x1/account/register",this.rgst,{withCredentials: true})
             .then(res => {
               if ( res.data.ErrCod == 0 ) {
                 bvu.Msg("注册成功","已成功注册，将在3秒后跳转至登陆页面","success")

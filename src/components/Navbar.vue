@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 21:45:42
+ * @LastEditTime: 2020-10-02 15:56:53
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
 // static
 <template>
   <div>
-    <b-navbar id="id-cc-navbar" fixed="top" toggleable="lg" small type="light" variant="light">
+    <b-navbar id="id-cc-navbar" fixed="top" toggleable="lg" type="light" variant="light">
       <b-navbar-brand href="/">
         <img
           src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"

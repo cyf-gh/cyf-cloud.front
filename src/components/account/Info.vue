@@ -66,7 +66,7 @@ import ccMd from '../cc-templates/markdown'
 import imageCropper from "../cc-templates/imageCropper"
 
 export default {
-    components: {
+components: {
         imageCropper,
         ccMd
     },

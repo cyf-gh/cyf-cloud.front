@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-13 13:07:33
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 21:25:16
+ * @LastEditTime: 2020-10-02 15:56:21
  * @FilePath: \cyf-cloud.front\src\components\account\Login.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -25,12 +25,13 @@
 <script>
 import vld from "../../cc/validate";
 import bvu from "../../cc/bvUtil";
+import apiSe from "../../server"
 export default {
   data() {
     return {
       login: "",
       loginType: "",
-      pswd :"", 
+      pswd :"",
       loginTypeShowText: "",
     };
   },
@@ -40,7 +41,7 @@ export default {
         bvu.Msg( "错误", "登陆用户名/邮箱/电话输入有误", "danger" )
         return;
       } else {
-        this.axios.post("/v1x1/account/login",{
+        this.axios.post(apiSe+"/v1x1/account/login",{
           "login":this.login,
           "loginType": this.loginType,
           "pswd": this.pswd

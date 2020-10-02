@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 22:56:07
+ * @LastEditTime: 2020-10-02 14:49:38
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -80,22 +80,7 @@
       </div>
     </b-card>
     <b-card>
-      <h4>快速剪切板</h4>
-      <b-overlay :show="hasteTextHide" rounded="sm" class="mt-3"
-            spinner-variant="light"
-      spinner-type="grow"
-      spinner-small
-      >
-        <b-form-textarea
-        id="id-cc-haste-textarea"
-        v-model="hasteText"
-        placeholder="复制你需要备忘的文字在这里..."
-        rows="10"
-        max-rows="15"
-        ></b-form-textarea>
-      </b-overlay>
-      <br>
-      <b-form-checkbox switch v-model="hasteTextHide" class="ml-2">隐藏内容</b-form-checkbox>
+      <ccClipboard></ccClipboard>
     </b-card>
   </b-card-group>
   </div>
@@ -104,16 +89,18 @@
 
 <script>
 import idy from "../../cc/v1x1/Identity"
+import ccClipboard from "../v1x1/Clipboard"
 import '../../cc/css/cc-card.css'
 export default {
+    components:{
+      ccClipboard
+    },
     name: "ccHome",
         data() {
       return {
         slide: 0,
         sliding: null,
         initing: true,
-        hasteText: "",
-        hasteTextHide: false,
       }
     },
     mounted() {
