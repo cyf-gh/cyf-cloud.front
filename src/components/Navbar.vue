@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-02 15:56:53
+ * @LastEditTime: 2020-10-06 20:16:17
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,14 +9,15 @@
 // static
 <template>
   <div>
-    <b-navbar id="id-cc-navbar" fixed="top" toggleable="lg" type="light" variant="light">
+    <sp></sp>
+    <b-navbar id="id-cc-navbar" fixed="top" toggleable="lg">
       <b-navbar-brand href="/">
         <img
           src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
           alt="Kitten"
           height="30"
           width="30"
-          style="filter: invert(100%);"
+          style="filter: invert(0%);"
         />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -43,15 +44,21 @@
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
+
     </b-navbar>
   </div>
 </template>
 
 <script>
 import idy from "../cc/v1x1/Identity"
+import sp from './ScrollPerview'
+
 export default {
   name: "ccNavbar",
-  data() {
+  components: {
+    sp
+  },
+data() {
     return {
       initing: true
     }
@@ -76,3 +83,18 @@ export default {
   },
 };
 </script>
+
+<style>
+.navbar{  
+  -webkit-backdrop-filter: blur(15px); 
+
+  backdrop-filter: blur(15px); 
+
+  background: rgba(248,248,248, 0.6); 
+  transition:all 0.6s;
+  transition-timing-function:ease-in-out;
+}
+.navbar:hover{
+  background-color: rgb(223, 223, 223, 0.8);
+}
+</style>

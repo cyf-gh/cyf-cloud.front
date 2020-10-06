@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-02 14:49:38
+ * @LastEditTime: 2020-10-06 19:23:57
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -10,21 +10,21 @@
 <div class="container-fluid">
   <div>
   <b-card-group deck>
-    <b-card>
-      <b-dropdown id="cc-home-dropdown-mc" class="p-1" variant="light" text="我的世界">
-        <b-dropdown-item href="/mc">概况</b-dropdown-item>
+    <b-card style="z-index: 999;">
+      <b-dropdown id="cc-home-dropdown-mc" variant="light" text="我的世界">
+        <b-dropdown-item href="/mc">首页</b-dropdown-item>
         <b-dropdown-item href="/mc/skin">外置登录</b-dropdown-item>
         <b-dropdown-item href="/mc/map">卫星地图</b-dropdown-item>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item href="/mc/about">关于</b-dropdown-item>
       </b-dropdown>
-        <b-dropdown id="cc-home-dropdown-cloud-app" class="p-1" variant="light" text="云应用">
+        <b-dropdown id="cc-home-dropdown-cloud-app" class="p-1 upper" variant="light" text="云应用">
           <b-dropdown-item href="/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>
           <b-dropdown-item href="/vt">开黑看视频（预览版）</b-dropdown-item>
         </b-dropdown>
-        <b-dropdown id="cc-home-dropdown-music-cyf" class="p-1" variant="light" text="音乐" disabled>
+        <b-dropdown id="cc-home-dropdown-music-cyf" class="p-1 upper" variant="light" text="音乐" disabled>
         </b-dropdown>
-        <b-dropdown id="cc-home-dropdown-blog-cyf" class="p-1" variant="light" text="博客" disabled>
+        <b-dropdown id="cc-home-dropdown-blog-cyf" class="p-1 upper" variant="light" text="博客" disabled>
         </b-dropdown>
     </b-card>
   </b-card-group>
@@ -126,3 +126,7 @@ export default {
     },
 }    
 </script>
+
+<style>
+
+</style>

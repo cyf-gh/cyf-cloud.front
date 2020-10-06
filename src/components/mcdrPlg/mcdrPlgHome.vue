@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-29 21:54:19
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 15:25:45
+ * @LastEditTime: 2020-10-06 17:59:22
  * @FilePath: \cyf-cloud.front\src\components\mcdrPlg\mcdrPlgHome.vue
  * @Descrion: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -82,6 +82,7 @@
       </div>
       <hr>
       <b-container>
+
           <small>插件源</small>
           <b-form-input id="id-input-plg-feed" v-model="feedSource" required placeholder="URI"></b-form-input>
         <b-badge pill variant="info" href="#" @mousedown="updateFeedSource">点击更新源</b-badge>
@@ -98,6 +99,7 @@
       </b-container>
     </b-sidebar>
 
+    <b-card>
     <div class="container text-center">
       <br>
       <h1 v-if="selectedPlgs.length==0">你还未选择任何插件</h1>
@@ -131,7 +133,10 @@
       
 
     </div>
+    </b-card>
+
     <b-container v-if="scr.src!='' ">
+    <b-card>
       <hr>
       <b-alert show variant="warning">如果插件有变动则请重新生成脚本</b-alert>
       <label>复制到终端并运行</label>
@@ -145,7 +150,8 @@
       rows="3"
       max-rows="10"
     ></b-form-textarea>
-      </b-container>
+    </b-card>
+    </b-container>
   </div>
 </template>
 

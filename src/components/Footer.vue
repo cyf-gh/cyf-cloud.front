@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 21:26:29
+ * @LastEditTime: 2020-10-06 19:32:52
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -77,13 +77,15 @@ export default {
     })
 </script>
 
-<style scoped>
+<style>
 #cc-footer{  
-  background-color: #F8F8F8;
+  -webkit-backdrop-filter: blur(15px); 
+  backdrop-filter: blur(15px); 
+  background: rgba(248,248,248, 0.6); 
   transition:all 0.6s;
   transition-timing-function:ease-in-out;
 }
 #cc-footer:hover{
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(223, 223, 223, 0.8);
 }
 </style>

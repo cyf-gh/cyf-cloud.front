@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 14:57:49
+ * @LastEditTime: 2020-10-06 17:59:49
  * @FilePath: \cyf-cloud.front\src\components\vt\VtHome.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -92,7 +92,7 @@
       </b-sidebar>
     </div>
 
-    <b-container id="main-control-panel">
+    <b-card id="main-control-panel">
       <b-card-group deck>
         <b-card v-if="ux.userStatus" >
           <div class="container">
@@ -118,7 +118,7 @@
           </div>
         </b-card>
       </b-card-group>
-    </b-container>
+    </b-card>
   </div>
 </template>
 

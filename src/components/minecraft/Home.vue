@@ -1,13 +1,12 @@
 <template>
-  <div class="container">
-    <br />
+<b-container fluid>
+  <b-card-group deck>
+  <b-card>
     <div class="text-center">
       <h2>
         <strong>快速了解 Minecraft 服务器的现状</strong>
       </h2>
-      <b-button href="#/mc/map" variant="light" class="mr-1">查看卫星地图</b-button>
-      <b-button href="#/mc/skin" variant="light">前往注册皮肤账户</b-button>
-      <hr style="width: 20%;" />
+      <b-button href="/mc/skin" class="m-3" variant="light">前往注册皮肤账户</b-button>
     </div>
     <div>
       <b-tabs content-class="mt-3" align="center">
@@ -64,7 +63,7 @@
                 <hr style="width:100%" />
                 <b-card-group deck>
                   <b-card>
-                    <iframe
+                    <b-embed
                       src="https://player.bilibili.com/player.html?aid=754040891&cid=218725210&page=1&danmaku=0"
                       scrolling="no"
                       border="0"
@@ -73,11 +72,11 @@
                       allowfullscreen="true"
                       width="auto"
                       height="auto"
-                    ></iframe>
+                    ></b-embed>
                     <small class="d-block mb-3 text-muted text-center">UP：ice_feather冰羽</small>
                   </b-card>
                   <b-card>
-                    <iframe
+                    <b-embed
                       src="https://player.bilibili.com/player.html?aid=754098493&cid=219718409&page=1&danmaku=0"
                       scrolling="no"
                       border="0"
@@ -86,7 +85,7 @@
                       allowfullscreen="true"
                       width="auto"
                       height="auto"
-                    ></iframe>
+                    ></b-embed>
                     <small class="d-block mb-3 text-muted text-center">UP：_伊莉雅酱_</small>
                   </b-card>
                   <b-card class="text-left">
@@ -169,11 +168,26 @@
         </b-tab>
       </b-tabs>
     </div>
-  </div>
+    </b-card>
+    <b-card class="text-center">
+      <h2>
+        <strong>卫星地图</strong>
+      </h2>
+      <ccMap></ccMap>
+    </b-card>
+  </b-card-group>
+</b-container>
 </template>
 
 <script>
+import ccMap from './Webmap'
+
+
+
 export default {
+  components:{
+      ccMap
+  },
   name: "McHome",
 };
 </script>
