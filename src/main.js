@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-29 17:13:19
+ * @LastEditTime: 2020-10-07 15:16:27
  * @FilePath: \cyf-cloud.front\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -17,9 +17,9 @@ import VueAxios from 'vue-axios'
 import cookie from 'vue-cookie'
 /*
 Vue.prototype.$axios = axios
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.baseURL = 'https://se.cyf-cloud.cn:2344/v1';
 */
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 // CDN
 // Vue.use(window['vue-cropper'])
 

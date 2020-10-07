@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-06 19:23:57
+ * @LastEditTime: 2020-10-07 21:49:16
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -24,8 +24,6 @@
         </b-dropdown>
         <b-dropdown id="cc-home-dropdown-music-cyf" class="p-1 upper" variant="light" text="音乐" disabled>
         </b-dropdown>
-        <b-dropdown id="cc-home-dropdown-blog-cyf" class="p-1 upper" variant="light" text="博客" disabled>
-        </b-dropdown>
     </b-card>
   </b-card-group>
   </div>
@@ -33,7 +31,6 @@
   <b-card-group deck>
     <b-card>
       <b-carousel
-          v-if="!isLoginIn"
           id="carousel-1"
           v-model="slide"
           :interval="7000"
@@ -68,20 +65,20 @@
           </b-carousel-slide>
       </b-carousel>
     </b-card>
-    <b-card>
-      <h4>博客</h4>
-      <div class="mt-3">
-      <b-button variant="light" class="mr-2">写一篇</b-button>
-      <b-button variant="light">随便看看</b-button>
-      </div>
-      <div class="mt-3">
-        我的博客...
-        <div id="id-cc-my-posts-list">id-cc-my-posts-list</div>
-      </div>
-    </b-card>
-    <b-card>
-      <ccClipboard></ccClipboard>
-    </b-card>
+      <b-card v-if="isLogin">
+        <h4>博客</h4>
+        <div class="mt-3">
+        <b-button variant="light" class="mr-2">写一篇</b-button>
+        <b-button variant="light">随便看看</b-button>
+        </div>
+        <div class="mt-3">
+          <h6>我的文章</h6>
+          <div id="id-cc-my-posts-list"><ccPostList></ccPostList></div>
+        </div>
+      </b-card>
+      <b-card v-if="isLogin">
+        <ccClipboard></ccClipboard>
+      </b-card>
   </b-card-group>
   </div>
 </div>
@@ -90,22 +87,23 @@
 <script>
 import idy from "../../cc/v1x1/Identity"
 import ccClipboard from "../v1x1/Clipboard"
+import ccPostList from "../post/List"
 import '../../cc/css/cc-card.css'
 export default {
     components:{
-      ccClipboard
+      ccClipboard, ccPostList
     },
     name: "ccHome",
         data() {
       return {
         slide: 0,
         sliding: null,
-        initing: true,
+        isLogin: false,
       }
     },
-    mounted() {
+    created() {
       idy.InitCookie(this.$cookie)
-      this.initing = false;
+      this.isLogin = idy.IsLogin()
     },
     methods: {
       onSlideStart() {
@@ -114,15 +112,6 @@ export default {
       onSlideEnd() {
         this.sliding = false;
       },
-    },
-    computed: {
-      isLoginIn() {
-        if ( this.initing ) {
-          return false
-        } else {
-          return idy.IsLogin()
-        }
-      }
     },
 }    
 </script>

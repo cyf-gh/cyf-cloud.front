@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-13 22:09:18
+ * @LastEditTime: 2020-10-07 23:24:00
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -48,7 +48,7 @@ module.exports = {
 	// 它支持webPack-dev-server的所有选项
 	devServer: {
 		port: 8887,
-		https: true,
+		https: false,
 		disableHostCheck: true,
 		// 配置多个代理
 		proxy: {

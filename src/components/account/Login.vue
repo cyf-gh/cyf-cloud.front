@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-13 13:07:33
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-02 15:56:21
+ * @LastEditTime: 2020-10-07 17:06:54
  * @FilePath: \cyf-cloud.front\src\components\account\Login.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -33,6 +33,8 @@ export default {
       loginType: "",
       pswd :"",
       loginTypeShowText: "",
+      timer: null,
+      count: 3,
     };
   },
   methods: {
@@ -48,8 +50,18 @@ export default {
         }, {withCredentials: true})
         .then(res => {
           if ( res.data.ErrCod == 0 ) {
-            bvu.Msg("登录成功","已成功登录，将在3秒后跳转至登陆页面","success")
+            bvu.Msg("登录成功","已成功登录，将在3秒后跳转至主页","success")
             console.log( res.data )
+            this.timer = setInterval(() => {
+              if (this.count > 0 && this.count <= 3) {
+                this.count--
+              } else {
+                clearInterval(this.timer)
+                this.timer = null
+                this.$router.push({ path:'/home'})
+                location.reload()
+              }
+            }, 1000)
             return;
           } else {
             console.error( res.data )
