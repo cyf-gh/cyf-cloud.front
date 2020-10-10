@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-28 23:12:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 18:27:54
+ * @LastEditTime: 2020-10-11 02:12:17
  * @FilePath: \cyf-cloud.front\src\components\account\Info.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -91,16 +91,21 @@ import imageCropper from "../cc-templates/imageCropper";
 import theme from "../../cc/v1x1/Theme";
 import idy from "../../cc/v1x1/Identity";
 import bvu from "../../cc/bvUtil";
+import apiAddr from '../../server'
+import err from "../../cc/v1x1/HttpErrReturn";
 
 export default {
-  mounted(){
-    idy.InitCookie(this.$cookie);
-    bvu.InitToast(this.$bvToast);
+  created(){
     this.isLoginIn = idy.IsLogin();
     if (this.isLoginIn) {
-      idy.RefreshAccountInfo(this.axios);
+      idy.ForceRefreshAccountInfo(this.axios);
       this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+      console.log("refreshed info")
     }
+  },
+  mounted() {
+    idy.InitCookie(this.$cookie);
+    bvu.InitToast(this.$bvToast);
   },
   components: {
     imageCropper,
@@ -111,8 +116,22 @@ export default {
     },
     changeBgUrl() {
       theme.ChangeBgUrl(this.accountInfo.BgUrl);
-      localStorage.setItem("bgurl", this.infoEx.bgUrl);
+      localStorage.setItem("bgurl", this.accountInfo.bgUrl);
     },
+    uploadBgUrl() {
+      this.axios.post( apiAddr + "/v1x1/account/upload/avatar",this.accountInfo.Avatar,{withCredentials: true})
+      .then(res => {
+        if ( err.Check( res.data ) ) {
+          bvu.Msg("信息修改","头像上传成功！","success")
+        } else {
+          bvu.Msg("信息修改", "头像上传失败！", "danger");
+        }
+      })
+      .catch(err => {
+        bvu.Msg("错误", err, "danger");
+        console.error(err);
+      })
+    }
   },
   data() {
     return {

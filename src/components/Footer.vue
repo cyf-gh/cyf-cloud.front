@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-06 19:32:52
+ * @LastEditTime: 2020-10-11 02:36:31
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -52,6 +52,16 @@
         </b-badge>
       </div>
     </div>
+    <hr>
+    <p class="text-center" style="color:gray;">
+      Designed and built with all the love in the world. Maintained by cyf.
+      <br>
+      Currently v1x1. Code closed-souce. cyf-cloud all copyright reserved.
+      <br>
+      cyf-cloud 2020
+    </p>
+    <br>
+    <br>
   </footer>
 </div>
 </template>

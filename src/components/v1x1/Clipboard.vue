@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-02 14:45:22
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 23:32:32
+ * @LastEditTime: 2020-10-10 23:16:12
  * @FilePath: \cyf-cloud.front\src\components\v1x1\Clipboard.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -30,10 +30,13 @@
         <b-form-checkbox swith v-model="haste.TextHide" @change="modify" class="m-2">隐藏内容</b-form-checkbox>
         </b-col>
         <b-col>
+        <b-form-checkbox swith v-model="autoUpdate" @change="switchAutoupdate" class="m-2">自动同步</b-form-checkbox>
+        </b-col>
+        <b-col>
         <b-button block variant="light" @click="update">更新</b-button>
         </b-col>
     </b-row>
-    <small style="color: gray;">上次更新：{{haste.LastUpdate}}</small>
+    <small class="cc-detail-text">上次更新：{{haste.LastUpdate}}</small>
   </div>
 </template>
 
@@ -49,14 +52,18 @@ export default {
             Text: "",
             TextHide: false,
         },
+        autoUpdate: true,
         lastModify: null,
         timer: null,
-        intvl: 1000,
+        intvl: 4000,
     };
   },
   created() {
     this.timer = setInterval(this.update, this.intvl)
     this.fetch()
+  },
+  mounted() {
+    this.autoUpdate = false
   },
   methods:{
     modify() {
@@ -79,6 +86,16 @@ export default {
         .catch(err => {
           console.error(err); 
         })
+    },
+    switchAutoupdate() {
+      if ( ! this.autoUpdate ) {
+        this.timer = this.timer == null ? setInterval(this.update, this.intvl) : this.timer
+        console.log("on")
+      } else {
+        clearInterval( this.timer )
+        this.timer = null
+        console.log("off")
+      }
     },
     update(){
       this.axios.get( apiAddr+"/v1x1/clipboard/fetch", {withCredentials: true})

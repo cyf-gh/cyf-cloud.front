@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 21:49:16
+ * @LastEditTime: 2020-10-10 22:50:12
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -44,16 +44,22 @@
           @sliding-end="onSlideEnd"
         >
           <!-- Slides with custom text -->
+          <b-carousel-slide img-src="https://s1.ax1x.com/2020/10/10/06w4j1.jpg">
+          <h1>账户</h1>
+          <p>本站已支持账户注册！享受更多服务！</p>
+          </b-carousel-slide>
           <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBTtP.jpg">
           <h1>Minecraft</h1>
           <p>现在就加入我的世界！</p>
-          <b-button href="#/mc/map" pill variant="light">查看卫星地图</b-button>
+          <b-button href="#/mc/map" pill variant="light">前往注册</b-button>
           </b-carousel-slide>
+          <!-- 
           <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJB6fK.jpg">
           <h1>皮肤站点</h1>
           <p>获取皮肤与外置登录服务</p>
           <b-button href="#/mc/skin" pill variant="light">前往注册</b-button>
           </b-carousel-slide>
+           -->
           <!-- Slides with custom text -->
           <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBhmd.jpg">
           <h1>音乐</h1>

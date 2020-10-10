@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 21:42:27
+ * @LastEditTime: 2020-10-11 00:16:53
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -10,15 +10,19 @@
     <b-card v-if="!isPrivate">
         <b-container style="background-color:white" v-if="post != null">
             <br>
-            <h2>{{post.Title}}</h2>
+            <b-row>
+            <b-col><h2>{{post.Title}}</h2></b-col>
+            <b-col><b-button variant="light" class="cc-put-right" v-if="post.MyPost" @click="edit">编辑</b-button></b-col>
+            </b-row>
             <div>
-                <b-badge :href="authHref" variant="light">作者：{{post.Author}}</b-badge>
+                <b-badge :href="authHref" variant="light" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
+                <b-badge :href="authHref" variant="light" v-else>作者：{{post.Author}}</b-badge>
                 <br>
                 <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                 <br>
                 <b-badge variant="light" class="mr-1">标签：</b-badge>
-                    <b-badge variant="dark" v-for="tag in post.Tags" :href="tagHref(tag)" class="mr-1">
-                        {{tag}}
+                <b-badge variant="dark" v-for="tag in post.Tags" :href="tagHref(tag)" class="mr-1">
+                    {{tag}}
                 </b-badge>
             </div>
             <hr>
@@ -87,8 +91,10 @@ export default {
     methods: {
         tagHref( tagName ) {
             return "/post?tag=" + tagName
+        },
+        edit() {
+            this.$router.push({path:'/post/editor?mode=modify' +'&id='+ this.postId})
         }
     }
-    
 }
 </script>

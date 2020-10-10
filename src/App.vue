@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-06 19:57:39
+ * @LastEditTime: 2020-10-11 02:29:14
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -54,11 +54,8 @@ export default {
 </script>
 
 <style>
-  .selector-for-some-widget {
-    box-sizing: content-box;
-  }
-
   .fs {
+    box-sizing: content-box;
     width: 100%;
     height: 100%;
   }

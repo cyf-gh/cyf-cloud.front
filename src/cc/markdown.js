@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-12 15:11:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-15 14:02:28
+ * @LastEditTime: 2020-10-11 00:23:15
  * @FilePath: \cyf-cloud.front\src\cc\markdown.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -50,6 +50,9 @@ async function SetMarkdownToDiv( md_url, md_data, div_id, axios, is_cc_server = 
 }
 
 function SetRawMarkdownToDiv( md_data, div_id ) {
+    if ( md_data == "" ) {
+        return
+    }
     var md2html = marked(md_data)
     console.log(md2html)
     document.getElementById(div_id).innerHTML = (md2html)

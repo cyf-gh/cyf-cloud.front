@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-13 15:49:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 17:26:12
+ * @LastEditTime: 2020-10-11 02:04:38
  * @FilePath: \cyf-cloud.front\src\cc\v1x1\Identity.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -55,15 +55,19 @@ function GetAtk() {
 function RefreshAccountInfo( axios ) {
     var infoData = localStorage.getItem("cc_account_info")
     if ( infoData == "" || infoData == null ) {
-        axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
-        .then(res => {
-            console.log(res.data)
-            localStorage.setItem( "cc_account_info", res.data.Data )
-        })
-        .catch(err => {
-            console.error(err);
-        })
+        ForceRefreshAccountInfo( axios )
     }
+}
+
+function ForceRefreshAccountInfo( axios ) {
+    axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
+    .then(res => {
+        console.log(res.data)
+        localStorage.setItem( "cc_account_info", res.data.Data )
+    })
+    .catch(err => {
+        console.error(err);
+    })
 }
 
 function ClearAccountInfo() {
@@ -86,5 +90,6 @@ export default {
     IsLogin,
     Logout,
     RefreshAccountInfo,
+    ForceRefreshAccountInfo,
     ClearAccountInfo
 }

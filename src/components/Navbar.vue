@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 21:48:46
+ * @LastEditTime: 2020-10-11 02:16:34
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -90,6 +90,7 @@ import sp from "./ScrollPerview";
 import apiAddr from "../server";
 import err from "../cc/v1x1/HttpErrReturn";
 import bvu from "../cc/bvUtil";
+import theme from "../cc/v1x1/Theme";
 
 export default {
   name: "ccNavbar",
@@ -109,12 +110,15 @@ export default {
     if (this.isLoginIn) {
       idy.RefreshAccountInfo(this.axios);
       this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+      
+      theme.SetBgUrl( this.accountInfo.BgUrl )
+      theme.ReloadBgUrl()
     }
   },
   methods: {
     logout() {
       this.axios
-        .post(apiAddr + "/v1x1/account/logout")
+        .post(apiAddr + "/v1x1/account/logout"), {}, {withCredentials: true}
         .then(
           (res) => {
             if (!err.Check(res.data)) {
