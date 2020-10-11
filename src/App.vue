@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:29:14
+ * @LastEditTime: 2020-10-11 23:37:10
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -35,6 +35,22 @@ export default {
     return {
       initing: true,
     }
+  },
+  created(){
+    console.clear()
+    let banner =
+"%c================================================\n"+
+"             __            _                 _\n"+
+"  ___ _   _ / _|       ___| | ___  _   _  __| |\n"+
+" / __| | | | |_ _____ / __| |/ _ \\| | | |/ _` |\n"+
+"| (__| |_| |  _|_____| (__| | (_) | |_| | (_| |\n"+
+" \\___|\\__, |_|        \\___|_|\\___/ \\__,_|\\__,_|\n"+
+"      |___/                                     \n"+
+"================================================\n"
+
+    console.log( banner, 'color: cyan;')
+    console.log( "%c日子不好过，求求老板赏口饭吃吧！www.cyf-cloud.cn/donate",'color: cyan')
+    console.log( "%c一个人写代码真的很操劳，加入我们！www.cyf-cloud.cn/info/join_us",'color: cyan')
   },
   mounted(){
     window.addEventListener('hashchange',()=>{

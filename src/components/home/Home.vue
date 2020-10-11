@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 22:59:50
+ * @LastEditTime: 2020-10-11 23:35:53
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -95,13 +95,14 @@ import idy from "../../cc/v1x1/Identity"
 import ccClipboard from "../v1x1/Clipboard"
 import ccPostList from "../post/List"
 import '../../cc/css/cc-card.css'
+
 export default {
     components:{
       ccClipboard, ccPostList
     },
     name: "ccHome",
         data() {
-      return {
+    return {
         slide: 0,
         sliding: null,
         isLogin: false,
