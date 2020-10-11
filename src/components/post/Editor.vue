@@ -2,7 +2,7 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:22:18
+ * @LastEditTime: 2020-10-11 22:52:10
  * @FilePath: \cyf-cloud.front\src\components\post\Editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -61,6 +61,7 @@
             <b-button variant="light" v-on:click="refreshPreview" class="ml-2">预览刷新</b-button>
             <b-button variant="light" v-on:click="savedDraft" class="ml-2">保存草稿</b-button>
             <b-button variant="light" v-b-toggle.cc-sidebar-draft class="ml-2">显示草稿箱</b-button>
+            <b-form-checkbox switch class="ml-2" v-model="isPrivate">设为隐私文章</b-form-checkbox>
             <small class="ml-5 my-auto" style="color: blue;border-style: dotted;border-width:2px" >{{status}}</small>
         </b-navbar>
     </b-container>
@@ -94,13 +95,18 @@ export default {
 
         canNotModify: false,
 
+        isPrivate: false,
+
         status: "status"
     }
     },
     methods: {
         savedDraft() {
-            df.SaveDraft( this.post )
-            this.status = "草稿已保存"
+            var res = confirm("确认保存？")
+            if(res) {
+                df.SaveDraft( this.post )
+                this.status = "草稿已保存"
+            }
         },
         refreshPreview() {
             md.SetRawMarkdownToDiv(
@@ -111,7 +117,56 @@ export default {
             this.status = "预览已刷新"
         },
         goPost() {
-        },
+            switch (this.$route.query.mode) {
+                case "modify":
+                    var res = confirm("确认修改？")
+                    if( !res ){
+                        return;
+                    }
+                    this.axios.post( apiAddr + "/v1x1/post/modify", {
+                        "Id": parseInt(this.postId),
+                        "Title" : this.post.Title,
+                        "Text" : this.post.Text,
+                        "TagIds" : this.post.Tags,
+                        "IsPrivate" : this.isPrivate,
+                    }, {withCredentials: true})
+                    .then(res => {
+                        if ( err.Check( res.data ) ) {
+                            this.status = "已修改！"
+                            this.$router.push( { path:'/post/reader?id='+ this.postId } )
+                        } else {
+                            console.error("in post reader loading post", err.data.Desc)
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
+                    return;
+                default:
+                    var res = confirm("确认发布？")
+                    if( !res ){
+                        return;
+                    }
+                    this.axios.post( apiAddr + "/v1x1/post/create", {
+                        "Title" : this.post.Title,
+                        "Text" : this.post.Text,
+                        "TagIds" : this.post.Tags,
+                        "IsPrivate" : this.isPrivate, 
+                    }, {withCredentials: true})
+                    .then(res => {
+                        if ( err.Check( res.data ) ) {
+                            this.status = "已上传！"
+                            this.$router.push( { path:'/post/reader?id='+ res.data.Data } )
+                        } else {
+                            console.error("in post reader loading post", err.data.Desc)
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err); 
+                    })
+                    return;
+            }
+       },
         getLastModifTime() {
             var date = new Date("2015-03-25 12:00:00");
             this.post.Date = date.toString();
@@ -120,6 +175,7 @@ export default {
     created() {
         switch( this.$route.query.mode ) {
             case "modify":
+                console.info("modify mode")
                 this.postId = this.$route.query.id
                 this.axios.get( apiAddr + "/v1x1/post", {
                     params:{id: this.postId},
@@ -128,6 +184,7 @@ export default {
                 .then(res => {
                     if ( err.Check( res.data ) ) {
                         this.post = JSON.parse( res.data.Data )
+                        this.isPrivate = this.post.IsPrivate
                         this.status = "编辑模式，正在编辑文章：" + this.post.Title
                     } else {
                         if ( res.data.ErrCod == "-5" ) {
@@ -140,11 +197,10 @@ export default {
                 .catch(err => {
                     console.error(err);
                 })
-
                 return;
             case "draft":
                 this.status = "草稿模式"
-                this.postId = df.GetDraftByTitle( this.$route.query.draft_title )
+                this.post = df.GetDraftByTitle( this.$route.query.dtitle)
                 return;
             default:
                 this.status = "创建了新文档"
@@ -156,9 +212,9 @@ export default {
                     "Date": new Date(),
                     "MyPost": true
                 }
-                return;
+            return;
         }
-    }
+    },
 }
 </script>
 

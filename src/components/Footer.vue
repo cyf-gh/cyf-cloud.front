@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:36:31
+ * @LastEditTime: 2020-10-11 22:42:09
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -53,15 +53,22 @@
       </div>
     </div>
     <hr>
-    <p class="text-center" style="color:gray;">
-      Designed and built with all the love in the world. Maintained by cyf.
+    <div class="text-center" >
+
+    <p style="color:gray;">
+      cyf-cloud 2020. Designed and built with all the love in the world. Maintained by cyf.
       <br>
-      Currently v1x1. Code closed-souce. cyf-cloud all copyright reserved.
-      <br>
-      cyf-cloud 2020
+      Currently v1x1. Code closed-source. cyf all copyright reserved.
     </p>
-    <br>
-    <br>
+      <img
+          src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+          alt="Kitten"
+          height="100"
+          width="100"
+          style="filter: invert(50%)"
+          class="mb-1"
+        />
+    </div>
   </footer>
 </div>
 </template>

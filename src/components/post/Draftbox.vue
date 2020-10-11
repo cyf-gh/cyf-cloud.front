@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-11 00:35:16
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 01:37:37
+ * @LastEditTime: 2020-10-11 21:42:43
  * @FilePath: \cyf-cloud.front\src\components\post\Draftbox.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -16,7 +16,10 @@
         <div v-for="d in ds">
             <b-row>
                 <b-col class="my-auto">{{d.Title}}</b-col>
-                <b-col><b-button variant="light" size="sm">修改</b-button><b-button variant="light" size="sm">删除</b-button></b-col>
+                <b-col>
+                <b-button variant="light" size="sm" @click="modify(d)">修改</b-button>
+                <b-button variant="light" size="sm" @click="deleteD(d)">删除</b-button>
+                </b-col>
             </b-row>
             <hr>
         </div>
@@ -37,10 +40,18 @@ export default {
     },
     methods: {
         modify( d ) {
-            // push to d router
+            var res = confirm("确认编辑？\n当前未保存的文字会全部消失")
+            if ( res ) {
+                this.$router.push({path:'/post/editor?mode=draft&dtitle='+d.Title})
+                location.reload()
+            }
         },
-        delete( d ) {
-            // localStorageDelete
+        deleteD( d ) {
+            var res = confirm("确认删除？")
+            if ( res ) {
+                df.DeleteDraftByTitle( d.Title )
+            }
+            this.refresh()
         },
         refresh() {
             this.ds = df.GetAllDrafts()

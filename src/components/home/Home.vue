@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-10 22:50:12
+ * @LastEditTime: 2020-10-11 22:59:50
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -74,7 +74,7 @@
       <b-card v-if="isLogin">
         <h4>博客</h4>
         <div class="mt-3">
-        <b-button variant="light" class="mr-2">写一篇</b-button>
+        <b-button variant="light" class="mr-2" @click="newPost">写一篇</b-button>
         <b-button variant="light">随便看看</b-button>
         </div>
         <div class="mt-3">
@@ -118,6 +118,9 @@ export default {
       onSlideEnd() {
         this.sliding = false;
       },
+      newPost() {
+        this.$router.push( { path:'/post/editor'} )
+      }
     },
 }    
 </script>

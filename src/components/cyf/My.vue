@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-30 22:17:20
+ * @LastEditTime: 2020-10-11 03:02:24
  * @FilePath: \cyf-cloud.front\src\components\cyf\My.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,33 +9,44 @@
     <b-container>
         <b-card-group>
         <b-card>
-            <h2>关于站长</h2>
+            <b-container style="border-style: dotted;border-width:2px">
+            <img
+            src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+            alt="cyf"
+            height="300"
+            width="300"
+            style="filter: invert(50%)"
+            class="my-auto cc-put-right"
+            />
+            <h2 class="mt-2">关于站长</h2>
+            <h1 class="mx-4 my-3" ><strong>cyf</strong></h1>
             <br>
             <b-container>
             <h5>其他链接：</h5>
-        <b-button class="m-1 badge badge-info" href="#/blog" >博客</b-button>
-        <b-button class="m-1 badge badge-info" target="_blank" href="https://github.com/cyf-gh">Github</b-button>
-        <b-button class="m-1 badge badge-info" target="_blank" href="https://space.bilibili.com/3087782">哔哩哔哩</b-button>
-        <b-button class="m-1 badge badge-info" href="#/music">音乐服务</b-button>
-        <b-button class="m-1 badge badge-info" href="#/donate">捐赠</b-button>
+        <b-badge variant="light" class="mr-2" target="_blank" href="https://cyf-ms.gitbook.io/tans-to-cn/">Github</b-badge>
+        <b-badge variant="light" class="mr-2" target="_blank" href="https://github.com/cyf-gh">GitBook</b-badge>
+        <b-badge variant="light" class="mr-2" target="_blank" href="https://steamcommunity.com/id/cyfsteam/">Steam</b-badge>
+        <b-badge variant="light" class="mr-2" target="_blank" href="https://space.bilibili.com/3087782">bilibili</b-badge>
+        <b-badge variant="light" class="mr-2" href="/blog" >博客</b-badge>
+        <b-badge variant="light" href="/donate">捐赠</b-badge>
         </b-container>
         <br>
         <b-container>
             <h5>联系方式：</h5>
             <ul class="list-unstyled text-small">
             <li>
-            <a class="text-muted">QQ：1026279833</a>
+            <a class="text-muted">QQ：<b-badge variant="light">1026279833</b-badge></a>
             </li>
             <li>
-            <a class="text-muted">微信：cyf_tx</a>
+            <a class="text-muted">微信：<b-badge variant="light">cyf_tx</b-badge></a>
             </li>
             <li>
-            <a class="text-muted">邮箱：cyf-ms@hotmail.com</a>
+            <a class="text-muted">邮箱：<b-badge variant="light">cyf-ms@hotmail.com</b-badge></a>
             </li>
             </ul>
         </b-container>
+            </b-container>
         </b-card>
-            <h2>Github信息：</h2>
             <!--
             <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer" :mdData="infoMd" ></ccMd>
             -->

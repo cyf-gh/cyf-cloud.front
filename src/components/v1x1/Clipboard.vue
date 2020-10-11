@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-02 14:45:22
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-10 23:16:12
+ * @LastEditTime: 2020-10-11 22:50:12
  * @FilePath: \cyf-cloud.front\src\components\v1x1\Clipboard.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -30,7 +30,7 @@
         <b-form-checkbox swith v-model="haste.TextHide" @change="modify" class="m-2">隐藏内容</b-form-checkbox>
         </b-col>
         <b-col>
-        <b-form-checkbox swith v-model="autoUpdate" @change="switchAutoupdate" class="m-2">自动同步</b-form-checkbox>
+        <b-form-checkbox swith v-model="autoUpdate" class="m-2">自动同步</b-form-checkbox>
         </b-col>
         <b-col>
         <b-button block variant="light" @click="update">更新</b-button>
@@ -87,17 +87,10 @@ export default {
           console.error(err); 
         })
     },
-    switchAutoupdate() {
-      if ( ! this.autoUpdate ) {
-        this.timer = this.timer == null ? setInterval(this.update, this.intvl) : this.timer
-        console.log("on")
-      } else {
-        clearInterval( this.timer )
-        this.timer = null
-        console.log("off")
-      }
-    },
     update(){
+      if ( !this.autoUpdate ) {
+        return;
+      }
       this.axios.get( apiAddr+"/v1x1/clipboard/fetch", {withCredentials: true})
         .then(res => {
           if( err.Check( res.data ) ) {

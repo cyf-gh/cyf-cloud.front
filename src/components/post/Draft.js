@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-10-11 00:36:00
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 00:51:17
+ * @LastEditTime: 2020-10-11 21:22:32
  * @FilePath: \cyf-cloud.front\src\components\post\Draft.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -33,8 +33,13 @@ function GetAllDrafts() {
     return drafts
 }
 
+function DeleteDraftByTitle( title ) {
+    localStorage.removeItem( draftHeader + title )
+}
+
 export default {
     SaveDraft,
     GetAllDrafts,
-    GetDraftByTitle
+    GetDraftByTitle,
+    DeleteDraftByTitle
 }
