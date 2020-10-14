@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:16:34
+ * @LastEditTime: 2020-10-14 20:54:38
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -117,17 +117,22 @@ export default {
   },
   methods: {
     logout() {
+      var rs = confirm("确认登出？")
+      if ( rs == false ) {
+        return
+      }
       this.axios
-        .post(apiAddr + "/v1x1/account/logout"), {}, {withCredentials: true}
+        .post(apiAddr + "/v1x1/account/logout", {}, {withCredentials: true})
         .then(
           (res) => {
-            if (!err.Check(res.data)) {
-              bvu.Msg("成功", "已登出账户", "success");
+            if (err.Check(res.data)) {
               idy.Logout();
+              bvu.Msg("成功", "已登出账户", "success");
               this.$router.push({ path: "/home" });
               location.reload();
             } else {
               bvu.Msg("错误", "登出账户错误", "danger");
+              console.error( res.data );
             }
           },
           { withCredentials: true }

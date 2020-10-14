@@ -1,20 +1,19 @@
 /*
  * @Date: 2020-09-13 15:49:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:04:38
+ * @LastEditTime: 2020-10-14 20:54:07
  * @FilePath: \cyf-cloud.front\src\cc\v1x1\Identity.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 
 import rd from "../random"
 import apiAddr from "../../server"
+import theme from "./Theme"
 
 var cke
 function InitCookie( cookie ) {
     cke = cookie
 }
-
-
 
 function GenerateBasicIds() {
     // 创建cid
@@ -79,7 +78,18 @@ function IsLogin() {
 }
 
 function Logout() {
+    theme.ReloadBgUrl()
+    localStorage.clear()
     cke.delete('atk')
+}
+
+function LogoutIfSession() {
+    var atk = cke.get("atk")
+    if( atk != null ) {
+        if ( atk.indexOf("$session$") != -1 ) {
+            Logout()
+        }
+    }
 }
 
 export default {
@@ -91,5 +101,6 @@ export default {
     Logout,
     RefreshAccountInfo,
     ForceRefreshAccountInfo,
-    ClearAccountInfo
+    ClearAccountInfo,
+    LogoutIfSession
 }

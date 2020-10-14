@@ -2,8 +2,8 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 22:52:10
- * @FilePath: \cyf-cloud.front\src\components\post\Editor.vue
+ * @LastEditTime: 2020-10-14 21:07:21
+ * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
@@ -11,6 +11,7 @@
     <div v-if="!canNotModify">
 
         <b-sidebar id="cc-sidebar-draft" aria-labelledby="sidebar-no-header-title" backdrop-variant="dark" no-header backdrop shadow>
+            <b-alert show>草稿箱储存在本地，随着退出登录与删除浏览器缓存会使所有草稿消失</b-alert>
             <ccDfBox></ccDfBox>
         </b-sidebar>
 
@@ -78,6 +79,7 @@ import apiAddr from '../../server'
 import err from '../../cc/v1x1/HttpErrReturn'
 import df from './Draft'
 import ccDfBox from './Draftbox'
+import idy from "../../cc/v1x1/Identity";
 
 export default {
     components:{
@@ -117,6 +119,11 @@ export default {
             this.status = "预览已刷新"
         },
         goPost() {
+            if( this.post.Text == "" || this.post.Title == "" ) {
+                this.status = "文章内容或标题均不能为空"
+                return;
+            }
+
             switch (this.$route.query.mode) {
                 case "modify":
                     var res = confirm("确认修改？")
@@ -173,6 +180,11 @@ export default {
         }
     },
     created() {
+        idy.InitCookie(this.$cookie);
+
+        if (!idy.IsLogin()) {
+            this.$router.push({ path: "/account/login?from=require_login" });
+        }
         switch( this.$route.query.mode ) {
             case "modify":
                 console.info("modify mode")

@@ -1,0 +1,8 @@
+import idy from "../../cc/v1x1/Identity";
+
+idy.InitCookie(this.$cookie);
+
+if (idy.IsLogin()) {
+} else {
+    this.$router.push({ path: "/account/login?from=require_login" });
+}

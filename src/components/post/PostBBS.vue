@@ -1,12 +1,12 @@
 <!--
- * @Date: 2020-10-07 19:01:48
+ * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 21:45:16
- * @FilePath: \cyf-cloud.front\src\components\post\List.vue
- * @Description: 文章列表
+ * @LastEditTime: 2020-10-14 21:48:04
+ * @FilePath: \cyf-cloud.front\src\components\post\PostBBS.vue
+ * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-    <div class="cc-my-posts-list-bg mt-2">
+    <b-card>
         <b-table
             :items="posts"
             :fields="fields"
@@ -22,9 +22,9 @@
         v-model="curPage"
         :per-page="perPage"
         :total-rows="rows"
-        aria-controls="id-my-posts"
+        aria-controls="id-all-posts"
       ></b-pagination>
-    </div>
+    </b-card>
 </template>
 
 <script>
@@ -40,6 +40,19 @@ export default {
             perPage: 7,
         }
     },
+    mounted() {
+         this.axios.get(apiAddr+"/v1x1/posts/info",{withCredentials: true})
+        .then(res => {
+            if( err.Check( res.data ) ) {
+                this.posts = JSON.parse( res.data.Data )
+            } else {
+                console.error("in post list loading all posts", res.data.Desc)
+            }
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+    },
     methods: {
         onSelectedPlgCliced(clicked) {
             for (var i in this.posts) {
@@ -50,19 +63,6 @@ export default {
             }
         },
     },
-    mounted() {
-        this.axios.get(apiAddr+"/v1x1/posts/info/self",{withCredentials: true})
-        .then(res => {
-            if( err.Check( res.data ) ) {
-                this.posts = JSON.parse( res.data.Data )
-            } else {
-                console.error("in post list loading posts", res.data.Desc)
-            }
-        })
-        .catch(err => {
-            console.error(err); 
-        })
-    },
     computed: {
         rows(){
             return this.posts.length;
@@ -70,15 +70,3 @@ export default {
     },
 }
 </script>
-
-
-<style scoped>
-.cc-my-posts-list-bg{
-    transition:all 0.6s;
-    transition-timing-function:ease-in-out;
-    background: rgb(248,248,248, 0.6);
-}
-.cc-my-posts-list-bg:hover{
-    background: white; 
-}
-</style>

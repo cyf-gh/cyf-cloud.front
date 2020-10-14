@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 23:37:10
+ * @LastEditTime: 2020-10-14 19:52:45
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -37,6 +37,7 @@ export default {
     }
   },
   created(){
+
     console.clear()
     let banner =
 "%c================================================\n"+
@@ -63,6 +64,11 @@ export default {
     ids.InitCookie(this.$cookie)
     ids.GenerateBasicIds();
     
+    // 首次加载行为
+    if ( window.performance.navigation.type != 1 ) {
+      ids.LogoutIfSession()
+    }
+
     theme.ReloadBgUrl()
     this.initing = false;
   }

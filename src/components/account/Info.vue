@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-28 23:12:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 02:12:17
+ * @LastEditTime: 2020-10-14 20:47:26
  * @FilePath: \cyf-cloud.front\src\components\account\Info.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -101,6 +101,8 @@ export default {
       idy.ForceRefreshAccountInfo(this.axios);
       this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
       console.log("refreshed info")
+    } else {
+      this.$router.push({ path: "/account/login?from=require_login" });
     }
   },
   mounted() {
