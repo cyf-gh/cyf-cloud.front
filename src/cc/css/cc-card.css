@@ -1,3 +1,4 @@
+
 .card {
     border: none;
     margin: 1rem;
@@ -11,9 +12,17 @@
     background: rgba(238,238,238, 0.8); 
 }
 
-.card:hover cc-detail-text{
-    
+.slide-fade-enter-active {
+    transition: all .3s ease;
 }
+.slide-fade-leave-active {
+    transition: all .3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
 
 body {
     background-position: center 0;
