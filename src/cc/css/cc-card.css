@@ -4,12 +4,29 @@
     margin: 1rem;
     transition:all 0.6s;
     transition-timing-function:ease-in-out;
-    -webkit-backdrop-filter: blur(15px); 
-    backdrop-filter: blur(15px); 
-    background: rgba(248,248,248, 0.6); 
+    background: rgba(248,248,248, 0.9);
 }
-.card:hover{
-    background: rgba(238,238,238, 0.8); 
+
+.ps-info.card {
+
+}
+
+.ps-info.card:hover {
+    background: rgba(255,255,255);    
+}
+
+.card:hover {
+    background: rgba(238,238,238, 1.0);
+}
+
+.no-blur.card {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    background: rgba(248,248,248, 0.6);
+}
+
+.no-blur.card:hover {
+    background: rgba(238,238,238, 0.8);
 }
 
 .slide-fade-enter-active {
@@ -22,7 +39,6 @@
     transform: translateX(10px);
     opacity: 0;
 }
-
 
 body {
     background-position: center 0;
@@ -40,6 +56,19 @@ body {
     position: relative;
     z-index: 10;
 }
+
+.navbar {
+    -webkit-backdrop-filter: blur(15px);
+  
+    backdrop-filter: blur(15px);
+  
+    background: rgba(248, 248, 248, 0.5);
+    transition: all 0.6s;
+    transition-timing-function: ease-in-out;
+  }
+  .navbar:hover {
+    background-color: rgb(223, 223, 223, 0.7);
+  }
 
 .cc-detail-text {
     color: rgba(238,238,238, 0.0);

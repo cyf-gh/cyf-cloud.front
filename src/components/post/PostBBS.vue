@@ -1,44 +1,40 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-15 20:00:26
+ * @LastEditTime: 2020-10-20 23:08:21
  * @FilePath: \cyf-cloud.front\src\components\post\PostBBS.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-    <div>
+    <b-container>
     <!-- 限定post范围弹窗 -->
     <b-modal ref="modal-range-post" hide-footer title="限定范围">
         <b-container>
         <h5 class="mb-1">标签</h5>
-        <small class="cc-detail-text text-center"
-            >点选标签来缩小你的搜索范围</small
-        >
+        <small class="cc-detail-text text-center">点选标签来缩小你的搜索范围</small>
         <br />
         <b-badge
             variant="light"
             v-for="tag in Tags"
             :key="tag.Text"
             @click="addSearchTag(tag)"
-            class="mr-1 my-auto"
-        >
-            {{ tag.Text }}
+            class="mr-1 my-auto">
+        {{ tag.Text }}
         </b-badge>
         <b-form-group
-            id="bbs-tags-separators-desc"
-            description="勾选你想要的标签"
-            label-for="id-bbs-tags-separators"
-            class="mt-3"
-        >
-            <b-form-tags
-            v-if="SelectedTags != null"
-            input-id="id-bbs-tags-separators"
-            v-model="SelectedTags"
-            separator=" ,;"
-            placeholder="使用半角逗号，分号，空格隔开"
-            no-add-on-enter
-            ></b-form-tags>
-        </b-form-group>
+          id="bbs-tags-separators-desc"
+          description="勾选你想要的标签"
+          label-for="id-bbs-tags-separators"
+          class="mt-3">
+        <b-form-tags
+          v-if="SelectedTags != null"
+          input-id="id-bbs-tags-separators"
+          v-model="SelectedTags"
+          separator=" ,;"
+          placeholder="使用半角逗号，分号，空格隔开"
+          no-add-on-enter
+          ></b-form-tags>
+          </b-form-group>
         <b-button-group style="width: 100%" class="my-3">
             <b-button @click="rangeByTags" variant="light">搜索</b-button>
             <b-button @click="hideFilter" variant="light">取消</b-button>
@@ -48,8 +44,44 @@
     <!-- 限定post范围弹窗 -->
     <b-card-group deck>
         <b-card>
-        <h3 class="text-center mb-2">文章列表</h3>
-        <b-table
+        <div v-if="SelectedTags!=null" class="text-center">
+          <h3 class="text-center mb-2">文章列表</h3>
+          <b-badge variant="primary" v-for="t in SelectedTags" :key="t" class="mr-1">
+            {{t}}
+          </b-badge>
+        </div>
+        <div v-if="postCurPage == null">
+          <h2 class="text-center">没有相应的文章</h2>
+        </div>
+        <div v-else>
+          <b-card class="ps-info" v-for="p in postCurPage" :key="p.Id" @click="viewPost(p)">
+          <b-row>
+            <b-col>
+              <h6>{{p.Title}}</h6>
+            </b-col>
+            <b-col>
+              <small style="float:right">浏览量：{{p.ViewedCount}}</small>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <small>创建日期：<b-badge variant="light">{{p.CreateDate}}</b-badge></small>
+            </b-col>
+            <b-col>
+              <small style="float:right">作者：<b-badge variant="light">{{p.Author}}</b-badge></small>
+            </b-col>
+          </b-row>
+          <b-row v-if="p.Tags!=null">
+            <b-col>
+              <small>标签：</small>
+              <b-badge variant="light" v-for="t in p.Tags" :key="t" class="mr-1">
+                {{t}}
+              </b-badge>
+            </b-col>
+          </b-row>
+          </b-card>
+        </div>
+        <!-- <b-table
             :items="posts"
             :fields="fields"
             hover
@@ -57,20 +89,27 @@
             :current-page="curPage"
             :per-page="perPage"
             @row-clicked="onSelectedPlgCliced"
-        ></b-table>
+        ></b-table> -->
+        <!--概述-->
+        </b-card>
+      <b-navbar fixed="bottom" toggleable="sm" >
+      <b-nav class="mx-auto">
         <b-pagination
             size="sm"
-            align="center"
             v-model="curPage"
             :per-page="perPage"
             :total-rows="rows"
             aria-controls="id-all-posts"
+            pills
+            
         ></b-pagination>
+      </b-nav>
+      <b-nav class="ml-0">
         <b-button @click="showFilter" variant="light">显示筛选器</b-button>
-
-        </b-card>
+      </b-nav>
+      </b-navbar>
     </b-card-group>
-    </div>
+    </b-container>
 </template>
 
 <script>
@@ -82,6 +121,7 @@ export default {
     return {
       fields: ["Title", "Date"],
       posts: [],
+      showPosts: [],
       curPage: 1,
       perPage: 7,
       Tags: [
@@ -100,7 +140,11 @@ export default {
     };
   },
   created() {
-    this.axios
+    this.onload()
+  },
+  methods: {
+    onload() {
+      this.axios
       .get(apiAddr + "/v1x1/posts/info", { withCredentials: true })
       .then((res) => {
         if (err.Check(res.data)) {
@@ -127,8 +171,11 @@ export default {
       .catch((err) => {
         console.error(err);
       });
-  },
-  methods: {
+    }
+    ,
+    viewPost( p ) {
+      this.$router.push({ path: "/post/reader?id=" + p.Id });
+    },
     onSelectedPlgCliced(clicked) {
       for (var i in this.posts) {
         if (this.posts[i].Id == clicked.Id) {
@@ -141,6 +188,16 @@ export default {
       this.SelectedTags.push(tag.Text);
     },
     rangeByTags() {
+      if ( this.SelectedTags == null ) {
+        this.onload();
+        this.hideFilter();
+        return;
+      }
+      if ( this.SelectedTags.length == 0 ) {
+        this.onload();
+        this.hideFilter();
+        return;
+      }
       this.axios
         .get(
           apiAddr + "/v1x1/posts/by/tag?tags=" + this.SelectedTags.toString(),
@@ -164,8 +221,15 @@ export default {
   },
   computed: {
     rows() {
-      return this.posts.length;
+      return this.posts == null ? 0: this.posts.length;
     },
+    postCurPage() {
+      if ( this.posts == null ) {
+        return null
+      }
+      var start = ( this.curPage - 1 ) * this.perPage
+      return this.posts.slice( start, start + this.perPage )
+    }
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:01:48
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 21:45:16
+ * @LastEditTime: 2020-10-20 22:10:22
  * @FilePath: \cyf-cloud.front\src\components\post\List.vue
  * @Description: 文章列表
 -->
@@ -23,7 +23,8 @@
         :per-page="perPage"
         :total-rows="rows"
         aria-controls="id-my-posts"
-      ></b-pagination>
+        pills
+    ></b-pagination>
     </div>
 </template>
 

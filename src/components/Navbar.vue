@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 20:54:38
+ * @LastEditTime: 2020-10-20 22:15:13
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -22,7 +22,7 @@
       <b-navbar-nav>
         <b-row>
         <b-col><b-nav-item href="/">主站</b-nav-item></b-col>
-        <b-col><b-nav-item href="/posts">博客</b-nav-item></b-col>
+        <b-col><b-nav-item href="/post/bbs">博客</b-nav-item></b-col>
         </b-row>
       </b-navbar-nav>
 
@@ -145,18 +145,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.navbar {
-  -webkit-backdrop-filter: blur(15px);
-
-  backdrop-filter: blur(15px);
-
-  background: rgba(248, 248, 248, 0.6);
-  transition: all 0.6s;
-  transition-timing-function: ease-in-out;
-}
-.navbar:hover {
-  background-color: rgb(223, 223, 223, 0.8);
-}
-</style>

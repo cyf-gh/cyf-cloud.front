@@ -1,13 +1,13 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 22:42:09
+ * @LastEditTime: 2020-10-20 18:32:44
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // src/components/Footer.vue
 <template>
-<div id="cc-footer">
+<b-card>
   <footer class="navbar-fixed-bottom container py-5">
     <div class="row">
       <div class="col-6 col-md">
@@ -70,7 +70,7 @@
         />
     </div>
   </footer>
-</div>
+</b-card>
 </template>
 
 <script>
@@ -93,16 +93,3 @@ export default {
       console.error(err);
     })
 </script>
-
-<style>
-#cc-footer{  
-  -webkit-backdrop-filter: blur(15px); 
-  backdrop-filter: blur(15px); 
-  background: rgba(248,248,248, 0.6); 
-  transition:all 0.6s;
-  transition-timing-function:ease-in-out;
-}
-#cc-footer:hover{
-  background-color: rgb(223, 223, 223, 0.8);
-}
-</style>
