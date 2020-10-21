@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-20 23:08:21
+ * @LastEditTime: 2020-10-21 14:15:32
  * @FilePath: \cyf-cloud.front\src\components\post\PostBBS.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -92,7 +92,10 @@
         ></b-table> -->
         <!--概述-->
         </b-card>
-      <b-navbar fixed="bottom" toggleable="sm" >
+      <b-navbar fixed="bottom" toggleable="sm">
+      <b-nav class="mr-0">
+        <small>一共有 {{rows}} 篇</small>
+      </b-nav>
       <b-nav class="mx-auto">
         <b-pagination
             size="sm"
@@ -101,11 +104,10 @@
             :total-rows="rows"
             aria-controls="id-all-posts"
             pills
-            
         ></b-pagination>
       </b-nav>
       <b-nav class="ml-0">
-        <b-button @click="showFilter" variant="light">显示筛选器</b-button>
+        <b-button @click="showFilter" variant="light" size="sm">显示筛选器</b-button>
       </b-nav>
       </b-navbar>
     </b-card-group>
@@ -200,7 +202,7 @@ export default {
       }
       this.axios
         .get(
-          apiAddr + "/v1x1/posts/by/tag?tags=" + this.SelectedTags.toString(),
+          apiAddr + "/v1x1/posts/info/by/tag?tags=" + this.SelectedTags.toString(),
           { withCredentials: true }
         )
         .then((res) => {

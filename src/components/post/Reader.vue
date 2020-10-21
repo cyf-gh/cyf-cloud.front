@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 00:16:53
+ * @LastEditTime: 2020-10-21 18:00:12
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -28,6 +28,25 @@
             <hr>
             <div id="id-cc-reader"></div>
             <br>
+            <b-navbar fixed="bottom" toggleable="sm" v-if="like != null">
+                <b-nav class="mr-0">
+                    <small>本文共 {{postLength}} 字</small>
+                </b-nav>
+                <b-nav class="mx-auto">
+                    <b-nav-form>
+                        <b-form-checkbox @change="doLikeIt" v-model="like.Liked">
+                            点赞：{{like.Count}}
+                        </b-form-checkbox>
+                        <b-form-checkbox class="ml-2" @change="doFav" v-model="isFav">
+                            收藏
+                        </b-form-checkbox>
+                    </b-nav-form>
+                    <!-- 收藏，点赞模块 -->
+                </b-nav>
+                <b-nav class="ml-0">
+                    <!-- 还没有东西  -->
+                </b-nav>
+            </b-navbar>
         </b-container>
     </b-card>
     <b-card v-else class="text-center">
@@ -43,6 +62,7 @@
 import apiAddr from '../../server'
 import err from '../../cc/v1x1/HttpErrReturn'
 import md from "../../cc/markdown";
+import bvUtil from '../../cc/bvUtil';
 
 export default {
     data() {
@@ -58,9 +78,12 @@ export default {
             postId: -1,
             authHref: '',
             isPrivate: false,
+
+            isFav: false,
+            like: null,
         }
     },
-    mounted() {
+    created() {
         this.postId = this.$route.query.id
         this.axios.get( apiAddr + "/v1x1/post", {
             params:{id: this.postId},
@@ -70,6 +93,8 @@ export default {
             if ( err.Check( res.data ) ) {
                 this.post = JSON.parse( res.data.Data )
                 this.authHref = "/user?name=" + this.post.Author
+                // 只有在文章为公开时才增加阅读数量
+                this.doView()
             } else {
                 if ( res.data.ErrCod == "-5" ) {
                     this.isPrivate = true
@@ -81,6 +106,11 @@ export default {
         .catch(err => {
             console.error(err); 
         })
+        this.checkFav()
+        this.checkLikeIt()
+    },
+    mounted() {
+
     },
     updated() {
         md.SetRawMarkdownToDiv(
@@ -94,7 +124,99 @@ export default {
         },
         edit() {
             this.$router.push({path:'/post/editor?mode=modify' +'&id='+ this.postId})
+        },
+        doView() {
+            this.axios.get( apiAddr + "/v1x1/post/view", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    return;
+                } else {
+                    console.error("in post reader do view", err.data.Desc)
+                }
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+        doFav() {
+            var favApi = this.isFav ? "/v1x1/post/fav/remove" : "/v1x1/post/fav/add"
+            var info = this.isFav ? "移除收藏成功" : "添加收藏成功"
+                this.axios.get( apiAddr + favApi, {
+                    params:{id: this.postId},
+                    withCredentials: true
+                })
+                .then(res => {
+                    if ( err.Check( res.data ) ) {
+                        bvUtil.Msg( "成功", info, "success" )
+                        this.checkFav()
+                    } else {
+                        console.error("in post reader add fav", err.data.Desc)
+                    }
+                })
+                .catch(err => {
+                    console.error(err); 
+                })
+        },
+        doLikeIt() {
+            var info = this.like.Liked ? "移除点赞成功" : "点赞成功"
+
+            this.axios.get( apiAddr + "/v1x1/post/like", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    bvUtil.Msg( "成功", info, "success" )
+                    this.checkLikeIt()
+                } else {
+                    console.error("in post reader do view", err.data.Desc)
+                }
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+        checkLikeIt() {
+            this.axios.get( apiAddr + "/v1x1/post/like/count", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    console.log( res.data.Data )
+                    this.like = JSON.parse( res.data.Data )
+                } else {
+                    console.error("in post reader check like it", err.data.Desc)
+                }
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+        checkFav() {
+            this.axios.get( apiAddr + "/v1x1/post/fav/check", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    this.isFav = res.data.Data == "1"
+                } else {
+                    console.error("in post reader check fav it", err.data.Desc)
+                }
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+    },
+    computed: {
+        postLength() {
+            return this.post == null ? 0 : this.post.Text.length;
         }
-    }
+    },
 }
 </script>
