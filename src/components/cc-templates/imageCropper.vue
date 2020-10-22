@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-29 16:12:04
  * @LastEditors: cyf
- * @LastEditTime: 2020-09-29 21:35:21
+ * @LastEditTime: 2020-10-22 15:21:11
  * @FilePath: \cyf-cloud.front\src\components\cc-templates\imageCropper.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -56,6 +56,9 @@
 <script>
 import SlimCropper from 'vue-slim-cropper'
 import ccImg from '../../cc/Image'
+import bvu from "../../cc/bvUtil";
+import apiAddr from '../../server'
+import err from "../../cc/v1x1/HttpErrReturn";
 
 export default {
 components:{
@@ -109,28 +112,22 @@ methods: {
       this.$refs.input.click()
     },
     upload() {
-        if ( this.isMultiFile ) {
-            this.$axios.post(this.uploadApi,{
-                "b64s": this.inputImgSrcList
-            })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.error(err); 
-            })
+      this.axios.post( apiAddr + "/v1x1/account/upload/avatar",this.inputImgSrc,{withCredentials: true})
+      .then(res => {
+        if ( err.Check( res.data ) ) {
+          bvu.Msg("信息修改","头像上传成功！","success")
         } else {
-            this.$axios.post(this.uploadApi,{
-                "b64": this.inputImgSrc
-            })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.error(err); 
-            })
+          bvu.Msg("信息修改", "头像上传失败！", "danger");
         }
+      })
+      .catch(err => {
+        bvu.Msg("错误", err, "danger");
+        console.error(err);
+      })
     }
+},
+mounted() {
+  bvu.InitToast(this.$bvToast);
 },
 }
 </script>

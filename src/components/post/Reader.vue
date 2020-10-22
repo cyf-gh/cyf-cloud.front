@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-21 18:00:12
+ * @LastEditTime: 2020-10-22 15:09:05
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -21,7 +21,7 @@
                 <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                 <br>
                 <b-badge variant="light" class="mr-1">标签：</b-badge>
-                <b-badge variant="dark" v-for="tag in post.Tags" :href="tagHref(tag)" class="mr-1">
+                <b-badge variant="dark" v-for="tag in post.Tags" :key="tag" :href="tagHref(tag)" class="mr-1">
                     {{tag}}
                 </b-badge>
             </div>

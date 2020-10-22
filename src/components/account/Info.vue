@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-28 23:12:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 20:47:26
+ * @LastEditTime: 2020-10-22 16:11:51
  * @FilePath: \cyf-cloud.front\src\components\account\Info.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -10,7 +10,7 @@
     <b-card-group deck>
       <b-card id="id-cc-basic-infos">
         <div>
-          <h4>基本信息</h4>
+          <h4 >基本信息</h4>
           <!-- 弹窗部分 -->
           <b-modal ref="upload-account-avatar" hide-footer title="修改头像">
             <imageCropper :isMultiFile="false"></imageCropper>
@@ -111,7 +111,7 @@ export default {
   },
   components: {
     imageCropper,
-  },
+},
   methods: {
     changeAvatar() {
       this.$refs["upload-account-avatar"].show();

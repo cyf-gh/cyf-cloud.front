@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-20 22:15:13
+ * @LastEditTime: 2020-10-22 15:29:58
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -21,8 +21,8 @@
       </b-navbar-brand>
       <b-navbar-nav>
         <b-row>
-        <b-col><b-nav-item href="/">主站</b-nav-item></b-col>
-        <b-col><b-nav-item href="/post/bbs">博客</b-nav-item></b-col>
+          <b-col><b-nav-item href="/">主站</b-nav-item></b-col>
+          <b-col><b-nav-item href="/post/bbs">博客</b-nav-item></b-col>
         </b-row>
       </b-navbar-nav>
 
@@ -72,6 +72,7 @@
                   <b-dropdown-item href="/account/info"
                     >个人信息</b-dropdown-item
                   >
+                  <b-dropdown-item href="/account/fav">收藏夹</b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
                   <b-dropdown-item v-on:click="logout">注销</b-dropdown-item>
                 </b-nav-item-dropdown>
@@ -110,19 +111,19 @@ export default {
     if (this.isLoginIn) {
       idy.RefreshAccountInfo(this.axios);
       this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
-      
-      theme.SetBgUrl( this.accountInfo.BgUrl )
-      theme.ReloadBgUrl()
+
+      theme.SetBgUrl(this.accountInfo.BgUrl);
+      theme.ReloadBgUrl();
     }
   },
   methods: {
     logout() {
-      var rs = confirm("确认登出？")
-      if ( rs == false ) {
-        return
+      var rs = confirm("确认登出？");
+      if (rs == false) {
+        return;
       }
       this.axios
-        .post(apiAddr + "/v1x1/account/logout", {}, {withCredentials: true})
+        .post(apiAddr + "/v1x1/account/logout", {}, { withCredentials: true })
         .then(
           (res) => {
             if (err.Check(res.data)) {
@@ -132,7 +133,7 @@ export default {
               location.reload();
             } else {
               bvu.Msg("错误", "登出账户错误", "danger");
-              console.error( res.data );
+              console.error(res.data);
             }
           },
           { withCredentials: true }
