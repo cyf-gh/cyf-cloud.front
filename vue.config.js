@@ -1,16 +1,33 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 23:24:00
+ * @LastEditTime: 2020-10-23 15:29:27
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 // vue.config.js 配置说明
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
 // 这里只列一部分，具体配置参考文档
+
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = ['js', 'css'];
 const isProduction = process.env.NODE_ENV === 'production';
+
+let banner =
+"%c================================================\n"+
+"             __            _                 _\n"+
+"  ___ _   _ / _|       ___| | ___  _   _  __| |\n"+
+" / __| | | | |_ _____ / __| |/ _ \\| | | |/ _` |\n"+
+"| (__| |_| |  _|_____| (__| | (_) | |_| | (_| |\n"+
+" \\___|\\__, |_|        \\___|_|\\___/ \\__,_|\\__,_|\n"+
+"      |___/                                     \n"+
+"================================================\n"
+
+    console.log( banner, 'color: cyan;')
+
+console.log( "is production >", isProduction )
+console.log( process.env.VUE_APP_BACKEND_SERVER_ADDR )
+
 module.exports = {
 	// 部署生产环境和开发环境下的URL。
 	// 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上

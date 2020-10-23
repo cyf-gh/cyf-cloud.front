@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-22 17:23:21
+ * @LastEditTime: 2020-10-23 14:55:16
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -194,7 +194,7 @@ export default {
             }
             if (this.ClientFilter) {
                 this.onload();
-                
+                this.posts = 
                 console.log("TODO: client filter");
             } else {
                 this.axios

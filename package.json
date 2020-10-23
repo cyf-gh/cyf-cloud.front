@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve_laptop": "vue-cli-service serve --mode laptop",
+    "serve_desktop": "vue-cli-service serve --mode desktop",
+    "serve_prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
