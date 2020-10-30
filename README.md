@@ -1,24 +1,23 @@
 # cyf-cloud.front
 
-## Project setup
+## 安装依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+或
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+cnpm install
 ```
 
-### Lints and fixes files
+## 启动
 ```
-npm run lint
+npm run serve_xxx
 ```
+你可以针对你的环境编写一个配置文件：**.env.xxx**
+
+### VUE_APP_BACKEND_SERVER_ADDR
+后端的服务器地址，注意配置CORS与Cookie放行。
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
