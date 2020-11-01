@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-01 14:03:17
+ * @LastEditTime: 2020-11-01 15:54:45
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -89,6 +89,23 @@ module.exports = {
 			}
 		}
 	},
+	// chainWebpack: config => {
+	// 	if (isProduction) {
+	// 		// 压缩代码
+	// 		config.optimization.minimize(true)
+	// 		// 分割代码
+	// 		config.optimization.splitChunks({
+	// 			chunks: 'all'
+	// 		})
+	// 	}
+	// },
+
+	chainWebpack: config => {
+		// 查看打包文件体积大小
+		config
+		.plugin('webpack-bundle-analyzer')
+		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	},
 
 	configureWebpack: config => {
 		if (isProduction) {
@@ -98,6 +115,13 @@ module.exports = {
 				threshold: 10240,
 				minRatio: 0.8
 			}))
+			config.externals = {
+				'vue': 'Vue',
+				'vue-router': 'VueRouter',
+				'axios': 'axios',
+			}
+		} else {
+			console.log()
 		}
-	}
+	},
 };

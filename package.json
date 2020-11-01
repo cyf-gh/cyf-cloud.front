@@ -7,7 +7,8 @@
     "serve_desktop": "vue-cli-service serve --mode desktop",
     "serve_prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "ui": "vue ui"
   },
   "dependencies": {
     "axios": "^0.19.2",

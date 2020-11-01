@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-01 14:36:02
+ * @LastEditTime: 2020-11-01 14:56:16
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -9,6 +9,7 @@ import VueRouter from 'vue-router'
 import Vue from "vue";
 
 import ccHome from "./components/home/Home";
+import ccHomeNL from "./components/home/HomeNoLogin";
 
 import ccMcWebmap from "./components/minecraft/Webmap"
 import ccMcHome from "./components/minecraft/Home"
@@ -61,6 +62,7 @@ const routes = [
     { path: '/post/bbs', component: ccPostBBS },
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: ccPostUserHome },
+    { path: '/home/nl', component: ccHomeNL },
     { path: '*', redirect: '/home' }
 ]
 
