@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-22 15:09:05
+ * @LastEditTime: 2020-11-01 14:06:04
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -17,6 +17,7 @@
             <div>
                 <b-badge :href="authHref" variant="light" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
                 <b-badge :href="authHref" variant="light" v-else>作者：{{post.Author}}</b-badge>
+                <b-badge variant="light">阅读量：{{post.ViewedCount}}</b-badge>
                 <br>
                 <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                 <br>

@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-23 15:29:27
+ * @LastEditTime: 2020-11-01 14:03:17
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -26,7 +26,7 @@ let banner =
     console.log( banner, 'color: cyan;')
 
 console.log( "is production >", isProduction )
-console.log( process.env.VUE_APP_BACKEND_SERVER_ADDR )
+console.log( "api address >", process.env.VUE_APP_BACKEND_SERVER_ADDR )
 
 module.exports = {
 	// 部署生产环境和开发环境下的URL。

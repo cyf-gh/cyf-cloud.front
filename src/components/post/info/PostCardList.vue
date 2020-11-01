@@ -1,15 +1,8 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-23 14:55:16
+ * @LastEditTime: 2020-11-01 14:07:12
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
- * @Description: What is mind? No matter. What is matter? Nevermind.
--->
-<!--
- * @Date: 2020-10-14 21:08:23
- * @LastEditors: cyf
- * @LastEditTime: 2020-10-22 17:00:33
- * @FilePath: \cyf-cloud.front\src\components\post\PostBBS.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
