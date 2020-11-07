@@ -21,7 +21,7 @@ jobs:
           git pull
           cnpm install
           sudo npm run build
-        host: se.cyf-cloud.cn
+        host: cn-xz-bgp.sakurafrp.com
         username: cyf
         password: ${{ secrets.PSWD }}
-        port: 2222
+        port: 13631
