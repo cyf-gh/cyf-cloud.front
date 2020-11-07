@@ -15,11 +15,12 @@ jobs:
     - name: Pull and rebuild
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.PSWD }}
-        port: ${{ secrets.PORT }}
+        host: se.cyf-cloud.cn
+        username: cyf
+        password: 990908hH
+        port: 2222
         script: |
+          whoami
           cd /home/cyf/.web/cyf-cloud.front
           git pull
           cnpm install
