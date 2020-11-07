@@ -21,7 +21,7 @@ jobs:
           git pull
           cnpm install
           sudo npm run build
-        host: lod.tpddns.cn
+        host: se.cyf-cloud.cn
         username: cyf
         password: ${{ secrets.PSWD }}
         port: 2222
