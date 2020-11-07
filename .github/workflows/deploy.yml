@@ -18,10 +18,10 @@ jobs:
         host: se.cyf-cloud.cn
         username: cyf
         password: ${{ secrets.PSWD }}
-        port: ${{ secrets.PORT }}
+        port: 2222
         script: |
           whoami
           cd /home/cyf/.web/cyf-cloud.front
           git pull
           cnpm install
-          npm run build
+          sudo npm run build
