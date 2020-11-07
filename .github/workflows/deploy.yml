@@ -14,17 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Deploy to server
-      uses: AEnterprise/rsync-deploy@v1.0
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        ARGS: -avz --delete
-        SERVER_PORT: '2222'
-        FOLDER: ./
-        SERVER_IP: ${{ secrets.SSH_HOST }}
-        USERNAME: ${{ secrets.SSH_USERNAME }}
-        SERVER_DESTINATION: /home/cyf/.web/cyf-cloud.front
-    - name: Restart server
+    - name: Pull and rebuild
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
@@ -32,4 +22,6 @@ jobs:
         key: ${{ secrets.DEPLOY_KEY }}
         script: |
           cd /home/cyf/.web/cyf-cloud.front
+          git pull
+          cnpm install
           npm run build
