@@ -13,15 +13,15 @@ jobs:
 
     steps:
     - name: Pull and rebuild
-      uses: appleboy/ssh-action@master
+      uses: garygrossgarten/github-action-ssh@release
       with:
-        host: lod.tpddns.cn
-        username: cyf
-        password: ${{ secrets.PSWD }}
-        port: 2222
-        script: |
+        command: |
           whoami
           cd /home/cyf/.web/cyf-cloud.front
           git pull
           cnpm install
           sudo npm run build
+        host: lod.tpddns.cn
+        username: cyf
+        password: ${{ secrets.PSWD }}
+        port: 2222
