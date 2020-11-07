@@ -16,9 +16,9 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: se.cyf-cloud.cn
-        username: cyf
-        password: 990908hH
-        port: 2222
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.PSWD }}
+        port: ${{ secrets.PORT }}
         script: |
           whoami
           cd /home/cyf/.web/cyf-cloud.front
