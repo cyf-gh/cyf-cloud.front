@@ -15,9 +15,9 @@ jobs:
     - name: Pull and rebuild
       uses: appleboy/ssh-action@master
       with:
-        host: se.cyf-cloud.cn
+        host: lod.tpddns.cn
         username: cyf
-        password: caoyifan0908work
+        password: ${{ secrets.PSWD }}
         port: 2222
         script: |
           whoami
