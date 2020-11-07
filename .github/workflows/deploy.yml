@@ -16,7 +16,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: se.cyf-cloud.cn
-        username: ${{ secrets.SSH_USERNAME }}
+        username: cyf
         password: ${{ secrets.PSWD }}
         port: ${{ secrets.PORT }}
         script: |
