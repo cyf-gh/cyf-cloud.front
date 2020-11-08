@@ -18,9 +18,11 @@ jobs:
         command: |
           whoami
           cd /home/cyf/.web/cyf-cloud.front
-          git pull
+          git stash
+          git pull --force
           cnpm install
           sudo npm run build
+          . ./githubpage.sh
         host: jp-tyo-dvm-2.sakurafrp.com
         username: cyf
         password: ${{ secrets.PSWD }}
