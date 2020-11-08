@@ -1,0 +1,25 @@
+name: Deploy cyf-cloud.front Github Page
+
+on:
+  push:
+    branches:
+      - stable
+    paths-ignore:
+      - README.md
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pull and rebuild
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: |
+          whoami
+          cd /home/cyf/.web/gh/cyf-cloud.front
+          . githubpage.sh
+        host: jp-tyo-dvm-2.sakurafrp.com
+        username: cyf
+        password: ${{ secrets.PSWD }}
+        port: 16661
