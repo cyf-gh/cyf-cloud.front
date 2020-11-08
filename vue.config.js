@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-07 11:50:41
+ * @LastEditTime: 2020-11-08 14:22:08
  * @FilePath: \cyf-cloud.front\vue.config.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -23,7 +23,7 @@ let banner =
 "      |___/                                     \n"+
 "================================================\n"
 
-    console.log( banner, 'color: cyan;')
+console.log( banner, 'color: cyan;')
 
 console.log( "is production >", isProduction )
 console.log( "api address >", process.env.VUE_APP_BACKEND_SERVER_ADDR )
@@ -37,7 +37,7 @@ module.exports = {
 	// publicPath: process.env.NODE_ENV === "production" ? "/cyf-gh.github.io/" : "/",
 
 	// outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称
-	outputDir: "mycli3",
+	outputDir: isProduction? "mycli3" : ".githubpages",
 	//用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）
 	assetsDir: "assets",
 	//指定生成的 index.html 的输出路径  (打包之后，改变系统默认的index.html的文件名)
