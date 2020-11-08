@@ -7,6 +7,7 @@
     "serve_desktop": "vue-cli-service serve --mode desktop",
     "serve_prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode githubpage",
     "lint": "vue-cli-service lint",
     "ui": "vue ui"
   },
