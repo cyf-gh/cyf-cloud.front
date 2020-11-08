@@ -21,8 +21,10 @@ jobs:
           git stash
           git pull --force
           cnpm install
-          sudo npm run build
+
           . ./githubpage.sh
+
+          sudo npm run build
         host: jp-tyo-dvm-2.sakurafrp.com
         username: cyf
         password: ${{ secrets.PSWD }}
