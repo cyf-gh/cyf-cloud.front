@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 21:46:42
+ * @LastEditTime: 2020-11-10 16:31:55
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -19,8 +19,8 @@
         <b-dropdown-item href="/mc/about">关于</b-dropdown-item>
       </b-dropdown>
         <b-dropdown id="cc-home-dropdown-cloud-app" class="p-1 upper" variant="light" text="云应用">
-          <b-dropdown-item href="/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>
-          <b-dropdown-item href="/vt">开黑看视频（预览版）</b-dropdown-item>
+          <b-dropdown-item href="/cloudApp/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>
+          <b-dropdown-item href="/cloudApp/vt">开黑看视频（预览版）</b-dropdown-item>
         </b-dropdown>
         <b-dropdown id="cc-home-dropdown-music-cyf" class="p-1 upper" variant="light" text="音乐" disabled>
         </b-dropdown>
@@ -128,7 +128,3 @@ export default {
     },
 }    
 </script>
-
-<style>
-
-</style>

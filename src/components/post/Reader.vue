@@ -1,33 +1,41 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-09 20:38:59
+ * @LastEditTime: 2020-11-10 21:01:52
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
 <div class="mt-4 mx-2">
     <div v-if="!isPrivate">
-        <b-container style="background-color:white" v-if="post != null" fluid>
-            <br>
-            <b-row>
-            <b-col><h2>{{post.Title}}</h2></b-col>
-            <b-col><b-button variant="light" class="cc-put-right" v-if="post.MyPost" @click="edit">编辑</b-button></b-col>
-            </b-row>
-            <div>
+        <div v-if="post != null" fluid>
+            <div class="BlogAnchor">
+                <p>
+                <div class="AnchorContent" id="AnchorContent"></div>
+                </p>
+            </div>
+            <b-container class="cc-md-info text-center">
+                <br>
+                <h4>{{post.Title}}</h4>
                 <b-badge :href="authHref" variant="light" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
                 <b-badge :href="authHref" variant="light" v-else>作者：{{post.Author}}</b-badge>
                 <b-badge variant="light">阅读量：{{post.ViewedCount}}</b-badge>
-                <br>
                 <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                 <br>
                 <b-badge variant="light" class="mr-1">标签：</b-badge>
-                <b-badge variant="dark" v-for="tag in post.Tags" :key="tag" :href="tagHref(tag)" class="mr-1">
+                <b-badge variant="light" v-for="tag in post.Tags" :key="tag" :href="tagHref(tag)" class="mr-1">
                     {{tag}}
                 </b-badge>
-            </div>
-            <hr>
-            <div id="id-cc-reader"></div>
+                <br>
+                <b-badge variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
+                <br>
+                <b-badge variant="light" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
+            </b-container>
+            <b-container class="cc-md-1">
+                <hr>
+                <div id="id-cc-reader" class="c-cc-reader"></div>
+                <br>
+            </b-container>
             <br>
             <b-navbar fixed="bottom" toggleable="sm" v-if="like != null">
                 <b-nav class="mr-0">
@@ -35,12 +43,13 @@
                 </b-nav>
                 <b-nav class="mx-auto">
                     <b-nav-form>
-                        <b-form-checkbox @change="doLikeIt" v-model="like.Liked">
+                        <b-form-checkbox size="sm" class="my-auto" @change="doLikeIt" v-model="like.Liked">
                             点赞：{{like.Count}}
                         </b-form-checkbox>
-                        <b-form-checkbox class="ml-2" @change="doFav" v-model="isFav">
+                        <b-form-checkbox size="sm" class="ml-2 my-auto" @change="doFav" v-model="isFav">
                             收藏
                         </b-form-checkbox>
+                        <b-badge href="#" class="ml-3 my-auto" variant="light" v-if="post.MyPost" @click="edit">编辑</b-badge>
                     </b-nav-form>
                     <!-- 收藏，点赞模块 -->
                 </b-nav>
@@ -48,7 +57,7 @@
                     <!-- 还没有东西  -->
                 </b-nav>
             </b-navbar>
-        </b-container>
+        </div>
     </div>
     <div v-else class="text-center">
         <h2>你访问的文章不公开</h2>
@@ -58,12 +67,12 @@
     </div>
 </div>
 </template>
-
 <script>
 import apiAddr from '../../server'
 import err from '../../cc/v1x1/HttpErrReturn'
 import md from "../../cc/markdown";
 import bvUtil from '../../cc/bvUtil';
+import '../../cc/css/markdown-cc-style.css'
 
 export default {
     data() {
@@ -118,6 +127,11 @@ export default {
             this.post.Text,
             "id-cc-reader"
         )
+
+        $(".c-cc-reader").find("h2,h3,h4,h5,h6").each(function(i,item){
+            $(item).attr("id","wow"+i);
+            $("#AnchorContent").append('<li><a href="#wow'+i+'">'+(i+1)+" · "+$(this).text()+'</a></li>');
+        });
     },
     methods: {
         tagHref( tagName ) {
@@ -217,6 +231,9 @@ export default {
     computed: {
         postLength() {
             return this.post == null ? 0 : this.post.Text.length;
+        },
+        location() {
+            return window.location
         }
     },
 }

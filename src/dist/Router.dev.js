@@ -11,6 +11,8 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _Home = _interopRequireDefault(require("./components/home/Home"));
 
+var _HomeNoLogin = _interopRequireDefault(require("./components/home/HomeNoLogin"));
+
 var _Webmap = _interopRequireDefault(require("./components/minecraft/Webmap"));
 
 var _Home2 = _interopRequireDefault(require("./components/minecraft/Home"));
@@ -49,12 +51,14 @@ var _Reader = _interopRequireDefault(require("./components/post/Reader.vue"));
 
 var _BBS = _interopRequireDefault(require("./components/post/BBS.vue"));
 
+var _UserHome = _interopRequireDefault(require("./components/post/UserHome.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-22 17:18:42
+ * @LastEditTime: 2020-11-10 21:06:47
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -89,10 +93,10 @@ var routes = [{
   path: '/blog',
   component: _Blog["default"]
 }, {
-  path: '/vt',
+  path: '/cloudApp/vt',
   component: _VtHome["default"]
 }, {
-  path: '/util/mcdrPlg',
+  path: '/cloudApp/util/mcdrPlg',
   component: _mcdrPlgHome["default"]
 }, {
   path: '/info/about',
@@ -119,12 +123,28 @@ var routes = [{
   path: '/post/reader',
   component: _Reader["default"]
 }, {
-  path: '*',
-  redirect: '/home'
-}];
+  path: '/user',
+  component: _UserHome["default"]
+}, {
+  path: '/home/nl',
+  component: _HomeNoLogin["default"]
+} // { path: '*', redirect: '/home' }
+];
 var router = new _vueRouter["default"]({
   mode: 'history',
-  routes: routes
+  routes: routes,
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      };
+    } else {
+      return {
+        x: 0,
+        y: 0
+      };
+    }
+  }
 });
 
 _vue["default"].use(_vueRouter["default"]);

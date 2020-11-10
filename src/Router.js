@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-07 12:04:51
+ * @LastEditTime: 2020-11-10 21:06:47
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -51,8 +51,8 @@ const routes = [
     { path: '/donate', component: ccCyfDonate },
     { path: '/donate/rank', component: ccCyfDonateRank },
     { path: '/blog', component: ccCyfBlog },
-    { path: '/vt', component: ccVt },
-    { path: '/util/mcdrPlg', component: ccMcdrPlg },
+    { path: '/cloudApp/vt', component: ccVt },
+    { path: '/cloudApp/util/mcdrPlg', component: ccMcdrPlg },
     { path: '/info/about', component: ccCyfInfo },
     { path: '/account/signin', component: ccAccountSignin },
     { path: '/account/login', component: ccAccountLogin },
@@ -63,12 +63,19 @@ const routes = [
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: ccPostUserHome },
     { path: '/home/nl', component: ccHomeNL },
-    { path: '*', redirect: '/home' }
+    // { path: '*', redirect: '/home' }
 ]
 
 const router = new VueRouter({
     mode: 'history',
-    routes
+    routes,
+    scrollBehavior: (to, from, savedPosition) => {
+        if (to.hash) {
+            return {selector: to.hash}
+        } else {
+            return { x: 0, y: 0 }
+        }
+    }
 })
 
 Vue.use(VueRouter)

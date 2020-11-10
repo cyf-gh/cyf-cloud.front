@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-02 14:45:22
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 22:50:12
+ * @LastEditTime: 2020-11-10 17:11:41
  * @FilePath: \cyf-cloud.front\src\components\v1x1\Clipboard.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -28,8 +28,6 @@
     <b-row class="mt-3">
         <b-col>
         <b-form-checkbox swith v-model="haste.TextHide" @change="modify" class="m-2">隐藏内容</b-form-checkbox>
-        </b-col>
-        <b-col>
         <b-form-checkbox swith v-model="autoUpdate" class="m-2">自动同步</b-form-checkbox>
         </b-col>
         <b-col>

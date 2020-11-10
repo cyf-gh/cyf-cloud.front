@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-29 21:54:19
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-06 17:59:22
+ * @LastEditTime: 2020-11-10 17:00:01
  * @FilePath: \cyf-cloud.front\src\components\mcdrPlg\mcdrPlgHome.vue
  * @Descrion: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -98,7 +98,7 @@
       </b-alert>
       </b-container>
     </b-sidebar>
-
+    <b-card-group>
     <b-card>
     <div class="container text-center">
       <br>
@@ -134,6 +134,21 @@
 
     </div>
     </b-card>
+    
+    <b-card>
+      <h3 class="text-center">安装教程视频</h3>
+      <b-embed
+        src="https://player.bilibili.com/player.html?aid=669491459&cid=230645380&page=1&danmaku=0"
+        scrolling="no"
+        border="0"
+        frameborder="no"
+        framespacing="0"
+        allowfullscreen="true"
+        width="auto"
+        height="auto"
+      ></b-embed>
+    </b-card>
+    </b-card-group>
 
     <b-container v-if="scr.src!='' ">
     <b-card>

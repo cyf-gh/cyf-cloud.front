@@ -1,20 +1,20 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-07 11:36:24
+ * @LastEditTime: 2020-11-10 16:52:37
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
   <div>
     <sp></sp>
-    <b-navbar id="id-cc-navbar" fixed="top" toggleable="sm">
+    <b-navbar fixed="top" toggleable="sm">
       <b-navbar-brand href="/">
         <img
           src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
-          alt="Kitten"
-          height="30"
-          width="30"
+          alt="cyf-cloud"
+          height="25"
+          width="25"
           style="filter: invert(50%)"
           class="mb-1"
         />
@@ -59,8 +59,8 @@
                   class="mt-2"
                   :src="accountInfo.Avatar"
                   alt="Kitten"
-                  height="30"
-                  width="30"
+                  height="25"
+                  width="25"
                 />
               </b-col>
               <b-col>
