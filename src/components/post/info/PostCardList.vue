@@ -1,12 +1,12 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-01 14:07:12
+ * @LastEditTime: 2020-11-14 19:40:46
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-    <b-container>
+    <div>
         <!-- 限定post范围弹窗 -->
         <b-modal ref="modal-range-post" hide-footer title="限定范围">
             <b-container>
@@ -91,7 +91,7 @@
                 </b-nav>
             </b-navbar>
         </b-card-group>
-    </b-container>
+    </div>
 </template>
 
 <script>
