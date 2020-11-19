@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 15:53:53
+ * @LastEditTime: 2020-11-19 18:49:16
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -63,7 +63,7 @@ const routes = [
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: ccPostUserHome },
     { path: '/home/nl', component: ccHomeNL },
-    // { path: '*', redirect: '/home' }
+    { path: '*', redirect: '/home' }
 ]
 
 const router = new VueRouter({
