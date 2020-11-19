@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 16:52:37
+ * @LastEditTime: 2020-11-19 11:31:02
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
   <div>
     <sp></sp>
     <b-navbar fixed="top" toggleable="sm">
-      <b-navbar-brand href="/">
+      <b-navbar-brand href="/home">
         <img
           src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
           alt="cyf-cloud"
@@ -21,7 +21,7 @@
       </b-navbar-brand>
       <b-navbar-nav>
         <b-row>
-          <b-col><b-nav-item href="/">主站</b-nav-item></b-col>
+          <b-col><b-nav-item href="/home">主站</b-nav-item></b-col>
           <b-col><b-nav-item href="/post/bbs">博客</b-nav-item></b-col>
         </b-row>
       </b-navbar-nav>

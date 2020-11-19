@@ -1,48 +1,59 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 21:01:52
+ * @LastEditTime: 2020-11-19 18:31:33
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-<div class="mt-4 mx-2">
+<div class="mt-4 mx-2" style="background-color:whitesmoke;">
+    <br id="aaaTop"></br>
+    <b-sidebar id="sidebar-reader-index" title="目录" right shadow>
+        <div v-if="IndexList != null">
+            <b-container>
+            <p @click="jumpTop">开始</p>
+            <div v-for="i in IndexList" :key="i.Name">
+                <p @click="jumpTo(i.Name, i.Text)" :class="i.Class"> {{i.Text}}</p>
+            </div>
+            <p @click="jumpBottom">结束</p>
+            </b-container>
+        </div>
+    </b-sidebar>
     <div v-if="!isPrivate">
         <div v-if="post != null" fluid>
             <div class="BlogAnchor">
-                <p>
                 <div class="AnchorContent" id="AnchorContent"></div>
-                </p>
             </div>
             <b-container class="cc-md-info text-center">
                 <br>
                 <h4>{{post.Title}}</h4>
-                <b-badge :href="authHref" variant="light" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
-                <b-badge :href="authHref" variant="light" v-else>作者：{{post.Author}}</b-badge>
+                <b-badge :href="authHref" variant="primary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
+                <b-badge :href="authHref" variant="primary" v-else>作者：{{post.Author}}</b-badge>
                 <b-badge variant="light">阅读量：{{post.ViewedCount}}</b-badge>
                 <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                 <br>
                 <b-badge variant="light" class="mr-1">标签：</b-badge>
-                <b-badge variant="light" v-for="tag in post.Tags" :key="tag" :href="tagHref(tag)" class="mr-1">
+                <b-badge variant="primary" v-for="tag in post.Tags" :key="tag.Post" :href="tagHref(tag)" class="mr-1">
                     {{tag}}
                 </b-badge>
                 <br>
                 <b-badge variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
                 <br>
-                <b-badge variant="light" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
+                <b-badge variant="primary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
             </b-container>
             <b-container class="cc-md-1">
                 <hr>
                 <div id="id-cc-reader" class="c-cc-reader"></div>
                 <br>
             </b-container>
+            <hr id="aaaBottom"></hr>
             <br>
-            <b-navbar fixed="bottom" toggleable="sm" v-if="like != null">
+            <b-navbar fixed="bottom" toggleable="sm">
                 <b-nav class="mr-0">
                     <small>本文共 {{postLength}} 字</small>
                 </b-nav>
                 <b-nav class="mx-auto">
-                    <b-nav-form>
+                    <b-nav-form v-if="like != null">
                         <b-form-checkbox size="sm" class="my-auto" @change="doLikeIt" v-model="like.Liked">
                             点赞：{{like.Count}}
                         </b-form-checkbox>
@@ -54,6 +65,7 @@
                     <!-- 收藏，点赞模块 -->
                 </b-nav>
                 <b-nav class="ml-0">
+                    <b-badge variant="light" v-b-toggle.sidebar-reader-index size="sm">目录</b-badge>
                     <!-- 还没有东西  -->
                 </b-nav>
             </b-navbar>
@@ -91,9 +103,15 @@ export default {
 
             isFav: false,
             like: null,
+            IndexList: null,
         }
     },
     created() {
+
+    },
+    mounted() {
+        localStorage.setItem("cc-reader-index", "[]")
+
         this.postId = this.$route.query.id
         this.axios.get( apiAddr + "/v1x1/post", {
             params:{id: this.postId},
@@ -119,21 +137,30 @@ export default {
         this.checkFav()
         this.checkLikeIt()
     },
-    mounted() {
-
-    },
     updated() {
-        md.SetRawMarkdownToDiv(
-            this.post.Text,
-            "id-cc-reader"
-        )
-
-        $(".c-cc-reader").find("h2,h3,h4,h5,h6").each(function(i,item){
-            $(item).attr("id","wow"+i);
-            $("#AnchorContent").append('<li><a href="#wow'+i+'">'+(i+1)+" · "+$(this).text()+'</a></li>');
-        });
+        if ( this.IndexList == null ){
+            md.SetRawMarkdownToDiv(
+                    this.post.Text,
+                "id-cc-reader"
+            )
+            this.IndexList = JSON.parse( localStorage.getItem("cc-reader-index") )
+            console.log(this.IndexList)
+        }
     },
     methods: {
+        jumpTo( id, name ) {
+            document.querySelector( id ).scrollIntoView(true);
+            console.log( document.documentElement.scrollTop||document.body.scrollTop )
+            var val = ( document.documentElement.scrollTop||document.body.scrollTop ) - 60
+            console.log(val)
+            $("body,html").animate({ scrollTop: val});
+        },
+        jumpTop() {
+            document.querySelector( "#aaaTop" ).scrollIntoView(true);
+        },
+        jumpBottom() {
+            document.querySelector( "#aaaBottom" ).scrollIntoView(true);
+        },
         tagHref( tagName ) {
             return "/post?tag=" + tagName
         },

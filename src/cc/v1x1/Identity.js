@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-13 15:49:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 20:54:07
+ * @LastEditTime: 2020-11-19 11:27:09
  * @FilePath: \cyf-cloud.front\src\cc\v1x1\Identity.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -78,9 +78,9 @@ function IsLogin() {
 }
 
 function Logout() {
-    theme.ReloadBgUrl()
     localStorage.clear()
     cke.delete('atk')
+    theme.ReloadBgUrl()
 }
 
 function LogoutIfSession() {

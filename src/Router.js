@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 21:06:47
+ * @LastEditTime: 2020-11-19 15:53:53
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -67,10 +67,11 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
     routes,
+    mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
         if (to.hash) {
+            console.log(to)
             return {selector: to.hash}
         } else {
             return { x: 0, y: 0 }

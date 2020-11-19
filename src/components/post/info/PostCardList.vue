@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-14 19:40:46
+ * @LastEditTime: 2020-11-19 15:36:37
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -49,9 +49,9 @@
                 </b-button-group>
             </b-container>
         </b-modal>
-        <!-- 限定post范围弹窗 -->
-        <b-card-group deck>
-            <b-card>
+        <!-- 列表 -->
+        <div>
+            <div>
                 <div v-if="SelectedTags != null" class="text-center">
                     <h3 class="text-center mb-2">{{this.ListTitle}}</h3>
                     <b-badge
@@ -69,7 +69,8 @@
                 <div v-else>
                     <cc-postinfos :posts="postCurPage"></cc-postinfos>
                 </div>
-            </b-card>
+            </div>
+            <!--  -->
             <b-navbar fixed="bottom" toggleable="sm">
                 <b-nav class="mr-0">
                     <small>一共有 {{ rows }} 篇</small>
@@ -90,7 +91,7 @@
                     >
                 </b-nav>
             </b-navbar>
-        </b-card-group>
+        </div>
     </div>
 </template>
 

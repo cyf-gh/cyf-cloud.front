@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-12 15:11:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 00:23:15
+ * @LastEditTime: 2020-11-19 17:50:51
  * @FilePath: \cyf-cloud.front\src\cc\markdown.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -54,7 +54,7 @@ function SetRawMarkdownToDiv( md_data, div_id ) {
         return
     }
     var md2html = marked(md_data)
-    console.log(md2html)
+    // console.log(md2html)
     document.getElementById(div_id).innerHTML = (md2html)
     marked.setOptions({
         renderer: new marked.Renderer(),
@@ -66,6 +66,20 @@ function SetRawMarkdownToDiv( md_data, div_id ) {
         smartLists: true,
         smartypants: false
     })
+    // 通过读取cc-reader-index可以获得目录json
+    localStorage.setItem("cc-reader-index", "[]")
+    $(".c-cc-reader").find("h2,h3,h4,h5,h6").each(function(i,item){
+        // 增加锚点位置
+        $(item).attr("id","aaa"+i);
+        var curI = JSON.parse( localStorage.getItem("cc-reader-index") )
+        curI.push({
+            "Name":"#aaa"+i,
+            "Text":$(this).text(),
+            "Class": "ml-"+ ( parseInt( $(item).prop('nodeName')[1] ) - 1 ).toString()
+        })
+        localStorage.setItem( "cc-reader-index", JSON.stringify(curI) )
+        // $("#AnchorContent").append('<li><a href="#wow'+i+'">'+(i+1)+" · "+$(this).text()+'</a></li>');
+    });
 }
 
 
