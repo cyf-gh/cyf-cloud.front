@@ -1,12 +1,12 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 18:31:33
+ * @LastEditTime: 2020-11-20 19:40:38
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-<div class="mt-4 mx-2" style="background-color:whitesmoke;">
+<div class="mt-4 mx-2" style="background-color:#fff;">
     <br id="aaaTop"></br>
     <b-sidebar id="sidebar-reader-index" title="目录" right shadow>
         <div v-if="IndexList != null">

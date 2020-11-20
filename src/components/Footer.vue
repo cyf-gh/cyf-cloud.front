@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-20 18:32:44
+ * @LastEditTime: 2020-11-20 19:33:06
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -41,7 +41,7 @@
       </div>
       <div class="col-12 col-md">
         <h5 style="color:gray">一言</h5>
-        <small class="border d-block mb-3 text-muted" id="hitokoto">正在加载一言...</small>
+        <small class="border d-block mb-3 text-muted px-2 py-1" id="hitokoto">正在加载一言...</small>
       </div>
       <div class="col-12 col-md">
         <b-badge pill variant="light">

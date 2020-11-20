@@ -1,14 +1,14 @@
 .cc-md-info {
-    background-color: whitesmoke;
+    background-color: #fff;
     border:1px;
-    border-color: whitesmoke;
+    border-color: #fff;
     border-style: solid;
 }
 
 .cc-md-1 {
-    background-color: whitesmoke;
+    background-color: #fff;
     border:1px;
-    border-color: whitesmoke;
+    border-color: #fff;
     border-style: solid;
     border-radius:4px;
 }
@@ -65,6 +65,16 @@
     transition-timing-function: ease-in-out;
 }
 
+.cc-md-1 blockquote {
+    padding: 20px;
+    background-color: #fafafa;
+    border-left: 6px solid #e6e6e6;
+    word-break: break-word;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 30px;
+    margin: 0 0 20px;
+}
 
 .cc-md-1 a:hover {
     transition: all 0.6s;
