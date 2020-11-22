@@ -2,8 +2,8 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-14 21:07:21
- * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
+ * @LastEditTime: 2020-11-22 16:06:36
+ * @FilePath: \cyf-cloud.front\src\components\post\Editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
@@ -50,7 +50,7 @@
                     </b-badge>
                 </div>
                 <hr>
-                <div :id="divId"></div>
+                <div :id="divId" class="cc-md-1"></div>
                 <br>
             </b-container>
         </b-card>
