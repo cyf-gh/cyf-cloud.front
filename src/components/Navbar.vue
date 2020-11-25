@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 11:31:02
+ * @LastEditTime: 2020-11-25 18:32:50
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -74,7 +74,9 @@
                   >
                   <b-dropdown-item href="/account/fav">收藏夹</b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item v-on:click="logout">注销</b-dropdown-item>
+                  <b-dropdown-item href="/post/editor">发表文章</b-dropdown-item>
+                  <b-dropdown-divider></b-dropdown-divider>
+                  <b-dropdown-item v-on:click="logout">登出</b-dropdown-item>
                 </b-nav-item-dropdown>
               </b-col>
             </b-row>
