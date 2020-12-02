@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 18:49:16
+ * @LastEditTime: 2020-11-29 16:30:45
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -37,6 +37,7 @@ import ccPostEditor from './components/post/Editor.vue'
 import ccPostReader from './components/post/Reader.vue'
 
 import ccPostBBS from './components/post/BBS.vue'
+import ccPostHome from './components/post/Home.vue'
 
 import ccPostUserHome from './components/post/UserHome.vue'
 
@@ -60,6 +61,7 @@ const routes = [
     { path: '/account/fav',  component: ccAccountFav },
     { path: '/post/editor', component: ccPostEditor },
     { path: '/post/bbs', component: ccPostBBS },
+    { path: '/post/home', component: ccPostHome },
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: ccPostUserHome },
     { path: '/home/nl', component: ccHomeNL },

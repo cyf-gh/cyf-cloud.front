@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-20 19:40:38
+ * @LastEditTime: 2020-11-29 16:28:17
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -85,6 +85,9 @@ import err from '../../cc/v1x1/HttpErrReturn'
 import md from "../../cc/markdown";
 import bvUtil from '../../cc/bvUtil';
 import '../../cc/css/markdown-cc-style.css'
+// import Viewer from 'v-viewer'
+// import Vue from 'vue'
+// Vue.use(Viewer)
 
 export default {
     data() {
