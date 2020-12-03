@@ -1,13 +1,13 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 16:31:55
+ * @LastEditTime: 2020-12-03 15:20:41
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // static
 <template>
-<div class="container-fluid">
+<b-container fluid="lg">
   <div>
   <b-card-group deck>
     <b-card style="z-index: 999;">
@@ -37,17 +37,10 @@
           controls
           indicators
           background="#ababab"
-          img-width="1024"
-          img-height="480"
-          style="text-shadow: 1px 1px 2px #333;"
+          style="text-shadow: 1px 1px 2px #333; height: 100%;"
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="https://s1.ax1x.com/2020/10/10/06w4j1.jpg">
-          <h1>账户</h1>
-          <p>本站已支持账户注册！享受更多服务！</p>
-          </b-carousel-slide>
           <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBTtP.jpg">
           <h1>Minecraft</h1>
           <p>现在就加入我的世界！</p>
@@ -87,7 +80,7 @@
       </b-card>
   </b-card-group>
   </div>
-</div>
+</b-container>
 </template>
 
 <script>
