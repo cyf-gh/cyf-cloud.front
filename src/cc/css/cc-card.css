@@ -1,6 +1,9 @@
-
 .card {
     margin: 1rem;
+}
+
+body {
+    background-color: rgb(246, 246, 246, 1);
 }
 
 @media screen and (max-width: 992px) {
@@ -10,10 +13,14 @@
     .card {
         border: rgba(0,0,0, 0.0);
     }
+    body {
+        background-color: white;
+    }
 }
 
 .navbar {
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgb(255, 255, 255, 0.9);
+    border: 1px solid rgba(0,0,0,.125);
 }
 
 body {

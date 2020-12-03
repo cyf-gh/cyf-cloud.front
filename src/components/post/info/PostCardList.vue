@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 15:36:37
+ * @LastEditTime: 2020-12-03 17:35:03
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -10,7 +10,7 @@
         <!-- 限定post范围弹窗 -->
         <b-modal ref="modal-range-post" hide-footer title="限定范围">
             <b-container>
-                <h5 class="mb-1">标签</h5>
+                <h5 class="mx-1">标签</h5>
                 <small class="cc-detail-text text-center"
                     >点选标签来缩小你的搜索范围</small
                 >
@@ -50,18 +50,21 @@
             </b-container>
         </b-modal>
         <!-- 列表 -->
-        <div>
+        <b-container fluid="lg">
             <div>
                 <div v-if="SelectedTags != null" class="text-center">
-                    <h3 class="text-center mb-2">{{this.ListTitle}}</h3>
-                    <b-badge
-                        variant="primary"
-                        v-for="t in SelectedTags"
-                        :key="t"
-                        class="mr-1"
-                    >
+                    <h3 class="text-center mt-4">{{this.ListTitle}}</h3>
+                    <div v-if="SelectedTags.length != 0">
+                    当前选中的标签：
+                        <b-badge
+                            variant="primary"
+                            v-for="t in SelectedTags"
+                            :key="t"
+                            class="mr-1 mb-2"
+                        >
                         {{ t }}
-                    </b-badge>
+                        </b-badge>
+                    </div>
                 </div>
                 <div v-if="postCurPage == null">
                     <h2 class="text-center">没有相应的文章</h2>
@@ -91,7 +94,7 @@
                     >
                 </b-nav>
             </b-navbar>
-        </div>
+        </b-container>
     </div>
 </template>
 
@@ -120,28 +123,15 @@ export default {
     props: {
         PostUrl: String, // "/v1x1/posts/info" by default
         ClientFilter: Boolean,
-        ListTitle: String, // 
+        ListTitle: String, //
     },
     created() {
         this.onload();
+
+
     },
     methods: {
         onload() {
-            this.axios
-                .get(apiAddr + this.PostUrl, { withCredentials: true })
-                .then((res) => {
-                    if (err.Check(res.data)) {
-                        this.posts = JSON.parse(res.data.Data);
-                    } else {
-                        console.error(
-                            "in post list loading all posts",
-                            res.data.Desc
-                        );
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
             this.axios
                 .get(apiAddr + "/v1x1/tags", { withCredentials: true })
                 .then((res) => {
@@ -160,8 +150,48 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
-        },
 
+            var CateDate = this.$route.query.date
+            if ( CateDate != undefined ) {
+                this.axios
+                    .get(apiAddr + "/v1x1/posts/info/by/date"+"?date="+CateDate, { withCredentials: true })
+                    .then((res) => {
+                        if (err.Check(res.data)) {
+                            this.posts = JSON.parse(res.data.Data);
+                        } else {
+                            console.error(
+                                "in post list loading all posts",
+                                res.data.Desc
+                            );
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                return
+            }
+            var CateTags = this.$route.query.tags
+            if ( CateTags != undefined ) {
+                this.SelectedTags = CateTags.split(",")
+                this.rangeByTags()
+                return
+            }
+            this.axios
+                .get(apiAddr + this.PostUrl, { withCredentials: true })
+                .then((res) => {
+                    if (err.Check(res.data)) {
+                        this.posts = JSON.parse(res.data.Data);
+                    } else {
+                        console.error(
+                            "in post list loading all posts",
+                            res.data.Desc
+                        );
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        },
         onSelectedPlgCliced(clicked) {
             for (var i in this.posts) {
                 if (this.posts[i].Id == clicked.Id) {

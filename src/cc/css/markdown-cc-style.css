@@ -1,3 +1,12 @@
+.ps-info {
+    border:  rgba(0,0,0,.125) 1px solid;
+    padding: 1rem;
+    background-color: white;
+}
+
+.ps-info:hover{
+    background-color: whitesmoke;
+}
 
 @media screen and (min-width: 992px) {
     .c-cc-reader {

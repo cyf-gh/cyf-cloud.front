@@ -60,7 +60,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-29 16:30:45
+ * @LastEditTime: 2020-12-03 16:23:02
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -119,7 +119,7 @@ var routes = [{
   path: '/post/editor',
   component: _Editor["default"]
 }, {
-  path: '/post/bbs',
+  path: '/posts',
   component: _BBS["default"]
 }, {
   path: '/post/home',

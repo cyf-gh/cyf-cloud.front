@@ -1,5 +1,5 @@
 <template>
-<b-container fluid>
+<b-container fluid="md">
   <b-card-group deck>
   <b-card>
     <div class="text-center">

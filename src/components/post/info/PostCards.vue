@@ -1,46 +1,33 @@
 <!--
  * @Date: 2020-10-22 16:03:12
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-22 17:16:05
+ * @LastEditTime: 2020-12-03 15:49:28
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCards.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
     <div>
-        <b-card
+        <div
             class="ps-info"
             v-for="p in posts"
             :key="p.Id"
             @click="viewPost(p)"
         >
             <b-row>
-                <b-col>
+                <b-col md="8" sm="10">
                     <h6>{{ p.Title }}</h6>
                 </b-col>
-                <b-col>
-                    <small style="float: right"
+                <b-col md="4" sm="2">
+                    <small style="float: center"
                         >浏览量：{{ p.ViewedCount }}</small
                     >
                 </b-col>
             </b-row>
             <b-row>
-                <b-col>
-                    <small
-                        >创建日期：<b-badge variant="light">{{
-                            p.CreateDate
-                        }}</b-badge></small
-                    >
-                </b-col>
-                <b-col>
-                    <small style="float: right"
-                        >作者：<b-badge variant="light">{{
-                            p.Author
-                        }}</b-badge></small
-                    >
-                </b-col>
+
             </b-row>
-            <b-row v-if="p.Tags != null">
-                <b-col>
+            <b-row>
+                <b-col v-if="p.Tags != null" md="4" sm="6">
                     <small>标签：</small>
                     <b-badge
                         variant="light"
@@ -51,8 +38,22 @@
                         {{ t }}
                     </b-badge>
                 </b-col>
+                <b-col md="4" sm="3">
+                    <small
+                        >作者：<b-badge variant="light">{{
+                            p.Author
+                        }}</b-badge></small
+                    >
+                </b-col>
+                <b-col md="4" sm="3">
+                    <small
+                        >创建日期：<b-badge variant="light">{{
+                            p.CreateDate
+                        }}</b-badge></small
+                    >
+                </b-col>
             </b-row>
-        </b-card>
+        </div>
     </div>
 </template>
 

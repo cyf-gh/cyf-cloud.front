@@ -1,13 +1,13 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-29 16:32:09
+ * @LastEditTime: 2020-12-03 15:32:20
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // static
 <template>
-<b-container fluid="lg">
+<b-container fluid="md">
   <div>
   <b-card-group deck>
     <b-card style="z-index: 999;">
@@ -32,9 +32,11 @@
       <div v-if="isLogin">
         <ccPostHome></ccPostHome>
       </div>
-      <!-- <b-card v-if="isLogin">
+      <!--
+      <b-card v-if="isLogin">
         <ccClipboard></ccClipboard>
-      </b-card> -->
+      </b-card>
+      -->
   </b-card-group>
   </div>
 </b-container>
@@ -48,7 +50,7 @@ import '../../cc/css/cc-card.css'
 
 export default {
     components:{
-      // ccClipboard, 
+      // ccClipboard,
       ccPostHome
     },
     name: "ccHome",

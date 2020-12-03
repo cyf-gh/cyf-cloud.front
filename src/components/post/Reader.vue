@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 15:04:24
+ * @LastEditTime: 2020-12-03 17:57:12
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -38,7 +38,7 @@
                     <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
                     <br>
                     <b-badge variant="light" class="mr-1">标签：</b-badge>
-                    <b-badge variant="primary" v-for="tag in post.Tags" :key="tag.Post" :href="tagHref(tag)" class="mr-1">
+                    <b-badge variant="light" v-for="tag in post.Tags" :key="tag.Post" :href="tagPostHref(tag)" class="mr-1">
                         {{tag}}
                     </b-badge>
                     <br>
@@ -79,21 +79,21 @@
                 <b-card id="id-cc-by-tag">
                     <h4>标签检索</h4>
                     <hr>
-                    <b-badge variant="light" v-for="tag in cateTag" :key="tag.Text"> {{tag.Text}} </b-badge>
+                    <b-badge variant="light" :href="tagPostHref(tag.Text)" v-for="tag in cateTag" :key="tag.Text"> {{tag.Text}} </b-badge>
                 </b-card>
                 <b-card id="id-cc-by-date">
                     <h4>日期检索</h4>
                     <hr>
                     <div v-for="date in cateDate" :key="date.Text">
-                        <a>{{date.Text}}</a>
+                        <a :href="dateHref(date.Text)">{{date.Text}} ({{date.Count}})</a>
                         <br>
                     </div>
                 </b-card>
                 <b-card id="id-cc-by-recent">
                     <h4>最近文章</h4>
                     <hr>
-                    <div v-for="recent in cateRecent" :key="recent.Title">
-                        <a>{{recent.Title}}</a>
+                    <div v-for="recent in cateRecent" :key="recent.Id">
+                        <a :href="recentPostHref(recent.Id)">{{recent.Title}}</a>
                         <br>
                     </div>
                 </b-card>
@@ -243,8 +243,14 @@ export default {
         jumpBottom() {
             this.jumpTo( "#aaaBottom" );
         },
-        tagHref( tagName ) {
-            return "/post?tag=" + tagName
+        dateHref( date ) {
+            return "/posts?date=" + date
+        },
+        recentPostHref( id ) {
+            return "/post/reader?id=" + id
+        },
+        tagPostHref( tagName ) {
+            return "/posts?tags=" + tagName
         },
         edit() {
             this.$router.push({path:'/post/editor?mode=modify' +'&id='+ this.postId})

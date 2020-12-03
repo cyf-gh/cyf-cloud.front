@@ -1,14 +1,15 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-20 19:33:06
+ * @LastEditTime: 2020-12-03 18:02:03
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 // src/components/Footer.vue
 <template>
 <b-card>
-  <footer class="navbar-fixed-bottom container py-5">
+<b-container fluid="lg">
+  <footer class="navbar-fixed-bottom container py-5" >
     <div class="row">
       <div class="col-6 col-md">
         <h5 style="color:gray">cyf-cloud</h5>
@@ -29,13 +30,13 @@
         <ul class="list-unstyled text-small">
           <li></li>
           <li>
-            <a class="text-muted" href="#/donate">我要捐赠&#128155;</a>
+            <a class="text-muted" href="/donate">我要捐赠&#128155;</a>
           </li>
           <li>
-            <a class="text-muted" href="#/donate/rank">捐赠榜&#128511;</a>
+            <a class="text-muted" href="/donate/rank">捐赠榜&#128511;</a>
           </li>
           <li>
-            <a class="text-muted" href="#/info/fl">友情链接</a>
+            <a class="text-muted" href="/info/fl">友情链接</a>
           </li>
         </ul>
       </div>
@@ -43,33 +44,39 @@
         <h5 style="color:gray">一言</h5>
         <small class="border d-block mb-3 text-muted px-2 py-1" id="hitokoto">正在加载一言...</small>
       </div>
-      <div class="col-12 col-md">
-        <b-badge pill variant="light">
-          <span id="busuanzi_container_site_pv">
-            访问量
-            <span id="busuanzi_value_site_pv"></span>次
-          </span>
-        </b-badge>
-      </div>
+
     </div>
     <hr>
-    <div class="text-center" >
+    <div>
+      <b-row>
+        <b-col class="text-center" md="6">
+        <img
+            src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+            alt="Kitten"
+            height="100"
+            width="100"
+            style="filter: invert(50%)"
+            class="mb-1"
+          />
+        </b-col>
+        <b-col md="6">
+          <small style="color:gray;">
+            <br>
+            | cyf-cloud 2020 - 当前版本v1x1 - 闭源 <span id="busuanzi_container_site_pv">
+               - 访问量 <span id="busuanzi_value_site_pv"></span>
+              次 |
+            <br>
+            | 版权 cyf 所有 - 由 cyf 维护 |
+            <br>
+            | 在互联网发表言论与文字请遵守中华人民共和国的法律法规 |
 
-    <p style="color:gray;">
-      cyf-cloud 2020. Designed and built with all the love in the world. Maintained by cyf.
-      <br>
-      Currently v1x1. Code closed-source. cyf all copyright reserved.
-    </p>
-      <img
-          src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
-          alt="Kitten"
-          height="100"
-          width="100"
-          style="filter: invert(50%)"
-          class="mb-1"
-        />
+            </span>
+          </small>
+        </b-col>
+      </b-row>
     </div>
   </footer>
+</b-container>
 </b-card>
 </template>
 
