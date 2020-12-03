@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-12 15:11:53
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 17:50:51
+ * @LastEditTime: 2020-11-29 16:37:30
  * @FilePath: \cyf-cloud.front\src\cc\markdown.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -79,6 +79,10 @@ function SetRawMarkdownToDiv( md_data, div_id ) {
         })
         localStorage.setItem( "cc-reader-index", JSON.stringify(curI) )
         // $("#AnchorContent").append('<li><a href="#wow'+i+'">'+(i+1)+" · "+$(this).text()+'</a></li>');
+    });
+    $(".c-cc-reader").find("img").each(function(i,item){
+        $(item).attr("style","width: auto; height: auto; max-width: 100%; max-height: 100%; margin: 0 auto;");
+        $(item).attr("class","center-text");
     });
 }
 

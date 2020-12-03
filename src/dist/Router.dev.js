@@ -51,6 +51,8 @@ var _Reader = _interopRequireDefault(require("./components/post/Reader.vue"));
 
 var _BBS = _interopRequireDefault(require("./components/post/BBS.vue"));
 
+var _Home3 = _interopRequireDefault(require("./components/post/Home.vue"));
+
 var _UserHome = _interopRequireDefault(require("./components/post/UserHome.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -58,7 +60,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 21:06:47
+ * @LastEditTime: 2020-11-29 16:30:45
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -120,6 +122,9 @@ var routes = [{
   path: '/post/bbs',
   component: _BBS["default"]
 }, {
+  path: '/post/home',
+  component: _Home3["default"]
+}, {
   path: '/post/reader',
   component: _Reader["default"]
 }, {
@@ -128,13 +133,16 @@ var routes = [{
 }, {
   path: '/home/nl',
   component: _HomeNoLogin["default"]
-} // { path: '*', redirect: '/home' }
-];
+}, {
+  path: '*',
+  redirect: '/home'
+}];
 var router = new _vueRouter["default"]({
-  mode: 'history',
   routes: routes,
+  mode: 'history',
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
+      console.log(to);
       return {
         selector: to.hash
       };

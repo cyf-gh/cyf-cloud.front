@@ -1,30 +1,56 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 15:07:09
+ * @LastEditTime: 2020-12-03 15:04:24
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-<div class="mt-4 mx-2" style="background-color:#fff;">
-    <br id="aaaTop"></br>
+<div class="mt-4 mx-2">
     <b-sidebar id="sidebar-reader-index" title="目录" right shadow>
         <div v-if="IndexList != null">
             <b-container>
-            <p @click="jumpTop">开始</p>
+            <p @click="jumpTop" style='color:darkblue;'>开始</p>
             <div v-for="i in IndexList" :key="i.Name">
                 <p @click="jumpTo(i.Name, i.Text)" :class="i.Class"> {{i.Text}}</p>
             </div>
-            <p @click="jumpBottom">结束</p>
+            <p @click="jumpBottom" style='color:darkblue;'>结束</p>
+            <hr>
+                <p @click='jumpTo("#id-cc-by-tag")'>标签检索</p>
+                <p @click='jumpTo("#id-cc-by-date")'>日期检索</p>
+                <p @click='jumpTo("#id-cc-by-recommend")'>推荐文章</p>
+            <br>
             </b-container>
         </div>
     </b-sidebar>
-    <div v-if="!isPrivate">
-        <div v-if="post != null" fluid>
-            <div class="BlogAnchor">
-                <div class="AnchorContent" id="AnchorContent"></div>
-            </div>
-            <b-container class="cc-md-info text-center">
+    <b-container class="cc-md-card" v-if="!isPrivate" fluid="sm">
+        <b-row>
+            <b-col class="cc-md-col" lg="9">
+                <div v-if="post != null" >
+                <div class="BlogAnchor">
+                    <div class="AnchorContent" id="AnchorContent"></div>
+                </div>
+                <b-card class="text-center">
+                    <h4 id="aaaTop">{{post.Title}}</h4>
+                    <b-badge :href="authHref" variant="primary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
+                    <b-badge :href="authHref" variant="primary" v-else>作者：{{post.Author}}</b-badge>
+                    <b-badge variant="light">阅读量：{{post.ViewedCount}}</b-badge>
+                    <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
+                    <br>
+                    <b-badge variant="light" class="mr-1">标签：</b-badge>
+                    <b-badge variant="primary" v-for="tag in post.Tags" :key="tag.Post" :href="tagHref(tag)" class="mr-1">
+                        {{tag}}
+                    </b-badge>
+                    <br>
+                    <b-badge variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
+                    <br>
+                    <b-badge variant="primary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
+                </b-card>
+                <b-card class="cc-md-1">
+                    <div id="id-cc-reader" class="c-cc-reader"></div>
+                    <br>
+                </b-card>
+                <div id="aaaBottom"/>
                 <br>
                 <b-navbar fixed="bottom" toggleable="sm">
                     <b-nav class="mr-0">
@@ -66,7 +92,7 @@
                 <b-card id="id-cc-by-recent">
                     <h4>最近文章</h4>
                     <hr>
-                    <div v-for="recent in cateRecent" :key="recent.Id">
+                    <div v-for="recent in cateRecent" :key="recent.Title">
                         <a>{{recent.Title}}</a>
                         <br>
                     </div>
@@ -89,6 +115,9 @@ import err from '../../cc/v1x1/HttpErrReturn'
 import md from "../../cc/markdown";
 import bvUtil from '../../cc/bvUtil';
 import '../../cc/css/markdown-cc-style.css'
+// import Viewer from 'v-viewer'
+// import Vue from 'vue'
+// Vue.use(Viewer)
 
 export default {
     data() {
@@ -108,6 +137,10 @@ export default {
             isFav: false,
             like: null,
             IndexList: null,
+
+            cateDate: null,
+            cateTag: null,
+            cateRecent: null,
         }
     },
     created() {
@@ -136,10 +169,13 @@ export default {
             }
         })
         .catch(err => {
-            console.error(err); 
+            console.error(err);
         })
         this.checkFav()
         this.checkLikeIt()
+        this.getAchieveDate()
+        this.getAchieveRecent()
+        this.getAchieveTag()
     },
     updated() {
         if ( this.IndexList == null ){
@@ -152,7 +188,49 @@ export default {
         }
     },
     methods: {
-        jumpTo( id, name ) {
+        getAchieveDate() {
+             this.axios.get( apiAddr + "/v1x1/posts/achieve/date", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    this.cateDate = JSON.parse( res.data.Data )
+                    return;
+                } else {
+                    console.error("in post achieve date get", err.data.Desc)
+                }
+            })
+        },
+        getAchieveRecent() {
+             this.axios.get( apiAddr + "/v1x1/posts/achieve/recent", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    this.cateRecent = JSON.parse( res.data.Data )
+                    return;
+                } else {
+                    console.error("in post achieve recent get", err.data.Desc)
+                }
+            })
+        },
+        getAchieveTag() {
+             this.axios.get( apiAddr + "/v1x1/posts/achieve/tag", {
+                params:{id: this.postId},
+                withCredentials: true
+            })
+            .then(res => {
+                if ( err.Check( res.data ) ) {
+                    this.cateTag = JSON.parse( res.data.Data )
+                    return;
+                } else {
+                    console.error("in post achieve tag get", err.data.Desc)
+                }
+            })
+        },
+        jumpTo( id ) {
             document.querySelector( id ).scrollIntoView(true);
             console.log( document.documentElement.scrollTop||document.body.scrollTop )
             var val = ( document.documentElement.scrollTop||document.body.scrollTop ) - 60
@@ -160,10 +238,10 @@ export default {
             $("body,html").animate({ scrollTop: val});
         },
         jumpTop() {
-            document.querySelector( "#aaaTop" ).scrollIntoView(true);
+            this.jumpTo( "#aaaTop" );
         },
         jumpBottom() {
-            document.querySelector( "#aaaBottom" ).scrollIntoView(true);
+            this.jumpTo( "#aaaBottom" );
         },
         tagHref( tagName ) {
             return "/post?tag=" + tagName

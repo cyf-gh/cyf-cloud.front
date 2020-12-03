@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-25 18:32:50
+ * @LastEditTime: 2020-11-29 16:12:59
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -21,8 +21,8 @@
       </b-navbar-brand>
       <b-navbar-nav>
         <b-row>
-          <b-col><b-nav-item href="/home">主站</b-nav-item></b-col>
-          <b-col><b-nav-item href="/post/bbs">博客</b-nav-item></b-col>
+          <b-col><b-nav-item href="/home">主页</b-nav-item></b-col>
+          <b-col><b-nav-item href="/post/home">博客</b-nav-item></b-col>
         </b-row>
       </b-navbar-nav>
 
