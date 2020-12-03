@@ -1,28 +1,19 @@
-.cc-md-info {
-    background-color: #fff;
-    border:1px;
-    border-color: #fff;
-    border-style: solid;
-}
 
-.cc-md-1 {
-    background-color: #fff;
-    border:1px;
-    border-color: #fff;
-    border-style: solid;
-    border-radius:4px;
-}
-
-@media (min-width: 900px) {
-    .cc-md-1 * {
-        margin-left: 3px;
-        margin-right: 3px;
+@media screen and (min-width: 992px) {
+    .c-cc-reader {
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 }
 
-.cc-md-1 * {
-    margin-left: 1px;
-    margin-right: 1px;
+.cc-md-card .card {
+    margin-left: 0.618rem;
+    margin-right: 0.618rem;
+}
+
+.cc-md-col {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .cc-md-1 em {
@@ -59,4 +50,3 @@
     line-height: 30px;
     margin: 0 0 20px;
 }
-
