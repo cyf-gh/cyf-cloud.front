@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 18:04:43
+ * @LastEditTime: 2020-12-04 14:50:46
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -30,10 +30,10 @@
         <ul class="list-unstyled text-small">
           <li></li>
           <li>
-            <a class="text-muted" href="/donate">我要捐赠&#128155;</a>
+            <a class="text-muted" href="/donate">我要捐赠 &#128155;</a>
           </li>
           <li>
-            <a class="text-muted" href="/donate/rank">捐赠榜&#128511;</a>
+            <a class="text-muted" href="/donate/rank">捐赠榜单</a>
           </li>
           <li>
             <a class="text-muted" href="/info/fl">友情链接</a>

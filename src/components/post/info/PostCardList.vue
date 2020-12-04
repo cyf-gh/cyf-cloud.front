@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 17:35:03
+ * @LastEditTime: 2020-12-04 14:05:11
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -127,8 +127,6 @@ export default {
     },
     created() {
         this.onload();
-
-
     },
     methods: {
         onload() {

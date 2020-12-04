@@ -55,12 +55,18 @@ var _Home3 = _interopRequireDefault(require("./components/post/Home.vue"));
 
 var _UserHome = _interopRequireDefault(require("./components/post/UserHome.vue"));
 
+var _Search = _interopRequireDefault(require("./components/search/Search.vue"));
+
+var _Post = _interopRequireDefault(require("./components/search/Post.vue"));
+
+var _User = _interopRequireDefault(require("./components/search/User.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 16:23:02
+ * @LastEditTime: 2020-12-04 18:37:43
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -133,6 +139,15 @@ var routes = [{
 }, {
   path: '/home/nl',
   component: _HomeNoLogin["default"]
+}, {
+  path: '/search',
+  component: _Search["default"]
+}, {
+  path: '/search/post',
+  component: _Post["default"]
+}, {
+  path: '/search/user',
+  component: _User["default"]
 }, {
   path: '*',
   redirect: '/home'

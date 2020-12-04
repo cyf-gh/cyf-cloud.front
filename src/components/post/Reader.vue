@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 17:57:12
+ * @LastEditTime: 2020-12-04 17:07:53
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -79,7 +79,7 @@
                 <b-card id="id-cc-by-tag">
                     <h4>标签检索</h4>
                     <hr>
-                    <b-badge variant="light" :href="tagPostHref(tag.Text)" v-for="tag in cateTag" :key="tag.Text"> {{tag.Text}} </b-badge>
+                    <tagList :tags="cateTag"></tagList>
                 </b-card>
                 <b-card id="id-cc-by-date">
                     <h4>日期检索</h4>
@@ -115,11 +115,15 @@ import err from '../../cc/v1x1/HttpErrReturn'
 import md from "../../cc/markdown";
 import bvUtil from '../../cc/bvUtil';
 import '../../cc/css/markdown-cc-style.css'
+import tagList from "./TagList"
 // import Viewer from 'v-viewer'
 // import Vue from 'vue'
 // Vue.use(Viewer)
 
 export default {
+    components: {
+        tagList
+    },
     data() {
         return {
             /**
@@ -188,6 +192,9 @@ export default {
         }
     },
     methods: {
+        tagPostHref( tagName ) {
+            return "/posts?tags=" + tagName
+        },
         getAchieveDate() {
              this.axios.get( apiAddr + "/v1x1/posts/achieve/date", {
                 params:{id: this.postId},
@@ -249,9 +256,7 @@ export default {
         recentPostHref( id ) {
             return "/post/reader?id=" + id
         },
-        tagPostHref( tagName ) {
-            return "/posts?tags=" + tagName
-        },
+
         edit() {
             this.$router.push({path:'/post/editor?mode=modify' +'&id='+ this.postId})
         },

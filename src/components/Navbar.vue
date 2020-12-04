@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 13:13:21
+ * @LastEditTime: 2020-12-04 22:49:40
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -36,11 +36,12 @@
               <b-col cols="8">
                 <b-form-input
                   class="sm-3"
-                  placeholder="你想要搜索的内容..."
+                  placeholder="文章/用户"
+                  v-model="searchText"
                 ></b-form-input>
               </b-col>
               <b-col>
-                <b-button class="sm-2" variant="light">搜索</b-button>
+                <b-button class="sm-2" @click="doSearch" variant="light">搜索</b-button>
               </b-col>
             </b-row>
           </b-nav-form>
@@ -104,6 +105,7 @@ export default {
     return {
       isLoginIn: false,
       accountInfo: null,
+      searchText: "",
     };
   },
   created() {
@@ -111,22 +113,30 @@ export default {
     bvu.InitToast(this.$bvToast);
     this.isLoginIn = idy.IsLogin();
     if ( this.isLoginIn ) {
-      this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
-      if ( this.accountInfo == null ) {
-          this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
-          .then(res => {
-              localStorage.setItem( "cc_account_info", res.data.Data )
-              this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
-              theme.SetBgUrl(this.accountInfo.BgUrl);
-              theme.ReloadBgUrl();
-          })
-          .catch(err => {
-              console.error(err);
-          })
+      try {
+        this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+      } catch {
+        console.log( "parse failed" )
       }
+        if ( this.accountInfo == null ) {
+            this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
+            .then(res => {
+                localStorage.setItem( "cc_account_info", res.data.Data )
+                this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+                theme.SetBgUrl(this.accountInfo.BgUrl);
+                theme.ReloadBgUrl();
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        }
     }
   },
   methods: {
+    doSearch() {
+       this.$router.push({ path: "/search?text=" + this.searchText });
+       location.reload()
+    },
     logout() {
       var rs = confirm("确认登出？");
       if (rs == false) {
@@ -139,7 +149,7 @@ export default {
             if (err.Check(res.data)) {
               idy.Logout();
               bvu.Msg("成功", "已登出账户", "success");
-              this.$router.push({ path: "/home" });
+              this.$router.push({ path: "/home/nl" });
               location.reload();
             } else {
               bvu.Msg("错误", "登出账户错误", "danger");

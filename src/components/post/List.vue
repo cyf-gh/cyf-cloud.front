@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:01:48
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-20 22:10:22
+ * @LastEditTime: 2020-12-04 13:52:04
  * @FilePath: \cyf-cloud.front\src\components\post\List.vue
  * @Description: 文章列表
 -->
@@ -15,6 +15,7 @@
             :current-page="curPage"
             :per-page="perPage"
             @row-clicked="onSelectedPlgCliced"
+            style="border:rgba(0,0,0,.125) 1px solid;"
         ></b-table>
         <b-pagination
         size="sm"

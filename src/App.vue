@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-29 15:54:51
+ * @LastEditTime: 2020-12-04 16:44:56
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
   <div id="app">
     <cc-navbar/>
     <!--cc-navbar height-->
-    <div class="fs">
+    <div class="fs" style="min-height: 72vh;">
       <div class="mt-2"></div>
       <br>
       <br>
