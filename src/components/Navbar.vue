@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-29 16:12:59
+ * @LastEditTime: 2020-12-04 13:13:21
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -51,7 +51,7 @@
               <b-dropdown-item href="/account/signin">注册</b-dropdown-item>
             </b-nav-item-dropdown>
           </div>
-          <div v-else>
+          <div v-else-if="isLoginIn && accountInfo!=null">
             <b-row>
               <b-col cols="1">
                 <b-img-lazy
@@ -110,12 +110,20 @@ export default {
     idy.InitCookie(this.$cookie);
     bvu.InitToast(this.$bvToast);
     this.isLoginIn = idy.IsLogin();
-    if (this.isLoginIn) {
-      idy.RefreshAccountInfo(this.axios);
+    if ( this.isLoginIn ) {
       this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
-
-      theme.SetBgUrl(this.accountInfo.BgUrl);
-      theme.ReloadBgUrl();
+      if ( this.accountInfo == null ) {
+          this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
+          .then(res => {
+              localStorage.setItem( "cc_account_info", res.data.Data )
+              this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+              theme.SetBgUrl(this.accountInfo.BgUrl);
+              theme.ReloadBgUrl();
+          })
+          .catch(err => {
+              console.error(err);
+          })
+      }
     }
   },
   methods: {

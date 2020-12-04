@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-11-29 16:07:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 16:23:13
+ * @LastEditTime: 2020-12-04 12:46:50
  * @FilePath: \cyf-cloud.front\src\components\post\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -11,7 +11,7 @@
       <h4>博客</h4>
       <div class="mt-3">
       <b-button variant="light" class="mr-2" @click="newPost">写一篇</b-button>
-      <b-button variant="light" @click="haveALook">随便看看</b-button>
+      <b-button variant="light" @click="haveALook">查看全部</b-button>
       </div>
       <div class="mt-3">
         <h6>我的文章</h6>
