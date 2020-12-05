@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 18:37:43
+ * @LastEditTime: 2020-12-05 12:33:13
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -24,14 +24,11 @@ import ccCyfInfo from "./components/cyf/My.vue"
 import ccMusic from "./components/music/Music"
 import ccMusicUpload from "./components/music/Upload"
 
-import ccVt from "./components/vt/VtHome"
-
-import ccMcdrPlg from "./components/mcdrPlg/mcdrPlgHome"
-
 import ccAccountSignin from './components/account/Signin.vue'
 import ccAccountLogin from  './components/account/Login.vue'
 import ccAccountInfo from './components/account/Info.vue'
 import ccAccountFav from './components/account/Fav.vue'
+import ccAccountHome from './components/account/Home.vue'
 
 import ccPostEditor from './components/post/Editor.vue'
 import ccPostReader from './components/post/Reader.vue'
@@ -47,22 +44,27 @@ import ccSearchUser from './components/search/User.vue'
 
 const routes = [
     { path: '/home', component: ccHome },
+    
     { path: '/mc', component: ccMcHome },
     { path: '/mc/map', component: ccMcWebmap },
     { path: '/mc/skin', component: ccMcSkin },
     { path: '/mc/about', component: ccMcAbout },
+    
     { path: '/music', component: ccMusic },
     { path: '/music/upload', component: ccMusicUpload },
     { path: '/donate', component: ccCyfDonate },
     { path: '/donate/rank', component: ccCyfDonateRank },
     { path: '/blog', component: ccCyfBlog },
-    { path: '/cloudApp/vt', component: ccVt },
-    { path: '/cloudApp/util/mcdrPlg', component: ccMcdrPlg },
+    
+    { path: '/cloudApp/vt', component: () => import('./components/vt/VtHome') },
+    { path: '/cloudApp/util/mcdrPlg', component: () =>import('./components/mcdrPlg/mcdrPlgHome') },
+
     { path: '/info/about', component: ccCyfInfo },
     { path: '/account/signin', component: ccAccountSignin },
     { path: '/account/login', component: ccAccountLogin },
     { path: '/account/info', component: ccAccountInfo },
     { path: '/account/fav',  component: ccAccountFav },
+    { path: '/user/home',  component: ccAccountHome },
     { path: '/post/editor', component: ccPostEditor },
     { path: '/posts', component: ccPostBBS },
     { path: '/post/home', component: ccPostHome },

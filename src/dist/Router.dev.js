@@ -33,10 +33,6 @@ var _Music = _interopRequireDefault(require("./components/music/Music"));
 
 var _Upload = _interopRequireDefault(require("./components/music/Upload"));
 
-var _VtHome = _interopRequireDefault(require("./components/vt/VtHome"));
-
-var _mcdrPlgHome = _interopRequireDefault(require("./components/mcdrPlg/mcdrPlgHome"));
-
 var _Signin = _interopRequireDefault(require("./components/account/Signin.vue"));
 
 var _Login = _interopRequireDefault(require("./components/account/Login.vue"));
@@ -45,13 +41,15 @@ var _Info = _interopRequireDefault(require("./components/account/Info.vue"));
 
 var _Fav = _interopRequireDefault(require("./components/account/Fav.vue"));
 
+var _Home3 = _interopRequireDefault(require("./components/account/Home.vue"));
+
 var _Editor = _interopRequireDefault(require("./components/post/Editor.vue"));
 
 var _Reader = _interopRequireDefault(require("./components/post/Reader.vue"));
 
 var _BBS = _interopRequireDefault(require("./components/post/BBS.vue"));
 
-var _Home3 = _interopRequireDefault(require("./components/post/Home.vue"));
+var _Home4 = _interopRequireDefault(require("./components/post/Home.vue"));
 
 var _UserHome = _interopRequireDefault(require("./components/post/UserHome.vue"));
 
@@ -63,13 +61,12 @@ var _User = _interopRequireDefault(require("./components/search/User.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-/*
- * @Date: 2020-08-13 20:58:42
- * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 18:37:43
- * @FilePath: \cyf-cloud.front\src\Router.js
- * @Description: What is mind? No matter. What is matter? Nevermin
- */
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 var routes = [{
   path: '/home',
   component: _Home["default"]
@@ -102,10 +99,18 @@ var routes = [{
   component: _Blog["default"]
 }, {
   path: '/cloudApp/vt',
-  component: _VtHome["default"]
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./components/vt/VtHome'));
+    });
+  }
 }, {
   path: '/cloudApp/util/mcdrPlg',
-  component: _mcdrPlgHome["default"]
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./components/mcdrPlg/mcdrPlgHome'));
+    });
+  }
 }, {
   path: '/info/about',
   component: _My["default"]
@@ -122,6 +127,9 @@ var routes = [{
   path: '/account/fav',
   component: _Fav["default"]
 }, {
+  path: '/user/home',
+  component: _Home3["default"]
+}, {
   path: '/post/editor',
   component: _Editor["default"]
 }, {
@@ -129,7 +137,7 @@ var routes = [{
   component: _BBS["default"]
 }, {
   path: '/post/home',
-  component: _Home3["default"]
+  component: _Home4["default"]
 }, {
   path: '/post/reader',
   component: _Reader["default"]
