@@ -2,8 +2,8 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-22 16:06:36
- * @FilePath: \cyf-cloud.front\src\components\post\Editor.vue
+ * @LastEditTime: 2020-12-05 11:59:46
+ * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
@@ -39,16 +39,6 @@
             <b-container style="background-color:white">
                 <br>
                 <h2>{{post.Title}}</h2>
-                <div>
-                    <b-badge variant="light">作者：{{post.Author}}</b-badge>
-                    <br>
-                    <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
-                    <br>
-                    <b-badge variant="light" class="mr-1">标签：</b-badge>
-                    <b-badge variant="dark" v-for="tag in post.Tags" class="mr-1">
-                        {{tag}}
-                    </b-badge>
-                </div>
                 <hr>
                 <div :id="divId" class="cc-md-1"></div>
                 <br>
