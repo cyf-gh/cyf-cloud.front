@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-12-04 18:32:22
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 23:32:07
+ * @LastEditTime: 2020-12-05 20:29:36
  * @FilePath: \cyf-cloud.front\src\components\search\User.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -14,7 +14,7 @@
                 <small>没有相应的结果</small>
             </div>
             <div class="text-center" v-else>
-                <div class="mt-3" v-for="u in Users" :key="u.Id">
+                <div class="mt-3" v-for="u in Users" :key="u.Id" @click="userHref(u.Id)">
                     <b-img-lazy
                         rounded="circle"
                         class="mx-2 d-inline"
@@ -67,6 +67,11 @@ export default {
         .catch(err => {
             console.error(err);
         })
+    },
+    methods: {
+        userHref( id ) {
+            this.$router.push({ path: "/user/home?id=" + id });
+        }
     },
 }
 </script>

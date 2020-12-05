@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 12:33:24
+ * @LastEditTime: 2020-12-05 20:30:52
  * @FilePath: \cyf-cloud.front\src\components\Navbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -70,7 +70,7 @@
                   class="text-primary"
                   right
                 >
-                  <b-dropdown-item href="/user/home">我的主页</b-dropdown-item>
+                  <b-dropdown-item :href="userHomeUrl()">我的主页</b-dropdown-item>
                   <b-dropdown-item href="/account/info">个人信息</b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
                   <b-dropdown-item href="/account/fav">收藏夹</b-dropdown-item>
@@ -94,6 +94,7 @@ import apiAddr from "../server";
 import err from "../cc/v1x1/HttpErrReturn";
 import bvu from "../cc/bvUtil";
 import theme from "../cc/v1x1/Theme";
+import sh from "../cc/searchHistory"
 
 export default {
   name: "ccNavbar",
@@ -130,9 +131,11 @@ export default {
             })
         }
     }
+    console.log( this.accountInfo )
   },
   methods: {
     doSearch() {
+      sh.AddSearchHistory(this.searchText)
        this.$router.push({ path: "/search?text=" + this.searchText });
        location.reload()
     },
@@ -162,6 +165,9 @@ export default {
           console.error(err);
         });
     },
+    userHomeUrl() {
+      return "/user/home?id=" + this.accountInfo.Id
+    }
   },
 };
 </script>

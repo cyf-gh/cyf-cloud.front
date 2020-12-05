@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 17:07:53
+ * @LastEditTime: 2020-12-05 20:33:18
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -76,12 +76,12 @@
                 </div>
             </b-col>
             <b-col class="cc-md-col" lg="3">
-                <b-card id="id-cc-by-tag">
+                <b-card id="id-cc-by-tag" class="mb-2">
                     <h4>标签检索</h4>
                     <hr>
                     <tagList :tags="cateTag"></tagList>
                 </b-card>
-                <b-card id="id-cc-by-date">
+                <b-card id="id-cc-by-date" class="mb-2">
                     <h4>日期检索</h4>
                     <hr>
                     <div v-for="date in cateDate" :key="date.Text">

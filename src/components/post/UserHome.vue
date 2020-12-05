@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-11-01 14:08:43
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-01 14:42:19
+ * @LastEditTime: 2020-12-05 20:07:19
  * @FilePath: \cyf-cloud.front\src\components\post\UserHome.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -52,7 +52,7 @@ export default {
         if( this.userName == curUserName ) {
             this.getUserPostInfosUrl = "/v1x1/posts/info/self"
         } else {
-            this.getUserPostInfosUrl = "/v1x1/posts/info?name=" + this.userName
+            this.getUserPostInfosUrl = "/v1x1/posts/info?user=" + this.userName
         }
         this.title = this.userName + " 的文章列表"
     }
