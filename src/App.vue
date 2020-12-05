@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 16:44:56
+ * @LastEditTime: 2020-12-05 21:03:14
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,7 @@
   <div id="app">
     <cc-navbar/>
     <!--cc-navbar height-->
-    <div class="fs" style="min-height: 72vh;">
+    <div class="fs">
       <div class="mt-2"></div>
       <br>
       <br>
@@ -63,7 +63,7 @@ export default {
     // 完成客户端cid的编写
     ids.InitCookie(this.$cookie)
     ids.GenerateBasicIds();
-    
+
     // 首次加载行为
     if ( window.performance.navigation.type != 1 ) {
       ids.LogoutIfSession()
@@ -80,5 +80,11 @@ export default {
     box-sizing: content-box;
     width: 100%;
     height: 100%;
+  }
+
+  @media screen and ( min-width: 992px;) {
+    .fs {
+      min-height: 72vh;
+    }
   }
 </style>

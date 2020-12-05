@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-03 15:32:20
+ * @LastEditTime: 2020-12-05 20:59:10
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -64,6 +64,9 @@ export default {
     created() {
       idy.InitCookie(this.$cookie)
       this.isLogin = idy.IsLogin()
+      if ( !this.isLogin ) {
+        this.$router.push({ path: "/home/nl" });
+      }
     },
     methods: {
       onSlideStart() {
