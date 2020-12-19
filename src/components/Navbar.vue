@@ -32,19 +32,14 @@
         <b-navbar-nav class="ml-auto">
           <b-dropdown-divider></b-dropdown-divider>
           <b-nav-form>
-            <b-row>
-              <b-col cols="8">
                 <b-form-input
-                  class="sm-3"
+                  class="mr-sm-2 mr-2"
                   placeholder="文章/用户"
                   v-model="searchText"
                   @keydown.enter.native="doSearch"
+                   style="width:12rem;"
                 ></b-form-input>
-              </b-col>
-              <b-col>
-                <b-button class="sm-2" @click="doSearch" variant="light">搜索</b-button>
-              </b-col>
-            </b-row>
+                <b-button class="my-2 my-sm-0 mr-4" @click="doSearch" variant="light">搜索</b-button>
           </b-nav-form>
           <b-dropdown-divider></b-dropdown-divider>
           <div v-if="!isLoginIn">
