@@ -31,6 +31,16 @@
 <script>
   import apiServer from "../../server"
   export default {
+    metaInfo() {
+        return {
+          title: "❤捐赠榜单",
+          titleTemplate: '%s - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
     mounted:function(){
         this.axios.get( apiServer + "/v1/donate/rank")
         .then(res => {

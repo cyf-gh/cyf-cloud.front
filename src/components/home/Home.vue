@@ -49,6 +49,14 @@ import ccPostHome from "../post/Home"
 import '../../cc/css/cc-card.css'
 
 export default {
+    metaInfo: {
+          title: "主页",
+          titleTemplate: '%s - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+          }
+    },
     components:{
       // ccClipboard,
       ccPostHome

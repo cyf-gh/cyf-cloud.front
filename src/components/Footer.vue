@@ -73,6 +73,11 @@
           </small>
         </b-col>
       </b-row>
+      <div class="text-center mt-4">
+      <small>
+        <b-badge variant="light" href="https://se.cyf-cloud.cn:8888">国内节点</b-badge>
+        <b-badge variant="light" class="ml-1" href="https://www.cyf-cloud.cn">国外节点</b-badge></small>
+      </div>
     </div>
   </footer>
 </b-container>

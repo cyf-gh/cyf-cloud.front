@@ -84,9 +84,21 @@ export default {
             searchHistory: [],
         };
     },
+    metaInfo() {
+        return {
+          title: this.Text + " - 搜索结果",
+          titleTemplate: '%s - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
     created() {
         this.Text = this.$route.query.text;
         this.searchHistory = sh.GetSearchHistoryList().reverse()
+    },
+    mounted() {
     },
     methods: {
         clearHistory() {

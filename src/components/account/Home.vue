@@ -49,7 +49,7 @@
                         <cc-post-list
                             :PostUrl="postUrl()"
                             :ClientFilter="clientFilter"
-                            ListTitle="文章列表"
+                            ListTitle="文章列表 "
                         ></cc-post-list>
                         <br>
                     </b-tab>
@@ -68,6 +68,16 @@ import md from "../../cc/markdown";
 import postList from "../post/info/PostCardList";
 
 export default {
+    metaInfo() {
+        return {
+          title: this.uName + "的个人主页",
+          titleTemplate: '%s - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
     components: {
         "cc-post-list": postList,
     },
@@ -75,6 +85,7 @@ export default {
         return {
             id: -1,
             u: null,
+            uName: "",
         }
     },
     mounted() {
@@ -84,7 +95,7 @@ export default {
         .then(res => {
             if (err.Check(res.data)) {
                 this.u = JSON.parse( res.data.Data )
-                console.log( this.u )
+                this.uName = this.u.Name                
             } else {
                 console.error(res.Desc);
             }

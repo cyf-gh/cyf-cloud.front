@@ -17,7 +17,7 @@ function AddSearchHistory( text ) {
 
 function GetSearchHistoryList() {
     var searchHistoryStr = localStorage.getItem("cc-search-history");
-    return searchHistoryStr == null || searchHistoryStr == "" ? [] : searchHistoryStr.split(",")
+    return searchHistoryStr == null || searchHistoryStr == "" ? [] : [...new Set( searchHistoryStr.split(",") )]
 }
 
 function ClearSearchHistory() {

@@ -72,6 +72,16 @@ import ccDfBox from './Draftbox'
 import idy from "../../cc/v1x1/Identity";
 
 export default {
+    metaInfo() {
+        return {
+          title: this.status,
+          titleTemplate: '【%s】- Markdown编辑器 - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
     components:{
         ccDfBox
     },

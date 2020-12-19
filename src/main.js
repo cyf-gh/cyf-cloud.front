@@ -15,6 +15,7 @@ import qs from 'qs'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import cookie from 'vue-cookie'
+import VueMeta from 'vue-meta'
 /*
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'https://se.cyf-cloud.cn:2344/v1';
@@ -23,6 +24,7 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 // CDN
 // Vue.use(window['vue-cropper'])
 
+Vue.use(VueMeta)
 Vue.use(VueAxios,axios)
 // Vue.use(VueCropper)
 Vue.use(qs)

@@ -32,5 +32,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+      metaInfo() {
+        return {
+          title: "❤捐赠",
+          titleTemplate: '%s - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
+};
 </script>

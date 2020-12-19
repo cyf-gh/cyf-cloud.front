@@ -104,6 +104,16 @@ import err from "../../../cc/v1x1/HttpErrReturn";
 import postInfos from "./PostCards";
 
 export default {
+    metaInfo() {
+        return {
+            title: this.listTitle,
+            titleTemplate: '%s - cyf-cloud',
+            htmlAttrs: {
+                lang: 'zh-cn',
+                amp: true
+            }
+        }
+    },
     name: "cc-post-list",
     components: {
         "cc-postinfos": postInfos,
@@ -256,6 +266,9 @@ export default {
             }
             var start = (this.curPage - 1) * this.perPage;
             return this.posts.slice(start, start + this.perPage);
+        },
+        listTitle() {
+            return this.ListTitle == "文章列表 " ? this.title : this.ListTitle;
         },
     },
 };

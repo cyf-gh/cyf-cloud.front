@@ -124,6 +124,16 @@ export default {
     components: {
         tagList
     },
+    metaInfo() {
+        return {
+          title: this.postTitle,
+          titleTemplate: '%s - 博客 - cyf-cloud',
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
     data() {
         return {
             /**
@@ -137,7 +147,7 @@ export default {
             postId: -1,
             authHref: '',
             isPrivate: false,
-
+            postTitle: "",
             isFav: false,
             like: null,
             IndexList: null,
@@ -164,6 +174,7 @@ export default {
                 this.authHref = "/user?name=" + this.post.Author
                 // 只有在文章为公开时才增加阅读数量
                 this.doView()
+                this.postTitle = this.post.Title
             } else {
                 if ( res.data.ErrCod == "-5" ) {
                     this.isPrivate = true

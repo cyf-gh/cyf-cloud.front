@@ -185,6 +185,15 @@ import ccMap from './Webmap'
 
 
 export default {
+  metaInfo() {
+        return {
+          title: "我的世界服务器 - cyf-cloud",
+          htmlAttrs: {
+            lang: 'zh-cn',
+            amp: true
+            }
+        }
+    },
   components:{
       ccMap
   },
