@@ -38,6 +38,7 @@
                   class="sm-3"
                   placeholder="文章/用户"
                   v-model="searchText"
+                  @keydown.enter.native="doSearch"
                 ></b-form-input>
               </b-col>
               <b-col>
@@ -108,6 +109,8 @@ export default {
       searchText: "",
     };
   },
+  mounted() { 
+  },
   created() {
     idy.InitCookie(this.$cookie);
     bvu.InitToast(this.$bvToast);
@@ -134,10 +137,13 @@ export default {
     console.log( this.accountInfo )
   },
   methods: {
-    doSearch() {
-      sh.AddSearchHistory(this.searchText)
-       this.$router.push({ path: "/search?text=" + this.searchText });
-       location.reload()
+    doSearch(event) {
+        console.log("searching...")
+        sh.AddSearchHistory(this.searchText)
+        let routeUrl = this.$router.resolve({
+              path: "/search?text=" + this.searchText,
+        });
+        window.open(routeUrl .href, '_blank');
     },
     logout() {
       var rs = confirm("确认登出？");
