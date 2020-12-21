@@ -2,7 +2,7 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 11:59:46
+ * @LastEditTime: 2020-12-21 16:58:30
  * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -101,6 +101,20 @@ export default {
 
         status: "status"
     }
+    },
+    mounted() {
+        let _this = this
+        window.onbeforeunload = function (e) {
+            if (_this.$route.name == 'inspect') {
+                e = e || window.event
+                if (e) {
+                    e.returnValue = '关闭提示'
+                }
+                return '关闭提示'
+            } else {
+                window.onbeforeunload = null
+            }
+        }
     },
     methods: {
         savedDraft() {
