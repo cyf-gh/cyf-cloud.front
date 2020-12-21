@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:01:48
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 13:52:04
+ * @LastEditTime: 2020-12-21 17:34:35
  * @FilePath: \cyf-cloud.front\src\components\post\List.vue
  * @Description: 文章列表
 -->
@@ -36,10 +36,10 @@ import err from "../../cc/v1x1/HttpErrReturn";
 export default {
     data() {
         return {
-            fields: ['Title', 'Date'],
+            fields: ['Title'],
             posts:[],
             curPage: 1,
-            perPage: 7,
+            perPage: 20,
         }
     },
     methods: {
