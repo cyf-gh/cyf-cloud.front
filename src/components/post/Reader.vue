@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 20:33:18
+ * @LastEditTime: 2020-12-21 17:02:10
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -228,6 +228,7 @@ export default {
             .then(res => {
                 if ( err.Check( res.data ) ) {
                     this.cateRecent = JSON.parse( res.data.Data )
+                    this.cateRecent.reverse();
                     return;
                 } else {
                     console.error("in post achieve recent get", err.data.Desc)
