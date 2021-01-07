@@ -157,6 +157,13 @@ var routes = [{
   path: '/search/user',
   component: _User["default"]
 }, {
+  path: '/dm1/home',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./components/dm_1/Home.vue'));
+    });
+  }
+}, {
   path: '*',
   redirect: '/home'
 }];

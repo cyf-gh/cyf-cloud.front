@@ -2,7 +2,7 @@
 <!--
  * @Date: 2020-09-14 20:05:30
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-21 16:58:30
+ * @LastEditTime: 2021-01-07 13:42:36
  * @FilePath: \cyf-cloud.front\src\components\post\editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -32,7 +32,10 @@
             v-model="post.Tags"
             separator=" ,;"
             placeholder="使用半角逗号，分号，空格隔开"
+            tag-variant="light"
+            tag-pills
             no-add-on-enter
+            remove-on-delete
             ></b-form-tags>
         </b-card>
         <b-card title="预览" v-on:click="refreshPreview">
