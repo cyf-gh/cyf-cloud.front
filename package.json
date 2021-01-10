@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve_laptop": "vue-cli-service serve --mode laptop",
+    "serve_laptopd": "vue-cli-service serve --mode laptopd",
     "serve_desktop": "vue-cli-service serve --mode desktop",
     "serve_prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
