@@ -1,8 +1,7 @@
-
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-10 16:18:44
+ * @LastEditTime: 2021-01-14 16:33:26
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -15,91 +14,195 @@
             /></a>
         </b-modal>
 
-        <b-row v-if="resourceList != null">
-            <b-col lg="6">
-                <b-card>
-                    <b-button size="sm" @click="Home">根目录</b-button>
-                    <b-button size="sm" @click="Back">返回上一层</b-button>
-                    <b-button size="sm"
-                        @click="ShowHistoryModal"
-                        v-b-modal.id-modal-history-dir
-                        >查看历史路径</b-button
-                    >
-                    <b-form-input size="sm" v-model="currentDir">Path</b-form-input
-                    ><b-button size="sm" @click="GoToCurrentPath">前往</b-button>
-                    <div
-                        v-if="
-                            resourceList.length == 0 ||
-                            resourceList == null
-                        "
-                    >
-                        <h4>空文件夹</h4>
-                    </div>
-                    <div class="x" v-else>
-                        <b-table
-                            hover
-                            :fields="resourceFields"
-                            :items="resourceList"
-                            @row-clicked="clickExplorer"
-                            small
-                        ></b-table>
-                    </div>
-                </b-card>
-            </b-col>
-            <b-col lg="6" v-if="currentResource != null">
-                <b-card>
-                    <div>
+        <b-card-group deck v-if="resourceList != null">
+            <b-card>
+                    <b-button-group class="mb-1">
+                        <b-button variant="light" size="sm" @click="Home"
+                            >根目录</b-button
+                        >
+                        <b-button variant="light" size="sm" @click="Back"
+                            >返回上一层</b-button
+                        >
 
-                                        <small
-                        >资源名:
-                        <strong>{{ currentResource.Name }}</strong></small
-                    >
-                    <br />
-                    <small
-                        >大小:
-                        <strong
-                            >{{ getWellSize }} {{ getWellUnit }} ( {{currentResSize}} Bytes )</strong
-                        ></small
-                    >
-                    <br />
-                    <small>系统</small>
-                    <details
-                        ><pre>{{ resourceDetailInfo }}</pre></details
-                    >
-                    </div>
-                    <div v-if="currentDMResource != null">
-                    <b-form-tags
-                        size="sm"
-                        input-id="id-dm-resources-tags-separators"
-                        v-model="currentDMResTags"
-                        @input="InputTags"
-                        separator=" ,;"
-                        placeholder="使用半角逗号，分号，空格隔开"
-                        no-add-on-enter
-                        remove-on-delete
-                    ></b-form-tags>
-                    <b-form-textarea
-                    size="sm"
-                        @blur="descriptionBlur"
-                        rows="3"
-                        max-rows="10"
-                        v-model="currentDMResource.Description"
-                    ></b-form-textarea>
-                    </div>
+                    </b-button-group>
+                    <b-row class="mb-1">
+                        <b-col lg="8">
+                            <b-form-input size="sm" v-model="currentDir">Path</b-form-input>
+                        </b-col>
+                        <b-col lg="4">
+                            <b-button-group style="float:left;">
+                            <b-button
+                                class="mx-auto"
+                                variant="light"
+                                size="sm"
+                                @click="GoToCurrentPath"
+                                >前往</b-button
+                            >                        <b-button
+                                variant="light"
+                                size="sm"
+                                @click="ShowHistoryModal"
+                                v-b-modal.id-modal-history-dir
+                                >查看历史路径</b-button
+                            >
+                            </b-button-group>
+                        </b-col>
+                    </b-row>
 
+                <div v-if="resourceList.length == 0 || resourceList == null">
+                    <h4>该目录下无内容</h4>
+                </div>
+                <div class="x" v-else>
+                    <b-table
+                        class="table-explorer"
+                        hover
+                        :fields="resourceFields"
+                        :items="resourceList"
+                        @row-clicked="clickExplorer"
+                        small
+                    ></b-table>
+                </div>
+            </b-card>
+            <div v-if="currentResource != null">
+                <b-card>
+                    <table class="dm-table">
+                        <tr>
+                            <td>
+                                <small>资源名</small>
+                            </td>
+                            <td>
+                                <strong>{{ currentResource.Name }}<b-badge class="ml-1 my-auto" v-if="currentDMResource != null" variant="info">UID: {{currentDMResource.Id}}</b-badge> </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <small>大小 </small>
+                            </td>
+                            <td>
+                                <strong
+                                    >{{ getWellSize }} {{ getWellUnit }} (
+                                    {{ currentResSize }} Bytes )</strong
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <small>MD5 </small>
+                            </td>
+                            <td>
+                                <strong
+                                    >{{currentDMResource.MD5}}</strong 
+                                >
+                            </td>
+                        </tr>
+                        <tr v-if="currentDMResource != null">
+                            <td>
+                                <small for="id-rating-sm-no-border">评分</small>
+                            </td>
+                            <td>
+                                <b-form-rating
+                                    id="id-rating-sm-no-border"
+                                    color="#ff8800"
+                                    stars="6"
+                                    v-model="currentDMResource.Rating"
+                                    @change="changeRating"
+                                    no-border
+                                    size="sm"
+                                ></b-form-rating>
+                            </td>
+                        </tr>
+                        <tr v-if="currentDMResource != null">
+                            <td>
+                                <small for="rating-sm-no-border">标签</small>
+                            </td>
+                            <td>
+                                <b-form-tags
+                                    tag-variant="light"
+                                    size="sm"
+                                    input-id="id-dm-resources-tags-separators"
+                                    v-model="currentDMResTags"
+                                    @input="InputTags"
+                                    separator=" ,;"
+                                    placeholder="使用半角逗号，分号，空格隔开"
+                                    no-add-on-enter
+                                    remove-on-delete
+                                ></b-form-tags>
+                            </td>
+                        </tr>
+                        <tr v-if="currentDMResource != null">
+                            <td>
+                                <small for="rating-sm-no-border">描述</small>
+                            </td>
+                            <td>
+                                <b-form-textarea
+                                    size="sm"
+                                    @blur="descriptionBlur"
+                                    rows="3"
+                                    max-rows="10"
+                                    v-model="currentDMResource.Description"
+                                ></b-form-textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><small>是否索引</small></td>
+                            <td>
+                                <strong v-if="currentDMResource != null"
+                                    >是</strong
+                                >
+                                <div v-else>
+                                    <strong>否</strong>
+                                    <b-button
+                                        variant="light"
+                                        id="id-button-order-resource"
+                                        size="sm"
+                                        class="ml-4"
+                                        @click="orderResource"
+                                        >索引该资源</b-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <small>系统</small>
+                            </td>
+                            <td>
+                                <details class="ml-2"
+                                    ><pre>{{
+                                        resourceDetailInfo
+                                    }}</pre></details
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <small>离线备份</small>
+                            </td>
+                            <td>
+                                <b-form-checkbox id="id-is-offline-backup" switch size="sm">是否开启</b-form-checkbox>
+                                <small style="color:gray" target="id-is-offline-backup">开启则将于下一次离线备份开始时进行备份。</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <small>备份列表</small>
+                            </td>
+                            <td v-if="currentDMResource.BackupIdList != null">
+                                <b-badge v-for="b in currentDMResource.BackupIdList" :key="b">UID:{{b}}</b-badge>
+                            </td>
+                            <td v-else>
+                                <strong>空</strong>
+                            </td>
+                        </tr>
+                    </table>
                 </b-card>
-            </b-col>
-        </b-row>
+            </div>
+        </b-card-group>
         <pre v-if="currentDMResource != null">{{ currentDMResource }}</pre>
-        <div v-else>
-            <b-button size="sm">索引该资源</b-button>
-        </div>
+        <div v-else></div>
     </b-container>
 </template>
 
 <script>
-/* eslint-disable vue/no-side-effects-in-computed-properties */
-/* eslint-disable vue/no-side-effects-in-computed-properties */
 import apiAddr from "../../server";
 import bvu from "../../cc/bvUtil";
 import err from "../../cc/v1x1/HttpErrReturn";
@@ -108,7 +211,13 @@ export default {
         return {
             resourceList: null,
             dmResList: null,
-            resourceFields: ["Name", "Path", "Mode", "Size", "ModTime"],
+            resourceFields: [
+                { key: "Name", label: "名字" },
+                { key: "Path", label: "路径" },
+                { key: "Mode", label: "权限" },
+                { key: "Size", label: "大小" },
+                { key: "ModTime", label: "修改时间" },
+            ],
             resourceDetailInfo: "",
             currentResource: null,
             currentDMResource: null,
@@ -155,6 +264,7 @@ export default {
         },
         UpdateCurrentDMResTags() {
             this.currentDMResTags = [];
+            if (this.currentDMResource == null) return;
             if (this.currentDMResource.TagIds != null) {
                 this.currentDMResource.TagIds.forEach((el) => {
                     this.currentDMResTags.push(this.allTags[el]);
@@ -208,7 +318,10 @@ export default {
             this.dirStack.push(path);
             this.historyDirs.push(path);
         },
-
+        changeRating() {
+            console.log("rating changed");
+            this.UpdateDMRes();
+        },
         GoToCurrentPath() {
             this.Forward(this.currentDir);
         },
@@ -244,6 +357,35 @@ export default {
                 })
                 .catch((err) => {
                     bvu.Msg("错误 - 资源索引", err, "danger");
+                });
+        },
+        orderResource() {
+            this.axios
+                .post(
+                    apiAddr + "/v1x1/dm/1/order",
+                    [{ Path: this.currentResource.Path }],
+                    {
+                        withCredentials: true,
+                    }
+                )
+                .then((res) => {
+                    if (err.IsOk(res.data)) {
+                        bvu.Msg(
+                            "成功 - 添加资源至索引",
+                            res.data.Desc,
+                            "success"
+                        );
+                    } else {
+                        bvu.Msg(
+                            "成功 - 添加资源至索引",
+                            res.data.Desc,
+                            "danger"
+                        );
+                    }
+                })
+                .catch((err) => {
+                    bvu.Msg("错误 - 资源索引", err, "danger");
+                    console.error(err);
                 });
         },
         InputTags(value) {
@@ -307,7 +449,6 @@ export default {
                     console.error(err);
                 });
         },
-        // 进栈目前只有两种行为：url框与点击资源管理table
         clickExplorer(record, index) {
             console.log(record, index);
             this.resourceDetailInfo = record.Sys;
@@ -334,13 +475,13 @@ export default {
     computed: {
         getWellSize() {
             if (this.currentResSize > 1024 * 1024 * 1024) {
-                return ( this.currentResSize / 1024 / 1024 / 1024 ).toFixed(2);
+                return (this.currentResSize / 1024 / 1024 / 1024).toFixed(2);
             }
             if (this.currentResSize > 1024 * 1024) {
-                return ( this.currentResSize / 1024 / 1024  ).toFixed(2);
+                return (this.currentResSize / 1024 / 1024).toFixed(2);
             }
             if (this.currentResSize > 1024) {
-                return ( this.currentResSize / 1024 ).toFixed(2);
+                return (this.currentResSize / 1024).toFixed(2);
             }
             return this.currentResSize;
         },
@@ -354,14 +495,65 @@ export default {
             if (this.currentResSize > 1024) {
                 return "KB";
             }
-            return "Byte"
-        }
+            return "Byte";
+        },
     },
 };
 </script>
 
-<style scoped>
+<style>
 .x {
-    overflow-x:auto;
+    overflow-x: auto;
+}
+.dm-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+.dm-table,
+th,
+td {
+    border: 1px solid whitesmoke;
+    padding: 10px;
+}
+.x {
+    overflow-x: auto;
+}
+/* Table Head */
+.table-explorer table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.table-explorer thead th {
+    background-color: whitesmoke;
+    color: gray;
+    border-bottom-width: 0;
+}
+
+/* Column Style */
+.table-explorer td {
+    color: #000;
+}
+/* Heading and Column Style */
+.table-explorer tr,
+th {
+    border-width: 1px;
+    border-style: solid;
+    border-color: whitesmoke;
+}
+
+/* Padding and font style */
+.table-explorer td,
+th {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.b-form-tag {
+    margin: 1px;
 }
 </style>
