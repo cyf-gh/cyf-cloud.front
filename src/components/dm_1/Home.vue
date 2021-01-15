@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-14 16:33:26
+ * @LastEditTime: 2021-01-15 14:16:11
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -204,6 +204,7 @@
 
 <script>
 import apiAddr from "../../server";
+import apiAddrWS from "../../serverWS";
 import bvu from "../../cc/bvUtil";
 import err from "../../cc/v1x1/HttpErrReturn";
 export default {
@@ -244,8 +245,29 @@ export default {
             .catch((err) => {
                 console.error(err);
             });
+        const ws = new WebSocket(apiAddrWS + '/v1x1/ws/test/echo');
+        this.websock.onmessage = this.websocketonmessage;
+        this.websock.onopen = this.websocketonopen;
+        this.websock.onerror = this.websocketonerror;
+        this.websock.onclose = this.websocketclose;
     },
     methods: {
+        websocketonopen(){ //连接建立之后执行send方法发送数据
+            let actions = {"test":"12345"};
+            this.websocketsend(JSON.stringify(actions));
+        },
+        websocketonerror(){//连接建立失败重连
+            this.initWebSocket();
+        },
+        websocketonmessage(e){ //数据接收
+            const redata = JSON.parse(e.data);
+        },
+        websocketsend(Data){//数据发送
+            this.websock.send(Data);
+        },
+        websocketclose(e){  //关闭
+            console.log('断开连接',e);
+        },
         GetAllTags() {
             this.axios
                 .get(apiAddr + "/v1x1/dm/1/tags/all", { withCredentials: true })
