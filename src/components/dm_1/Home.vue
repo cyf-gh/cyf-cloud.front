@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-15 14:16:11
+ * @LastEditTime: 2021-01-15 14:41:36
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -230,6 +230,7 @@ export default {
             allTags: [],
             allTags2: [],
             currentDMResTags: [],
+            websock: null,
         };
     },
     mounted() {
@@ -245,7 +246,7 @@ export default {
             .catch((err) => {
                 console.error(err);
             });
-        const ws = new WebSocket(apiAddrWS + '/v1x1/ws/test/echo');
+        this.websock = new WebSocket(apiAddrWS + '/v1x1/ws/test/echo');
         this.websock.onmessage = this.websocketonmessage;
         this.websock.onopen = this.websocketonopen;
         this.websock.onerror = this.websocketonerror;
@@ -257,7 +258,7 @@ export default {
             this.websocketsend(JSON.stringify(actions));
         },
         websocketonerror(){//连接建立失败重连
-            this.initWebSocket();
+            // this.initWebSocket();
         },
         websocketonmessage(e){ //数据接收
             const redata = JSON.parse(e.data);

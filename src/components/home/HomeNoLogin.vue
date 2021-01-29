@@ -1,12 +1,13 @@
 <!--
  * @Date: 2020-11-01 14:46:55
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 13:26:27
+ * @LastEditTime: 2021-01-27 15:23:24
  * @FilePath: \cyf-cloud.front\src\components\home\HomeNoLogin.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
     <b-container class="mt-3" style="height: 100%;">
+      <SecNavBar></SecNavBar>
               <b-carousel
                   id="carousel-1"
                   v-model="slide"
@@ -50,10 +51,14 @@
 <script>
 import Vue from 'vue'
 import VueFullPage from 'vue-fullpage.js'
+import SecNavBar from './SecNavbar'
 
 Vue.use(VueFullPage);
 
 export default {
+  components: {
+    SecNavBar
+  },
     data() {
     return {
       options: {
