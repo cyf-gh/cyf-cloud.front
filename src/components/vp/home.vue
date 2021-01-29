@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:29:17
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-29 21:50:04
+ * @LastEditTime: 2021-01-30 00:00:53
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 
@@ -26,6 +26,7 @@
                                         </td>
                                         <td>
                                             <b-input
+                                                    @change="changeDate( p, c, i )"
                                                     size="sm"
                                                     v-model="c.Date"
                                                     type="text"
@@ -33,6 +34,11 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                                <b-form inline>
+                                    <b-form-select size="sm" v-model="pg.selectMainName" @change="selectchanged" :options="pg.mainops"></b-form-select>
+                                    <b-form-select size="sm" v-if="pg.selectMainName != null" v-model="pg.selectChildName" :options="pg.childops"></b-form-select>
+                                    <b-button @click="addProgress">添加流程</b-button>
+                                </b-form>
                         </b-card>
                     </b-col>
                     <b-col md="4">
@@ -143,9 +149,20 @@ export default {
     mounted() {
         bvu.InitToast(this.$bvToast);
         this.drawChart( 1400, 600 );
+
+        this.pg.mainops = []
+        for ( var i = 0; i < this.example_marking.length; ++i ) {
+            this.pg.mainops.push( this.example_marking[i].Name )
+        }
     },
     data() {
         return {
+            pg:{
+                selectMainName: null,
+                selectChildName: null,
+                mainops: [],
+                childops: [],
+            },
             datacollection: null,
             example_marking: [
                 {
@@ -258,6 +275,91 @@ export default {
         };
     },
     methods: {
+        /**
+         * https://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another
+         */
+        array_move(arr, old_index, new_index) {
+            if (new_index >= arr.length) {
+                var k = new_index - arr.length + 1;
+                while (k--) {
+                    arr.push(undefined);
+                }
+            }
+            arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+            return arr; // for testing
+        },
+
+        changeDate( p, c, i ) {
+            console.log( p, c, i )
+            try {
+                var newDate = Date.parse( c.Date )
+                if ( isNaN( newDate ) ) {
+                    throw("非法的日期 =>" + c.Date + "<= 请检查")
+                }
+                this.rerangeProgressByDate( p, c, i )
+            } catch( ex ) {
+                bvu.Msg( "修改日期时发生错误", ex, "danger")
+                console.error( ex )
+            }
+        },
+        addProgress() {
+            for ( var i = 0; i < this.example_marking.length; ++i ) {
+                if ( this.progress[i].Name == this.pg.selectMainName ) {
+                    this.progress[i].Childs.push( { Name: this.pg.selectChildName, Percent: this.getPercent( this.pg.selectMainName, this.pg.selectChildName ), Date: "" })
+                    return;
+                }
+            }
+        },
+        rerangeProgressByDate( p, c, ii ) {
+            console.log( p )
+            var curDate = new Date( c.Date )
+            for ( var i = 0; i < p.Childs.length - 1; ++i ) {
+                var prevDate = new Date(p.Childs[i].Date)
+                var nextDate = new Date(p.Childs[i+1].Date)
+                // insert i+1
+                if ( curDate > prevDate && curDate <= nextDate ) {
+                    if ( i+1 == ii ) {
+                        continue
+                    }
+                    this.array_move( p.Childs, ii, i > ii ? i : i + 1 )
+                    console.log( "move to between", i, i + 1)
+                    return
+                }
+            }
+            if ( curDate < new Date(p.Childs[0].Date) ) {
+                this. array_move( p.Childs, ii, 0)
+                console.log( "move to first" )
+            } else if ( curDate > new Date(p.Childs[p.Childs.length - 1].Date ) ) {
+                this. array_move( p.Childs, ii, p.Childs.length - 1)
+                console.log( "move to last" )
+            }
+            return;
+        },
+        getPercent( mn, cn ) {
+            var percent = "0"
+            this.example_marking.forEach( el => {
+                if ( el.Name == mn ) {
+                    el.Childs.forEach( elel => {
+                        if ( elel.Name == cn ) {
+                            percent = elel.Percent
+                            return
+                        }
+                    } )
+                }
+            })
+            return percent
+        },
+        selectchanged() {
+            for ( var i = 0; i < this.example_marking.length; ++i ) {
+                if ( this.example_marking[i].Name == this.pg.selectMainName ) {
+                    this.pg.childops = []
+                    for ( var j = 0; j < this.example_marking.length; ++j ) {
+                        this.pg.childops.push(this.example_marking[i].Childs[j].Name)
+                    }
+                    return;
+                }
+            }
+        },
         drawChart( w, h ) {
             const canvas = document.getElementById('chart');
             // canvas.clear(0, 0, canvas.width, canvas.height);
@@ -344,10 +446,9 @@ export default {
                     // 画点
                     ctx.fillRect( curX - 4, curY - 4, 8,8)
                     prevX = curX; prevY = curY
-
-
                 }
             }
+            // 写上流程名
             for ( i = 0; i < this.chartProps.nodes.length; ++i ) {
                 curX = this.chartProps.nodes[i].x
                 curY = this.chartProps.nodes[i].y
