@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:29:17
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-30 00:00:53
+ * @LastEditTime: 2021-01-30 00:13:52
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 
@@ -25,12 +25,15 @@
                                             {{c.Percent}}%
                                         </td>
                                         <td>
-                                            <b-input
-                                                    @change="changeDate( p, c, i )"
-                                                    size="sm"
-                                                    v-model="c.Date"
-                                                    type="text"
-                                                />
+                                            <b-form inline>
+                                                <b-input
+                                                        @change="changeDate( p, c, i )"
+                                                        size="sm"
+                                                        v-model="c.Date"
+                                                        type="text"
+                                                    />
+                                                    <b-button size="sm" @click="delProgress(p,i)">X</b-button>
+                                            </b-form>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -288,7 +291,9 @@ export default {
             arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
             return arr; // for testing
         },
-
+        delProgress( p, i ) {
+          p.Childs.splice( i, 1 )
+        },
         changeDate( p, c, i ) {
             console.log( p, c, i )
             try {
@@ -310,10 +315,18 @@ export default {
                 }
             }
         },
+        // 可以修改为冒泡
         rerangeProgressByDate( p, c, ii ) {
             console.log( p )
             var curDate = new Date( c.Date )
+            var lastI = p.Childs.length - 1
             for ( var i = 0; i < p.Childs.length - 1; ++i ) {
+                if ( p.Childs[i+1].Date == "" ) {
+                    // 日期为空白的元素总在最后
+                    // 最后一个元素的index为第一个空白元素的index-1
+                    lastI = i
+                    break;
+                }
                 var prevDate = new Date(p.Childs[i].Date)
                 var nextDate = new Date(p.Childs[i+1].Date)
                 // insert i+1
@@ -329,8 +342,8 @@ export default {
             if ( curDate < new Date(p.Childs[0].Date) ) {
                 this. array_move( p.Childs, ii, 0)
                 console.log( "move to first" )
-            } else if ( curDate > new Date(p.Childs[p.Childs.length - 1].Date ) ) {
-                this. array_move( p.Childs, ii, p.Childs.length - 1)
+            } else if ( curDate > new Date(p.Childs[lastI].Date ) ) {
+                this. array_move( p.Childs, ii, lastI)
                 console.log( "move to last" )
             }
             return;
