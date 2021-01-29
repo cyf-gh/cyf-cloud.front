@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-29 16:58:13
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-29 20:27:28
+ * @LastEditTime: 2021-01-29 21:07:15
  * @FilePath: \cyf-cloud.front\src\components\vp\canvasUtil\Canvas.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -25,6 +25,12 @@ CanvasRenderingContext2D.prototype.fillTextCenterY = function ( text, x, y ) {
     var h = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
     ctx.fillText( text, x, y + h / 2 )
+}
+
+CanvasRenderingContext2D.prototype.getTextWidth = function( text ) {
+    var ctx = this;
+    var metrics = ctx.measureText( text );
+    return metrics.width
 }
 
 CanvasRenderingContext2D.prototype.drawLine = function( x, y, x2, y2, lineWidth = 1 ) {

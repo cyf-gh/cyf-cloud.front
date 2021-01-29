@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:29:17
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-29 20:40:34
+ * @LastEditTime: 2021-01-29 21:50:04
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 
@@ -12,74 +12,108 @@
     <b-card>
         <b-tabs content-class="mt-3" align="center">
             <b-tab title="参考打分值">
-                <b-card id="table-marking">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th colspan="3">参考流程打分值</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th colspan="2">步骤</th>
-                                <th>进度</th>
-                            </tr>
-                        </tbody>
-                        <tbody v-for="p in example_marking">
-                            <tr v-for="(c, i) in p.Childs">
-                                <td :rowspan="p.Childs.length" v-if="i == 0">
-                                    {{ p.Name }}
-                                </td>
-                                <td>{{ c.Name }}</td>
-                                <td>
-                                    <b-form inline>
-                                        <b-input
-                                            size="sm"
-                                            v-model="c.Percent"
-                                            type="number"
-                                        />%
-                                    </b-form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </b-card>
-                <b-card>
-                    <b-form class-content="mx-2" inline>
-                        <h6>主步骤名：</h6>
-                        <b-input size="sm" v-model="new_marking.Name"></b-input>
-                        <h6>步骤名：</h6>
-                        <b-input
-                            size="sm"
-                            v-model="new_marking.ChildName"
-                        ></b-input>
-                        <h6>完成百分比：</h6>
-                        <b-input
-                            size="sm"
-                            v-model="new_marking.Percent"
-                            type="number"
-                        ></b-input>
-                        %
-                        <b-button variant="info" size="sm" @click="addMarking"
-                            >添加一笔流程</b-button
-                        >
-                    </b-form>
-                    <b-form class-content="mx-2" inline>
-                        <h6>主步骤名：</h6>
-                        <b-input
-                            size="sm"
-                            v-model="delete_marking.Name"
-                        ></b-input>
-                        <h6>步骤名：</h6>
-                        <b-input
-                            size="sm"
-                            v-model="delete_marking.ChildName"
-                        ></b-input>
-                        <b-button variant="info" size="sm" @click="delMarking"
-                            >删除该流程</b-button
-                        >
-                    </b-form>
-                </b-card>
+                <b-row>
+                    <b-col md="8">
+                        <b-card id="table-marking">
+                            <tbody v-for="p in progress">
+                                    <tr v-for="(c, i) in p.Childs">
+                                        <td :rowspan="p.Childs.length" v-if="i == 0">
+                                            {{ p.Name }}
+                                        </td>
+                                        <td>{{ c.Name }}</td>
+                                        <td>
+                                            {{c.Percent}}%
+                                        </td>
+                                        <td>
+                                            <b-input
+                                                    size="sm"
+                                                    v-model="c.Date"
+                                                    type="text"
+                                                />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </b-card>
+                    </b-col>
+                    <b-col md="4">
+                        <b-card id="table-marking" style=".transformed {transform: scale(0.5);}">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">参考流程打分值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2">步骤</th>
+                                        <th>进度</th>
+                                    </tr>
+                                </tbody>
+                                <tbody v-for="p in example_marking">
+                                    <tr v-for="(c, i) in p.Childs">
+                                        <td :rowspan="p.Childs.length" v-if="i == 0">
+                                            {{ p.Name }}
+                                        </td>
+                                        <td>{{ c.Name }}</td>
+                                        <td>
+                                            <b-form inline>
+                                                <b-input
+                                                    style="width:5rem;"
+                                                    size="sm"
+                                                    v-model="c.Percent"
+                                                    type="number"
+                                                />%
+                                            </b-form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <b-card>
+                            <b-form class-content="mx-2" inline>
+                                <small>主步骤名：</small>
+                                <b-input style="width:5rem;" size="sm" v-model="new_marking.Name"></b-input>
+                                <small>步骤名：</small>
+                                <b-input
+                                    style="width:5rem;"
+                                    size="sm"
+                                    v-model="new_marking.ChildName"
+                                ></b-input>
+                                <small>完成百分比：</small>
+                                <b-input
+                                    style="width:5rem;"
+                                    size="sm"
+                                    v-model="new_marking.Percent"
+                                    type="number"
+                                ></b-input>
+                                %
+                                <b-button variant="info" size="sm" @click="addMarking"
+                                    >添加一笔流程</b-button
+                                >
+                            </b-form>
+                            <hr>
+                            <b-form class-content="mx-2" inline>
+                                <small>主步骤名：</small>
+                                <b-input
+                                    style="width:5rem;"
+                                    size="sm"
+                                    v-model="delete_marking.Name"
+                                ></b-input>
+                                <small>步骤名：</small>
+                                <b-input
+                                    style="width:5rem;"
+                                    size="sm"
+                                    v-model="delete_marking.ChildName"
+                                ></b-input>
+                                <b-button variant="info" size="sm" @click="delMarking"
+                                    >删除该流程</b-button
+                                >
+                            </b-form>
+                        </b-card>
+                        </b-card>
+                    </b-col>
+
+                </b-row>
+
             </b-tab>
             <b-tab title="表格" active>
                 <canvas id="chart"></canvas>
@@ -171,7 +205,8 @@ export default {
                 ChildName: "",
             },
             chartProps: {
-                XDelta : 20
+                XDelta : 20,
+                nodes: [],
             },
             progress: [                {
                     Name: "营销",
@@ -285,7 +320,43 @@ export default {
                 curUnix += deltaUnix
             }
 
+            var color_list = ["#D2691E","#7FFFD4","#DEB887","#5F9EA0","#7FFF00","#00FFFF"]
 
+            // 绘制曲线
+            var updown = true
+            var prevX = zero.x, prevY = zero.y
+            ctx.fillRect( zero.x - 4, zero.y - 4, 8,8)
+            ctx.fillTextCenterX( this.progress[0].Childs[0].Name, zero.x-20, zero.y + 20 )
+            this.chartProps.nodes = []
+            for ( i = 0; i < this.progress.length; ++i ) {
+                ctx.strokeStyle = color_list[i]
+                for( j = 1; j < this.progress[i].Childs.length; ++j ) {
+                    ctx.strokeStyle = color_list[i]
+                    
+                    var curChild = this.progress[i].Childs[j]
+                    // 获取坐标并记录
+                    var curX = ( Date.parse( curChild.Date ) - minDate ) / ( maxDate - minDate ) * ( cright - zero.x ) + zero.x
+                    var curY = zero.y - ( curChild.Percent / 100 * ( zero.y - ctop ) )
+                    this.chartProps.nodes.push( { name: curChild.Name,x: curX, y: curY } )
+                    // 绘制折线
+                    ctx.drawLine( curX, curY, prevX, prevY, 3 )
+                    ctx.strokeStyle = color_list[5]
+                    // 画点
+                    ctx.fillRect( curX - 4, curY - 4, 8,8)
+                    prevX = curX; prevY = curY
+
+
+                }
+            }
+            for ( i = 0; i < this.chartProps.nodes.length; ++i ) {
+                curX = this.chartProps.nodes[i].x
+                curY = this.chartProps.nodes[i].y
+                var curName = this.chartProps.nodes[i].name
+                var textY = updown ? curY - 10 : curY + ctx.getTextWidth( curChild.Name ) + 10
+
+                ctx.fillTextVerticalRaw( curName, curX, textY, - Math.PI / 3 )
+                updown = !updown
+            }
         },
 
         getRandomInt() {
@@ -408,4 +479,5 @@ export default {
     font-family: Verdana;
     font-weight: bold;
 }
+
 </style>
