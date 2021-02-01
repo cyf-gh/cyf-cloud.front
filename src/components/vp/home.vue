@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:29:17
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-30 00:13:52
+ * @LastEditTime: 2021-02-01 16:10:32
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 
@@ -13,9 +13,9 @@
         <b-tabs content-class="mt-3" align="center">
             <b-tab title="参考打分值">
                 <b-row>
-                    <b-col md="8">
-                        <b-card id="table-marking">
-                            <tbody v-for="p in progress">
+                    <b-col md="6">
+                        <b-card id="table-marking" v-if="progress!=undefined">
+                            <tbody v-for="(p, pi) in progress">
                                     <tr v-for="(c, i) in p.Childs">
                                         <td :rowspan="p.Childs.length" v-if="i == 0">
                                             {{ p.Name }}
@@ -26,25 +26,40 @@
                                         </td>
                                         <td>
                                             <b-form inline>
-                                                <b-input
-                                                        @change="changeDate( p, c, i )"
+                                                <b-form-input
+                                                        @change="changeDate( p, c, i, pi )"
                                                         size="sm"
                                                         v-model="c.Date"
                                                         type="text"
+                                                        :state="vaildDate( c ) && validDateNextPrev( c, pi )"
                                                     />
-                                                    <b-button size="sm" @click="delProgress(p,i)">X</b-button>
+                                                    <b-form-invalid-feedback :state="vaildDate( c )">
+                                                        日期不合法，请输入 yyyy/mm/dd 的格式
+                                                    </b-form-invalid-feedback>
+                                                    <b-form-invalid-feedback :state="validDateNextPrev( c, pi )">
+                                                        主流程的日期不可大于下一个流程的日期或小于上一个流程的日期
+                                                    </b-form-invalid-feedback>
+                                                    <b-button size="sm" variant="light" @click="delProgress(p,i)">X</b-button>
+                                                    <b-button size="sm" v-if="p.Childs.length == 1 && pi != 0" variant="light" @click="upProgress(p,pi)">↑</b-button>
+                                                    <b-button size="sm" v-if="p.Childs.length == 1 && pi != progress.length - 1" variant="light" @click="downProgress(p,pi)">↓</b-button>
+                                                    <div v-if="i != p.Childs.length - 1">
+                                                        <b-button v-if="p.Childs[i+1].Date == c.Date" @click="swapSame(p, i)">调换</b-button>
+                                                    </div>
+                                                    <small v-if="p.Childs.length == 1">只有大流程中有一个步骤时可以移动大流程</small>
                                             </b-form>
                                         </td>
+                                        <td :rowspan="p.Childs.length" v-if="i == 0">耗时：{{sumDay(p)}}天</td>
                                     </tr>
                                 </tbody>
+                                <hr>
                                 <b-form inline>
                                     <b-form-select size="sm" v-model="pg.selectMainName" @change="selectchanged" :options="pg.mainops"></b-form-select>
                                     <b-form-select size="sm" v-if="pg.selectMainName != null" v-model="pg.selectChildName" :options="pg.childops"></b-form-select>
-                                    <b-button @click="addProgress">添加流程</b-button>
+                                    <b-button variant="info" size="sm" @click="addProgress">添加流程</b-button>
                                 </b-form>
                         </b-card>
                     </b-col>
-                    <b-col md="4">
+                    <b-col md="6">
                         <b-card id="table-marking" style=".transformed {transform: scale(0.5);}">
                             <table>
                                 <thead>
@@ -67,6 +82,7 @@
                                         <td>
                                             <b-form inline>
                                                 <b-input
+                                                    @change="changeMarkingPercent( p, c)"
                                                     style="width:5rem;"
                                                     size="sm"
                                                     v-model="c.Percent"
@@ -77,7 +93,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <b-card>
+                            <hr>
                             <b-form class-content="mx-2" inline>
                                 <small>主步骤名：</small>
                                 <b-input style="width:5rem;" size="sm" v-model="new_marking.Name"></b-input>
@@ -118,18 +134,26 @@
                                 >
                             </b-form>
                         </b-card>
-                        </b-card>
                     </b-col>
 
                 </b-row>
 
             </b-tab>
-            <b-tab title="表格" active>
-                <canvas id="chart"></canvas>
+            <b-tab title="表格" @click="drawChart(chartProps.w, chartProps.h)" active>
+                <div class="x">
+                    <canvas id="chart"></canvas>
+                </div>
                 <b-form inline>
+                    <small>横坐标分割数量</small>
                     <b-input size="sm" v-model="chartProps.XDelta"></b-input>
-                    <b-button variant="info" size="sm" @click="delMarking">重新绘制</b-button>
+                    <small>表格宽</small>
+                    <b-input size="sm" v-model="chartProps.w"></b-input>
+                    <small>表格长</small>
+                    <b-input size="sm" v-model="chartProps.h"></b-input>
+
+                    <b-button variant="info" size="sm" @click="drawChart(chartProps.w, chartProps.h)">重新绘制</b-button>
                 </b-form>
+                <h5>项目总耗时{{chartProps.totalDays}}天</h5>
                 <!-- <line-chart :chart-data="datacollection" :options="options"></line-chart> -->
             </b-tab>
         </b-tabs>
@@ -149,13 +173,24 @@ export default {
         // this.fillData();
         cu.Init()
     },
+
     mounted() {
         bvu.InitToast(this.$bvToast);
-        this.drawChart( 1400, 600 );
+        this.drawChart( this.chartProps.w, this.chartProps.h );
 
-        this.pg.mainops = []
-        for ( var i = 0; i < this.example_marking.length; ++i ) {
-            this.pg.mainops.push( this.example_marking[i].Name )
+        this.refreshSelect()
+        
+        let _this = this
+        window.onbeforeunload = function (e) {
+            if (_this.$route.name == 'inspect') {
+                e = e || window.event
+                if (e) {
+                    e.returnValue = '关闭提示'
+                }
+                return '关闭提示'
+            } else {
+                window.onbeforeunload = null
+            }
         }
     },
     data() {
@@ -227,6 +262,9 @@ export default {
             chartProps: {
                 XDelta : 20,
                 nodes: [],
+                totalDays: 0,
+                h: 600,
+                w: 1400,
             },
             progress: [                {
                     Name: "营销",
@@ -278,6 +316,25 @@ export default {
         };
     },
     methods: {
+        sumDay( p ) {
+            try {
+                var start = Date.parse( p.Childs[0].Date )
+                var end = Date.parse( p.Childs[p.Childs.length - 1].Date )
+                if ( p.Childs.length == 1 ) {return 1}
+                return Math.ceil( ( end - start ) / ( 1000 * 60 * 60 * 24 ) );
+            } catch {
+                return 0
+            }
+        },
+        swapSame( p, i ) {
+            this.array_move( p.Childs, i, i + 1 )
+        },
+        refreshSelect() {
+        this.pg.mainops = []
+            for ( var i = 0; i < this.example_marking.length; ++i ) {
+                this.pg.mainops.push( this.example_marking[i].Name )
+            }
+        },
         /**
          * https://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another
          */
@@ -292,14 +349,42 @@ export default {
             return arr; // for testing
         },
         delProgress( p, i ) {
-          p.Childs.splice( i, 1 )
+            var res = confirm("确认删除该流程？")
+            if( !res ){
+                return;
+            }
+            p.Childs.splice( i, 1 )
         },
-        changeDate( p, c, i ) {
-            console.log( p, c, i )
+        upProgress( p, pi ) {
+            this.array_move(this.progress, pi, pi-1)
+        },
+        downProgress( p, pi ) {
+            this.array_move(this.progress, pi, pi+1)
+        },
+        changeDate( p, c, i, pi ) {
+            console.log( p, c, i, pi )
             try {
                 var newDate = Date.parse( c.Date )
                 if ( isNaN( newDate ) ) {
                     throw("非法的日期 =>" + c.Date + "<= 请检查")
+                }
+                if ( pi == 0 ) {
+                    var nextFirst = Date.parse( this.progress[pi+1].Childs[0].Date )// 必须小于等于这个
+                    if ( newDate > nextFirst ) {
+                        throw("主流程的日期不可大于下一个流程的日期")
+                    }
+                }
+                if ( pi == this.progress.length - 1 ) {
+                    var prevLast = Date.parse( this.progress[pi-1].Childs[this.progress[pi-1].Childs.length - 1].Date ) // 必须大于等于
+                    if ( newDate < prevLast ) {
+                        throw("主流程的日期不可小于上一个流程的日期")
+                    }
+                }
+                nextFirst = Date.parse(this.progress[pi+1].Childs[0].Date )// 必须小于等于这个
+                prevLast = Date.parse(this.progress[pi-1].Childs[this.progress[pi-1].Childs.length - 1].Date )// 必须大于等于
+                if ( newDate > nextFirst || newDate < prevLast ) {
+                    console.log( newDate, nextFirst, prevLast )
+                    throw("主流程的日期不可大于下一个流程的日期或小于上一个流程的日期")
                 }
                 this.rerangeProgressByDate( p, c, i )
             } catch( ex ) {
@@ -308,12 +393,13 @@ export default {
             }
         },
         addProgress() {
-            for ( var i = 0; i < this.example_marking.length; ++i ) {
+            for ( var i = 0; i < this.progress.length; ++i ) {
                 if ( this.progress[i].Name == this.pg.selectMainName ) {
                     this.progress[i].Childs.push( { Name: this.pg.selectChildName, Percent: this.getPercent( this.pg.selectMainName, this.pg.selectChildName ), Date: "" })
                     return;
                 }
             }
+            this.progress.push( { Name: this.pg.selectMainName, Childs: [ { Name: this.pg.selectChildName, Percent: this.getPercent( this.pg.selectMainName, this.pg.selectChildName ), Date: ""} ] })
         },
         // 可以修改为冒泡
         rerangeProgressByDate( p, c, ii ) {
@@ -366,7 +452,7 @@ export default {
             for ( var i = 0; i < this.example_marking.length; ++i ) {
                 if ( this.example_marking[i].Name == this.pg.selectMainName ) {
                     this.pg.childops = []
-                    for ( var j = 0; j < this.example_marking.length; ++j ) {
+                    for ( var j = 0; j < this.example_marking[i].Childs.length; ++j ) {
                         this.pg.childops.push(this.example_marking[i].Childs[j].Name)
                     }
                     return;
@@ -421,12 +507,14 @@ export default {
                 }
             }
             const diffDays = Math.ceil( ( maxDate - minDate ) / ( 1000 * 60 * 60 * 24 ) );
+            this.chartProps.totalDays = diffDays
             console.log( diffDays )
 
             var deltaUnix = (  maxDate - minDate ) / this.chartProps.XDelta
             var curUnix = minDate
             var deltaWidth = ( (cright - zero.x) / this.chartProps.XDelta )
-            for ( i = 0; i < this.chartProps.XDelta + 1; i++ ) {
+            console.log( this.chartProps.XDelta, deltaWidth, cright )
+            for ( i = 0; i < Number(this.chartProps.XDelta) + 1; i++ ) {
                 var curDate2 = new Date( curUnix )
                 var xmerterx = zero.x + deltaWidth * i
                 ctx.strokeStyle = "rgb(80,80,80)"
@@ -434,7 +522,7 @@ export default {
                 ctx.drawLine( xmerterx, zero.y, xmerterx, ctop, 0.5 )
                 curUnix += deltaUnix
             }
-
+            console.log( i )
             var color_list = ["#D2691E","#7FFFD4","#DEB887","#5F9EA0","#7FFF00","#00FFFF"]
 
             // 绘制曲线
@@ -472,9 +560,42 @@ export default {
                 updown = !updown
             }
         },
-
+        vaildDate( c ) {
+            var newDate = Date.parse( c.Date )
+            return !isNaN( newDate )
+        },
+        validDateNextPrev( c, pi ) {
+            var newDate = Date.parse( c.Date )
+            if ( pi == 0 ) {
+                var nextFirst = Date.parse( this.progress[pi+1].Childs[0].Date )// 必须小于等于这个
+                return !( newDate > nextFirst )
+            }
+            if ( pi == this.progress.length - 1 ) {
+                var prevLast = Date.parse( this.progress[pi-1].Childs[this.progress[pi-1].Childs.length - 1].Date ) // 必须大于等于
+                return !( newDate < prevLast )
+            }
+            nextFirst = Date.parse(this.progress[pi+1].Childs[0].Date )// 必须小于等于这个
+            prevLast = Date.parse(this.progress[pi-1].Childs[this.progress[pi-1].Childs.length - 1].Date )// 必须大于等于
+            return !( newDate > nextFirst || newDate < prevLast )
+        },
         getRandomInt() {
             return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+        },
+        changeMarkingPercent(p, c) {
+            var totalModify = 0
+            for ( var i = 0; i < this.progress.length; ++i ) {
+                if ( this.progress[i].Name == p.Name ) {
+                    for ( var j = 0; j < this.progress[i].Childs.length; ++j ) {
+                        var e = this.progress[i].Childs[j]
+                        if ( e.Name == c.Name ) {
+                            ++totalModify
+                            e.Percent = c.Percent
+                        }
+                    }
+                    bvu.Msg("修改成功","已有"+totalModify.toString()+"项流程的进度被更新","success")
+                    return
+                }
+            }
         },
         addMarking() {
             if (
@@ -518,6 +639,7 @@ export default {
                     },
                 ],
             });
+            this.refreshSelect();
         },
         delMarking() {
             for (var i = 0; i < this.example_marking.length; ++i) {
@@ -539,6 +661,7 @@ export default {
                                     this.delete_marking.ChildName,
                                 "success"
                             );
+                            this.refreshSelect();
                             return;
                         }
                     }
