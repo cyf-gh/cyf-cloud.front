@@ -163,6 +163,13 @@ var routes = [{
     });
   }
 }, {
+  path: '/vp/editor',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("./components/vp/editor"));
+    });
+  }
+}, {
   path: '*',
   redirect: '/home'
 }];
