@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-09-05 00:56:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-11 03:02:24
+ * @LastEditTime: 2021-02-04 16:41:38
  * @FilePath: \cyf-cloud.front\src\components\cyf\My.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -23,6 +23,7 @@
             <br>
             <b-container>
             <h5>其他链接：</h5>
+        <b-badge variant="light" class="mr-2" target="_blank" href="https://se.cyf-cloud.cn:8888/user/home?id=1">cyf-cloud</b-badge>
         <b-badge variant="light" class="mr-2" target="_blank" href="https://cyf-ms.gitbook.io/tans-to-cn/">Github</b-badge>
         <b-badge variant="light" class="mr-2" target="_blank" href="https://github.com/cyf-gh">GitBook</b-badge>
         <b-badge variant="light" class="mr-2" target="_blank" href="https://steamcommunity.com/id/cyfsteam/">Steam</b-badge>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-02 16:29:39
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-04 16:27:56
+ * @LastEditTime: 2021-02-04 16:38:09
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -21,12 +21,14 @@
             <br>
             <h6>项目一览</h6>
             <b-table
+            v-if="pList.length!=0"
             small
             hover
             :items="pList"
             @row-clicked="editProject"
             :fields="fields"
             ></b-table>
+            <small v-else>无已有的项目，请先创建一个</small>
         </b-card>
     </div>
 </template>
