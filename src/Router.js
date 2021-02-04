@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 12:33:13
+ * @LastEditTime: 2021-02-02 16:57:15
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -21,8 +21,8 @@ import ccCyfDonate from "./components/cyf/Donate"
 import ccCyfDonateRank from "./components/cyf/DonateRank"
 import ccCyfInfo from "./components/cyf/My.vue"
 
-import ccMusic from "./components/music/Music"
-import ccMusicUpload from "./components/music/Upload"
+// import ccMusic from "./components/music/Music"
+// import ccMusicUpload from "./components/music/Upload"
 
 import ccAccountSignin from './components/account/Signin.vue'
 import ccAccountLogin from  './components/account/Login.vue'
@@ -42,6 +42,7 @@ import ccSearch from './components/search/Search.vue'
 import ccSearchPost from './components/search/Post.vue'
 import ccSearchUser from './components/search/User.vue'
 
+
 const routes = [
     { path: '/home', component: ccHome },
     
@@ -50,8 +51,8 @@ const routes = [
     { path: '/mc/skin', component: ccMcSkin },
     { path: '/mc/about', component: ccMcAbout },
     
-    { path: '/music', component: ccMusic },
-    { path: '/music/upload', component: ccMusicUpload },
+    // { path: '/music', component: ccMusic },
+    // { path: '/music/upload', component: ccMusicUpload },
     { path: '/donate', component: ccCyfDonate },
     { path: '/donate/rank', component: ccCyfDonateRank },
     { path: '/blog', component: ccCyfBlog },
@@ -74,6 +75,11 @@ const routes = [
     { path: '/search', component: ccSearch},
     { path: '/search/post', component: ccSearchPost},
     { path: '/search/user', component: ccSearchUser}, 
+
+    { path: '/dm1/home', component: () => import('./components/dm_1/Home.vue' ) },
+
+    { path: '/vp/home', component: () => import("./components/vp/home" )},
+    { path: '/vp/editor', component: () => import("./components/vp/editor" )},
 
     { path: '*', redirect: '/home' }
 ]

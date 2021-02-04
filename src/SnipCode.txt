@@ -6,3 +6,24 @@ if (idy.IsLogin()) {
 } else {
     this.$router.push({ path: "/account/login?from=require_login" });
 }
+
+*******************************************
+
+import err from "../../cc/v1x1/HttpErrReturn";
+
+.then(res => {
+    if (err.Check(res.data)) {
+        this.pList = JSON.parse(res.data.Data)
+    } else {
+        console.error(
+            "in (where?))",
+            res.data.Desc
+        );
+        bvu.Msg( "错误", res.data.Desc, "danger" )
+    }
+    console.log(res)
+})
+.catch(err => {
+    bvu.Msg( "错误", err, "danger" )
+    console.error( err );
+})

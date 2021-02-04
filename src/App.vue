@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 21:03:14
+ * @LastEditTime: 2021-01-29 15:15:35
  * @FilePath: \cyf-cloud.front\src\App.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -50,8 +50,9 @@ export default {
 "================================================\n"
 
     console.log( banner, 'color: cyan;')
-    console.log( "%c日子不好过，求求老板赏口饭吃吧！www.cyf-cloud.cn/donate",'color: cyan')
-    console.log( "%c一个人写代码真的很操劳，加入我们！www.cyf-cloud.cn/info/join_us",'color: cyan')
+    var hostPort = window.location.host
+    console.log( "%c加入团队：https://"+hostPort+"/info/join_us",'color: cyan')
+    console.log( "%c捐赠：https://"+ hostPort +"/donate",'color: cyan')
   },
   mounted(){
     window.addEventListener('hashchange',()=>{

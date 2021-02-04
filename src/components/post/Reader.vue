@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 20:33:18
+ * @LastEditTime: 2021-02-04 16:43:54
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -18,7 +18,7 @@
             <hr>
                 <p @click='jumpTo("#id-cc-by-tag")'>标签检索</p>
                 <p @click='jumpTo("#id-cc-by-date")'>日期检索</p>
-                <p @click='jumpTo("#id-cc-by-recommend")'>推荐文章</p>
+                <p @click='jumpTo("#id-cc-by-recent")'>最近文章</p>
             <br>
             </b-container>
         </div>
@@ -228,6 +228,7 @@ export default {
             .then(res => {
                 if ( err.Check( res.data ) ) {
                     this.cateRecent = JSON.parse( res.data.Data )
+                    this.cateRecent.reverse();
                     return;
                 } else {
                     console.error("in post achieve recent get", err.data.Desc)

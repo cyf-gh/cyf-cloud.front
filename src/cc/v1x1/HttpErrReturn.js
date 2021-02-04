@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-12 17:16:41
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-07 19:26:23
+ * @LastEditTime: 2021-01-10 14:46:58
  * @FilePath: \cyf-cloud.front\src\cc\v1x1\HttpErrReturn.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -15,6 +15,10 @@ function Check( her ) {
     return true
 }
 
+function IsOk( res_data ) {
+    return Check( res_data )
+}
+
 export default {
-    Check
+    Check, IsOk
 }

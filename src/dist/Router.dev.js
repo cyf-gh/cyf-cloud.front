@@ -29,10 +29,6 @@ var _DonateRank = _interopRequireDefault(require("./components/cyf/DonateRank"))
 
 var _My = _interopRequireDefault(require("./components/cyf/My.vue"));
 
-var _Music = _interopRequireDefault(require("./components/music/Music"));
-
-var _Upload = _interopRequireDefault(require("./components/music/Upload"));
-
 var _Signin = _interopRequireDefault(require("./components/account/Signin.vue"));
 
 var _Login = _interopRequireDefault(require("./components/account/Login.vue"));
@@ -82,13 +78,9 @@ var routes = [{
 }, {
   path: '/mc/about',
   component: _About["default"]
-}, {
-  path: '/music',
-  component: _Music["default"]
-}, {
-  path: '/music/upload',
-  component: _Upload["default"]
-}, {
+}, // { path: '/music', component: ccMusic },
+// { path: '/music/upload', component: ccMusicUpload },
+{
   path: '/donate',
   component: _Donate["default"]
 }, {
@@ -156,6 +148,27 @@ var routes = [{
 }, {
   path: '/search/user',
   component: _User["default"]
+}, {
+  path: '/dm1/home',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require('./components/dm_1/Home.vue'));
+    });
+  }
+}, {
+  path: '/vp/home',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("./components/vp/home"));
+    });
+  }
+}, {
+  path: '/vp/editor',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("./components/vp/editor"));
+    });
+  }
 }, {
   path: '*',
   redirect: '/home'
