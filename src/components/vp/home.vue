@@ -14,8 +14,7 @@
                 <h6>新建项目</h6>
             <b-form inline>
             <b-input placeholder="项目名称" size="sm" class="mx-2 my-1" v-model="newTitle"></b-input>
-            <b-button size="sm" @click="newProject" v-if="newTitle!=''" v-b-popover.hover.top="'请注意项目的名字全局唯一，不可重复'" title="提示" variant="light" >新建模板</b-button>
-            <b-button size="sm" v-else disabled variant="light" v-b-popover.hover.top="'请注意项目的名字全局唯一，不可重复'" title="提示">新建模板</b-button>
+            <b-button size="sm" @click="newProject" v-b-popover.hover.top="'请注意项目的名字全局唯一，不可重复'" title="提示" variant="light" >新建模板</b-button>
             <!-- <b-button size="sm" class="mx-2 my-1" variant="info" @click="importExcelProject">导入已有的项目（Excel）</b-button> -->
             </b-form>
             <br>
@@ -51,6 +50,7 @@ export default {
         .then(res => {
             if (err.Check(res.data)) {
                 this.pList = JSON.parse(res.data.Data)
+                this.pList = this.pList == null || this.pList == undefined ? [] : this.pList
             } else {
                 console.error(
                     "in vp get project list",
@@ -76,6 +76,10 @@ export default {
     },
     methods: {
         newProject() {
+            if ( this.newTitle == "" ) {
+                bvu.Msg("错误","项目名不能为空","danger")
+                return
+            }
             this.$router.push({ path: "/vp/editor?mode=new&title="+this.newTitle});
         },
         editProject(p, index) {
