@@ -882,6 +882,9 @@ export default {
             }
         },
         addProgress() {
+            if ( this.pg.selectChildName == "" || this.pg.selectMainName == "" ) {
+                bvu.Msg("错误", "您还未选择主流程或流程","danger")
+            }
             for (var i = 0; i < this.progress.length; ++i) {
                 if (this.progress[i].Name == this.pg.selectMainName) {
                     this.progress[i].Childs.push({

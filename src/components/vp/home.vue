@@ -13,20 +13,21 @@
             <br>
                 <h6>新建项目</h6>
             <b-form inline>
-            <b-input size="sm" class="mx-2 my-1" v-model="newTitle"></b-input>
-            <b-button size="sm" @click="newProject" v-if="newTitle!=''" variant="light" >新建模板</b-button>
-            <b-button size="sm" v-else disabled variant="light">新建模板</b-button>
+            <b-input placeholder="项目名称" size="sm" class="mx-2 my-1" v-model="newTitle"></b-input>
+            <b-button size="sm" @click="newProject" v-if="newTitle!=''" v-b-popover.hover.top="'请注意项目的名字全局唯一，不可重复'" title="提示" variant="light" >新建模板</b-button>
+            <b-button size="sm" v-else disabled variant="light" v-b-popover.hover.top="'请注意项目的名字全局唯一，不可重复'" title="提示">新建模板</b-button>
             <!-- <b-button size="sm" class="mx-2 my-1" variant="info" @click="importExcelProject">导入已有的项目（Excel）</b-button> -->
             </b-form>
             <br>
             <h6>项目一览</h6>
             <b-table
-            v-if="pList.length!=0"
-            small
-            hover
-            :items="pList"
-            @row-clicked="editProject"
-            :fields="fields"
+                v-if="pList.length!=0"
+                small
+                hover
+                :items="pList"
+                @row-clicked="editProject"
+                :fields="fields"
+                style="border:rgba(0,0,0,.125) 1px solid;    background: rgb(248,248,248, 0.6);"
             ></b-table>
             <small v-else>无已有的项目，请先创建一个</small>
         </b-card>

@@ -36,7 +36,7 @@ import err from "../../cc/v1x1/HttpErrReturn";
 export default {
     data() {
         return {
-            fields: ['Title'],
+            fields: [ { key: "Title", label: "标题" },],
             posts:[],
             curPage: 1,
             perPage: 20,

@@ -207,6 +207,7 @@ import apiAddr from "../../server";
 import apiAddrWS from "../../serverWS";
 import bvu from "../../cc/bvUtil";
 import err from "../../cc/v1x1/HttpErrReturn";
+import idy from "../../cc/v1x1/Identity";
 export default {
     data() {
         return {
@@ -234,6 +235,10 @@ export default {
         };
     },
     mounted() {
+        console.log(this.accountInfo);
+        if (!idy.IsLogin()) {
+            this.$router.push({ path: "/account/login?from=require_login" });
+        }
         bvu.InitToast(this.$bvToast);
         this.axios
             .get(apiAddr + "/v1x1/dm/1/raw/root", { withCredentials: true })
