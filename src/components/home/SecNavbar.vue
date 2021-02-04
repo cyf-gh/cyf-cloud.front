@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:21:20
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-27 15:26:02
+ * @LastEditTime: 2021-02-04 16:30:25
  * @FilePath: \cyf-cloud.front\src\components\home\SecNavbar.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -18,15 +18,11 @@
               <b-dropdown id="cc-home-dropdown-cloud-app" class="p-1 upper" variant="light" text="云应用">
                 <b-dropdown-item href="/cloudApp/util/mcdrPlg">MCDR插件安装助手</b-dropdown-item>
                 <b-dropdown-item href="/cloudApp/vt">开黑看视频（预览版）</b-dropdown-item>
+                <b-dropdown-item href="/vp/home">可视化流程项目</b-dropdown-item>
               </b-dropdown>
               <b-dropdown id="cc-home-dropdown-music-cyf" class="p-1 upper" variant="light" text="公告">
+                <b-dropdown-item href="#">开发日志</b-dropdown-item>
               </b-dropdown>
           </b-card>
         </b-card-group>
 </template>
-
-<script>
-export default {
-    
-}
-</script>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-27 15:24:24
+ * @LastEditTime: 2021-02-04 16:32:08
  * @FilePath: \cyf-cloud.front\src\components\home\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,16 +9,15 @@
 <template>
 <b-container fluid="md">
  <SecNavBar></SecNavBar>
-  <b-card-group deck>
-      <div v-if="isLogin">
+      <b-card-group deck v-if="isLogin">
         <ccPostHome></ccPostHome>
-      </div>
+        <VPHome></VPHome>
+      </b-card-group>
       <!--
       <b-card v-if="isLogin">
         <ccClipboard></ccClipboard>
       </b-card>
       -->
-  </b-card-group>
 </b-container>
 </template>
 
@@ -28,6 +27,7 @@ import idy from "../../cc/v1x1/Identity"
 import ccPostHome from "../post/Home"
 import '../../cc/css/cc-card.css'
 import SecNavBar from './SecNavbar'
+import VPHome from '../vp/home'
 
 export default {
     metaInfo: {
@@ -41,7 +41,8 @@ export default {
     components:{
       // ccClipboard,
       ccPostHome,
-      SecNavBar
+      SecNavBar,
+      VPHome
     },
     name: "ccHome",
     data() {

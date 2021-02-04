@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-02-02 16:29:39
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-03 00:00:17
+ * @LastEditTime: 2021-02-04 16:27:56
  * @FilePath: \cyf-cloud.front\src\components\vp\home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,18 +9,20 @@
 <template>
     <div>
         <b-card>
+            <h4>可视化项目流程</h4>
+            <br>
+                <h6>新建项目</h6>
             <b-form inline>
-                <small>新建项目名</small>
             <b-input size="sm" class="mx-2 my-1" v-model="newTitle"></b-input>
-            <b-button size="sm" @click="newProject" v-if="newTitle!=''">新建项目模板</b-button>
-            <b-button size="sm" v-else disabled>新建项目模板</b-button>
-            <b-button size="sm" class="mx-2 my-1" variant="info" @click="importExcelProject">导入已有的项目（Excel）</b-button>
+            <b-button size="sm" @click="newProject" v-if="newTitle!=''" variant="light" >新建模板</b-button>
+            <b-button size="sm" v-else disabled variant="light">新建模板</b-button>
+            <!-- <b-button size="sm" class="mx-2 my-1" variant="info" @click="importExcelProject">导入已有的项目（Excel）</b-button> -->
             </b-form>
-        </b-card>
-        <b-card>
+            <br>
+            <h6>项目一览</h6>
             <b-table
             small
-            striped
+            hover
             :items="pList"
             @row-clicked="editProject"
             :fields="fields"
@@ -64,7 +66,7 @@ export default {
         return {
             pList :[],
             fields: [
-                { key: "Title", label: "项目名称" },
+                { key: "Title", label: "名称" },
             ],
             newTitle: "",
         }
