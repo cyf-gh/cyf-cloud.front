@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-27 15:29:17
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-03 00:00:39
+ * @LastEditTime: 2021-02-04 16:17:27
  * @FilePath: \cyf-cloud.front\src\components\vp\editor.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 
@@ -338,7 +338,7 @@
             <b-nav class="mx-auto"> 
             </b-nav>
             <b-nav class="ml-0">
-                <b-button class="mr-2" size="sm" variant="info" @click="exportExcelProject">生成Excel表格</b-button>
+                <b-button class="mr-2" v-if="showBanner == false" size="sm" variant="primary" @click="exportExcelProject">生成Excel表格</b-button>
                 <b-button size="sm" variant="info" @click="updateData">保存</b-button>
             </b-nav>
         </b-navbar>
@@ -645,13 +645,30 @@ export default {
             ],
         };
     },
-    // this.getSumdayOf("评级")
-    // this.getSumdayOf("授信")
-    // this.getSumdayOf("提款")
-    // this.getSumdayOf("放款")
     methods: {
         exportExcelProject() {
-            
+            const canvas = document.getElementById("chart");
+
+            this.axios
+                .post(
+                    apiAddr + "/v1x1/vp/export",
+                    {
+                        Id: this.meta.Id,
+                        Title: this.meta.Title,
+                        Base64: canvas.toDataURL('image/png')
+                    },
+                    { withCredentials: true,
+                      responseType: 'blob'
+                     }).then((response) => {
+                        const url = URL.createObjectURL(new Blob([response.data], {
+                            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        }))
+                        const link = document.createElement('a')
+                        link.href = url
+                        link.setAttribute('download', this.meta.Title+".xlsx")
+                        document.body.appendChild(link)
+                        link.click()
+                    });
         },
         back2Home() {
             this.$router.push({
@@ -661,6 +678,10 @@ export default {
         printinfo() {
         },
         updateData() {
+            this.basicInfos2[1].Childs[1].Childs.forEach( el => {
+                console.log(el)
+                el.v = el.v.toString()
+            } )
             this.axios
                 .post(
                     apiAddr + "/v1x1/vp/update",
@@ -958,7 +979,9 @@ export default {
             canvas.height = h;
             canvas.width = w;
             const ctx = canvas.getContext("2d");
-
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0,0,w,h);
+            ctx.fillStyle = "#000000";
             var left = 0;
             var right = left + w;
             var top = 0;
@@ -1305,5 +1328,9 @@ export default {
     font-size: 12px;
     font-family: Verdana;
     font-weight: bold;
+}
+
+.text-input {
+    length: 100%
 }
 </style>
