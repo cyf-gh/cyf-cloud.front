@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-01-15 14:41:36
+ * @LastEditTime: 2021-02-05 22:38:47
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -84,7 +84,7 @@
                                 >
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-if="currentDMResource != null">
                             <td>
                                 <small>MD5 </small>
                             </td>
@@ -186,8 +186,10 @@
                             <td>
                                 <small>备份列表</small>
                             </td>
-                            <td v-if="currentDMResource.BackupIdList != null">
-                                <b-badge v-for="b in currentDMResource.BackupIdList" :key="b">UID:{{b}}</b-badge>
+                            <td v-if="currentDMResource != null">
+                                <div v-if="currentDMResource.BackupIdList != null">
+                                    <b-badge v-for="b in currentDMResource.BackupIdList" :key="b">UID:{{b}}</b-badge>
+                                </div>
                             </td>
                             <td v-else>
                                 <strong>空</strong>
@@ -280,11 +282,13 @@ export default {
                 .then((res) => {
                     var tags = JSON.parse(res.data.Data);
                     this.allTags = new Map();
-                    tags.forEach((el) => {
-                        this.allTags[el.Id] = el.Name;
-                        this.allTags2[el.Name] = el.Id;
-                    });
-                    this.UpdateCurrentDMResTags();
+                    if ( tags != null ) {
+                        tags.forEach((el) => {
+                            this.allTags[el.Id] = el.Name;
+                            this.allTags2[el.Name] = el.Id;
+                        });
+                        this.UpdateCurrentDMResTags();
+                    }
                 })
                 .catch((err) => {
                     console.error(err);
