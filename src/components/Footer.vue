@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 14:50:46
+ * @LastEditTime: 2021-02-06 16:58:57
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -22,6 +22,9 @@
           </li>
           <li>
             <a class="text-muted" href="/info/contact">用户协议</a>
+          </li>
+          <li>
+            <a class="text-muted" href="/info/api/ref">API 手册</a>
           </li>
         </ul>
       </div>

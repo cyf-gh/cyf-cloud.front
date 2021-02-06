@@ -170,6 +170,13 @@ var routes = [{
     });
   }
 }, {
+  path: '/info/api/ref',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("./components/v1x1/meta_ref.vue"));
+    });
+  }
+}, {
   path: '*',
   redirect: '/home'
 }];
