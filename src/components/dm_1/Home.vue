@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-05 22:38:47
+ * @LastEditTime: 2021-02-10 20:14:15
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -14,7 +14,7 @@
             /></a>
         </b-modal>
 
-        <b-card-group deck v-if="resourceList != null">
+        <b-card-group deck>
             <b-card>
                     <b-button-group class="mb-1">
                         <b-button variant="light" size="sm" @click="Home"
@@ -26,7 +26,7 @@
 
                     </b-button-group>
                     <b-row class="mb-1">
-                        <b-col lg="8">
+                        <b-col lg="8" v-if="currentDir!=null">
                             <b-form-input size="sm" v-model="currentDir">Path</b-form-input>
                         </b-col>
                         <b-col lg="4">
@@ -48,10 +48,10 @@
                         </b-col>
                     </b-row>
 
-                <div v-if="resourceList.length == 0 || resourceList == null">
+                <div v-if=" resourceList == null">
                     <h4>该目录下无内容</h4>
                 </div>
-                <div class="x" v-else>
+                <div v-else class="x">
                     <b-table
                         class="table-explorer"
                         hover
@@ -227,6 +227,7 @@ export default {
             currentDMResource: null,
             currentResSize: 0,
             currentResSizeUnit: "bytes",
+            currentDir: "",
             dirStack: [],
             historyDirs: [],
             rootDir: "",
@@ -242,22 +243,35 @@ export default {
             this.$router.push({ path: "/account/login?from=require_login" });
         }
         bvu.InitToast(this.$bvToast);
-        this.axios
-            .get(apiAddr + "/v1x1/dm/1/raw/root", { withCredentials: true })
-            .then((res) => {
-                this.rootDir = JSON.parse(res.data.Data);
-                this.dirStack.push(this.rootDir);
-                this.historyDirs.push(this.rootDir);
-                this.Home();
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        this.websock = new WebSocket(apiAddrWS + '/v1x1/ws/test/echo');
-        this.websock.onmessage = this.websocketonmessage;
-        this.websock.onopen = this.websocketonopen;
-        this.websock.onerror = this.websocketonerror;
-        this.websock.onclose = this.websocketclose;
+        var dir = this.$route.query.d
+        if ( dir == undefined ) {
+            this.axios
+                .get(apiAddr + "/v1x1/dm/1/raw/root", { withCredentials: true })
+                .then((res) => {
+                    this.rootDir = JSON.parse(res.data.Data);
+                    this.dirStack.push(this.rootDir);
+                    this.historyDirs.push(this.rootDir);
+                    this.Home();
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        } else {
+            this.currentDir = dir
+            this.dirStack.push(dir);
+            this.historyDirs.push(dir);
+            this.Forward(dir)
+        }
+
+            try {
+                this.websock = new WebSocket(apiAddrWS + '/v1x1/ws/test/echo');
+                this.websock.onmessage = this.websocketonmessage;
+                this.websock.onopen = this.websocketonopen;
+                this.websock.onerror = this.websocketonerror;
+                this.websock.onclose = this.websocketclose;
+            } catch (error) {
+                console.error( error )
+            }
     },
     methods: {
         websocketonopen(){ //连接建立之后执行send方法发送数据
@@ -275,6 +289,11 @@ export default {
         },
         websocketclose(e){  //关闭
             console.log('断开连接',e);
+        },
+        ModifyUrlParams(dir) {
+            this.$router.push({
+                query:{'d':dir}
+            })
         },
         GetAllTags() {
             this.axios
@@ -343,7 +362,11 @@ export default {
             if (this.dirStack.length > 1) {
                 this.dirStack.pop();
                 this.GoTo(this.dirStack[this.dirStack.length - 1]);
-            }
+            } // else {
+            //     // 栈空，浏览器history back
+            //     window.history.back();
+            //     this.$router.go( 0 );
+            // }
         },
         Forward(path) {
             this.GoTo(path);
@@ -360,14 +383,15 @@ export default {
         GoTo(path) {
             this.currentDir = path;
             console.log("Goto: ", path);
+            this.ModifyUrlParams( this.currentDir )
             this.axios
                 .get(apiAddr + "/v1x1/dm/1/raw/dir", {
-                    params: { d: path },
+                    params: { d: path, head: 0, end: -1 },
                     withCredentials: true,
                 })
                 .then((res) => {
                     if (err.IsOk(res.data)) {
-                        this.resourceList = JSON.parse(res.data.Data);
+                        this.resourceList = JSON.parse(res.data.Data).Dirs;
                     } else {
                         bvu.Msg("错误 - 路径", res.data.Desc, "danger");
                     }
@@ -485,7 +509,8 @@ export default {
             console.log(record, index);
             this.resourceDetailInfo = record.Sys;
             this.currentResource = record;
-            this.QueryDMResource();
+            try { this.QueryDMResource();
+           } catch( ex ) { console.error(ex) }
             if (record.IsDir == true) {
                 this.GetDirSize(record.Path);
                 this.Forward(record.Path);
@@ -495,6 +520,7 @@ export default {
         },
         QueryDMResource() {
             this.currentDMResource = null;
+            if ( this.dmResList == null ) return
             this.dmResList.forEach((el) => {
                 if (el.Path == this.currentResource.Path) {
                     this.currentDMResource = el;
@@ -502,6 +528,13 @@ export default {
                 }
             });
             this.GetAllTags();
+        },
+    },
+    watch: {
+        $route(to, from) {
+            if ( this.dirStack[this.dirStack.length - 1] != this.$route.query.d ) {
+                this.Forward( this.$route.query.d )
+            }
         },
     },
     computed: {

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2020-10-06 16:24:51
+ * @LastEditTime: 2021-02-09 13:43:55
  * @FilePath: \cyf-cloud.front\src\components\cyf\Donate.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -9,7 +9,6 @@
 
 <div class="container text-center">
   <b-card>
-
     <b-alert show >您的捐赠能更好的帮助我进行网络服务建设！感谢各位衣食父母！</b-alert>
     <b-row class= "text-center">
     <b-col>

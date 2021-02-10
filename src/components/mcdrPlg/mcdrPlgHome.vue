@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-29 21:54:19
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-10 17:00:01
+ * @LastEditTime: 2021-02-09 14:07:33
  * @FilePath: \cyf-cloud.front\src\components\mcdrPlg\mcdrPlgHome.vue
  * @Descrion: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -86,7 +86,7 @@
           <small>插件源</small>
           <b-form-input id="id-input-plg-feed" v-model="feedSource" required placeholder="URI"></b-form-input>
         <b-badge pill variant="info" href="#" @mousedown="updateFeedSource">点击更新源</b-badge>
-          <small class="d-block mb-3 text-muted">官方插件源地址：<br>1：<br>https://raw.githubusercontent.com/cyf-gh/MCDRPluginCataJson/master/feed.json<br>2:<br>https://api.cyf-cloud.cn/v1/util/mcdr/plg/feed</small>
+          <small class="d-block mb-3 text-muted">官方插件源地址：<br>1：<br>https://raw.githubusercontent.com/cyf-gh/MCDRPluginCataJson/master/feed.json<br>2:<br>https://se.cyf-cloud.cn:2346/v1/util/mcdr/plg/feed</small>
       <b-alert show variant="info">
         <h4 class="alert-heading">使用方法</h4>
         <p>
@@ -214,7 +214,7 @@ export default {
       curCatName: "",
       fields: ["name", "desc"],
       feedSource:
-        "https://api.cyf-cloud.cn/v1/util/mcdr/plg/feed",
+        "https://se.cyf-cloud.cn:2346/v1/util/mcdr/plg/feed",
       view : {
         tCount:0
       },

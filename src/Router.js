@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-06 16:58:01
+ * @LastEditTime: 2021-02-10 19:47:10
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -90,12 +90,17 @@ const router = new VueRouter({
     scrollBehavior: (to, from, savedPosition) => {
         if (to.hash) {
             console.log(to)
-            return {selector: to.hash}
+            return {selector: to.hash} 
         } else {
             return { x: 0, y: 0 }
         }
     }
 })
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 Vue.use(VueRouter)
 
