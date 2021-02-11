@@ -7,4 +7,4 @@
  */
 let apiServerWS;
 
-export default apiServerWS = 'wss://' + process.env.VUE_APP_BACKEND_SERVER_ADDR;
+export default apiServerWS = process.env.VUE_APP_BACKEND_SERVER_WS_TYPE + process.env.VUE_APP_BACKEND_SERVER_ADDR;

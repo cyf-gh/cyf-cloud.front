@@ -14,6 +14,6 @@ exports["default"] = void 0;
  */
 var apiServerWS;
 
-var _default = apiServerWS = 'wss://' + process.env.VUE_APP_BACKEND_SERVER_ADDR;
+var _default = apiServerWS = process.env.VUE_APP_BACKEND_SERVER_WS_TYPE + process.env.VUE_APP_BACKEND_SERVER_ADDR;
 
 exports["default"] = _default;
