@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-11 17:14:53
+ * @LastEditTime: 2021-02-12 00:42:41
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -205,26 +205,28 @@
                 <h1>没有选中任何资源</h1>
             </div>
 
-            <div v-else>No task</div>
         </b-sidebar>
         <b-card-group deck>
             <b-card>
-                <b-container v-if="isWsConn">
-                    <div v-for="t in wsTasks.order_recruit" :key="t.TaskName">
-                        <h6>任务名：</h6>
-                        <small>{{ t.TaskName }}</small>
-                        <h6>进度描述：</h6>
-                        <small><b-badge>{{ t.ProgressStage }}</b-badge> - {{ t.CurrentMsg }}</small>
-                        <b-progress-bar
-                            :value="t.Progress"
-                            :max="t.ProgressMax"
-                            animated
-                            variant="success"
-                        >
-                        <span>Progress: <strong>{{ t.Progress }} / {{ t.ProgressMax }}</strong></span>
-                        </b-progress-bar>
+                <div v-if="isWsConn">
+                    <div v-for="wt in wsTasks" :key="wt.Name">
+                        <div v-for="t in wt.List" :key="t.TaskName">
+                            <small>任务名：<b-badge>{{ t.TaskName }}</b-badge></small>
+                            <small>进度描述：<b-badge>{{ t.ProgressStage }}</b-badge> - <b-badge>{{ t.CurrentMsg }}</b-badge></small>
+                            <b-progress-bar
+                                :value="t.Progress"
+                                :max="t.ProgressMax"
+                                animated
+                                variant="success"
+                                v-if="!t.IsFinished"
+                            >
+                            <span><strong>{{ t.Progress }} / {{ t.ProgressMax }}</strong></span>
+                            </b-progress-bar>
+                            <small v-else><br>任务完成</small>
+                        </div>
                     </div>
-                </b-container>
+                </div>
+                <div v-else>No task</div>
 
                 <div v-if="resourceList == null">
                     <h4>该目录下无内容</h4>
