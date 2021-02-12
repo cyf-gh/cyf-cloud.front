@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-14 21:08:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-04 14:05:11
+ * @LastEditTime: 2021-02-12 19:51:36
  * @FilePath: \cyf-cloud.front\src\components\post\info\PostCardList.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -233,7 +233,7 @@ export default {
                     .get(
                         apiAddr +
                             "/v1x1/posts/info/by/tag?tags=" +
-                            this.SelectedTags.toString(),
+                            JSON.stringify( this.SelectedTags ),
                         { withCredentials: true }
                     )
                     .then((res) => {

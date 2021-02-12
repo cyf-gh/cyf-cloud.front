@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-07 19:34:34
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-04 16:43:54
+ * @LastEditTime: 2021-02-12 19:39:22
  * @FilePath: \cyf-cloud.front\src\components\post\Reader.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -116,6 +116,7 @@ import md from "../../cc/markdown";
 import bvUtil from '../../cc/bvUtil';
 import '../../cc/css/markdown-cc-style.css'
 import tagList from "./TagList"
+import idy from "../../cc/v1x1/Identity";
 // import Viewer from 'v-viewer'
 // import Vue from 'vue'
 // Vue.use(Viewer)
@@ -162,7 +163,7 @@ export default {
     },
     mounted() {
         localStorage.setItem("cc-reader-index", "[]")
-
+        idy.InitCookie(this.$cookie);
         this.postId = this.$route.query.id
         this.axios.get( apiAddr + "/v1x1/post", {
             params:{id: this.postId},
@@ -173,6 +174,9 @@ export default {
                 this.post = JSON.parse( res.data.Data )
                 this.authHref = "/user?name=" + this.post.Author
                 // 只有在文章为公开时才增加阅读数量
+                this.getAchieveDate()
+                this.getAchieveRecent()
+                this.getAchieveTag()
                 this.doView()
                 this.postTitle = this.post.Title
             } else {
@@ -186,11 +190,11 @@ export default {
         .catch(err => {
             console.error(err);
         })
-        this.checkFav()
-        this.checkLikeIt()
-        this.getAchieveDate()
-        this.getAchieveRecent()
-        this.getAchieveTag()
+
+        if ( idy.IsLogin() ) {
+            this.checkFav()
+            this.checkLikeIt()
+        } 
     },
     updated() {
         if ( this.IndexList == null ){
@@ -208,7 +212,7 @@ export default {
         },
         getAchieveDate() {
              this.axios.get( apiAddr + "/v1x1/posts/achieve/date", {
-                params:{id: this.postId},
+                params:{au: this.post.Author},
                 withCredentials: true
             })
             .then(res => {
@@ -222,7 +226,7 @@ export default {
         },
         getAchieveRecent() {
              this.axios.get( apiAddr + "/v1x1/posts/achieve/recent", {
-                params:{id: this.postId},
+                params:{au: this.post.Author},
                 withCredentials: true
             })
             .then(res => {
@@ -237,7 +241,7 @@ export default {
         },
         getAchieveTag() {
              this.axios.get( apiAddr + "/v1x1/posts/achieve/tag", {
-                params:{id: this.postId},
+                params:{au: this.post.Author},
                 withCredentials: true
             })
             .then(res => {
