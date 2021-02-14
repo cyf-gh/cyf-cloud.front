@@ -200,9 +200,7 @@ var router = new _vueRouter["default"]({
 var originalPush = _vueRouter["default"].prototype.push;
 
 _vueRouter["default"].prototype.push = function push(location) {
-  return originalPush.call(this, location)["catch"](function (err) {
-    return err;
-  });
+  return originalPush.call(this, location); //.catch(err => err)
 };
 
 _vue["default"].use(_vueRouter["default"]);
