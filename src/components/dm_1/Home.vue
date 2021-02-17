@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-01-06 13:00:26
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-14 16:54:58
+ * @LastEditTime: 2021-02-16 21:27:32
  * @FilePath: \cyf-cloud.front\src\components\dm_1\Home.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -352,8 +352,41 @@
                     <b-nav class="ml-0"> </b-nav>
                 </b-navbar>
             </b-tab>
-            <b-tab title="音乐">
+            <b-tab title="音乐" @click="getMusicList">
+                <b-modal id="id-modal-music-settings" title="设置" @ok="refreshFields">
+                    <h6>显示属性</h6>
+                    <b-form inline>
+                        <div class="mr-2"  :key="m.key" v-for="m in musicAllFields">
+                        <b-form-checkbox v-model="m.sortable" v-if="m.key=='title'" disabled>
+                            {{m.label}}
+                        </b-form-checkbox>
+                        <b-form-checkbox v-model="m.sortable" v-else>
+                            {{m.label}}
+                        </b-form-checkbox>
+                        </div>
+                    </b-form>
+                </b-modal>
+                <b-card v-if="musicID3List != null" class="x">
+                    <b-badge @click="openFieldsSetting" href="#" v-b-modal.id-modal-music-settings>显示属性</b-badge>
+                    <b-table
+                        class="table-explorer"
+                        hover
+                        :fields="musicFields"
+                        :items="musicID3List"
+                        @row-clicked="clickMusicList"
+                        small
+                        fixed
+                    ></b-table>
+                </b-card>
+                <b-navbar fixed="bottom" v-if="musicAPlayer!=null">
+                    <aplayer
+                    fixed="true"
+                    style="width:100%"
+                        autoplay
+                        :music="musicAPlayer"
+                    />
 
+                </b-navbar>
             </b-tab>
         </b-tabs>
     </b-container>
@@ -365,7 +398,12 @@ import apiAddrWS from "../../serverWS";
 import bvu from "../../cc/bvUtil";
 import err from "../../cc/v1x1/HttpErrReturn";
 import idy from "../../cc/v1x1/Identity";
+import Aplayer from 'vue-aplayer'
+
 export default {
+    components: {
+        Aplayer
+    },
     data() {
         return {
             infoVisiable: true,
@@ -378,6 +416,22 @@ export default {
                 { key: "Size", label: "大小", sortable: true },
                 { key: "ModTime", label: "修改时间", sortable: true },
             ],
+            musicFields: [
+                { key: "title", label: "名字", sortable: true },
+                { key: "artist", label: "艺术家", sortable: true },
+            ],
+            musicAllFields: [
+                { key: "title", label: "标题", sortable: true },
+                { key: "album", label: "专辑", sortable: false },
+                { key: "artist", label: "艺术家", sortable: false },
+                { key: "genre", label: "流派", sortable: false },
+                { key: "fileType", label:"文件类型", sortable: false },
+                { key: "year", label:"年份", sortable: false },
+            ],
+            musicList: null,
+            musicCover: null,
+            musicID3List: null,
+            musicAPlayer: null,
             resourceDetailInfo: "",
             currentResource: null,
             currentDMResource: null,
@@ -411,10 +465,33 @@ export default {
             this.MakeBreadCrumb();
             this.Forward(dir);
         }
-
-        
+        var localFields = localStorage.getItem("cc-music-table-fields")
+        if ( localFields != null ) {
+            this.musicFields = JSON.parse( localFields )
+        } else {
+            localStorage.setItem("cc-music-table-fields", JSON.stringify(this.musicFields ) )
+        }
     },
     methods: {
+        openFieldsSetting() {
+            this.musicAllFields.forEach( el => {
+                this.musicFields.forEach( e => {
+                    console.log( el, e )
+                    if ( e.key == el.key ) {
+                        el.sortable = e.sortable
+                    }
+                })
+            } )
+        },
+        refreshFields() {
+            this.musicFields = []
+            this.musicAllFields.forEach( el => {
+                if ( el.sortable ) {
+                    this.musicFields.push( el )
+                }
+            } )
+            localStorage.setItem("cc-music-table-fields", JSON.stringify(this.musicFields ) )
+        },
         orderMusicId3() {
             this.axios
                 .get(apiAddr + "/v1x1/dm/1/order/music/load/id3", {
@@ -430,6 +507,36 @@ export default {
                         this.websocketinit();
                     } else {
                         console.error("in orderMusicId3", res.data.Desc);
+                        bvu.Msg("错误", res.data.Desc, "danger");
+                    }
+                    console.log(res);
+                })
+                .catch((err) => {
+                    bvu.Msg("错误", err, "danger");
+                    console.error(err);
+                });
+        },
+        getMusicList() {
+            this.axios
+                .get(apiAddr + "/v1x1/dm/1/music/ex?head=0&end=50", {
+                    withCredentials: true,
+                })
+                .then((res) => {
+                    if (err.Check(res.data)) {
+                        bvu.Msg(
+                            "音乐",
+                            "成功索引0-50下标的音乐",
+                            "success"
+                        );
+                        this.musicList = JSON.parse(res.data.Data);
+                        console.log( this.musicList )
+                        this.musicID3List = []
+                        this.musicList.musics.forEach( el => {
+                            this.musicID3List.push( JSON.parse( el.Data ) )
+                        });
+                        console.log( this.musicList,this.musicID3List )
+                    } else {
+                        console.error("in getMusicList", res.data.Desc);
                         bvu.Msg("错误", res.data.Desc, "danger");
                     }
                     console.log(res);
@@ -784,6 +891,82 @@ export default {
                 this.Forward(this.currentDir + "/" + record.Name);
             } else {
                 this.currentResSize = record.Size;
+            }
+        },
+        clickMusicList(record, index) {
+            console.log( "in clickMusicList")
+            console.log( index )
+
+            try {
+                var music = null
+                
+                this.musicList.musics.forEach( el => {
+                    var id3 = JSON.parse(el.Data)
+                    if ( id3.title == record.title && id3.comment == record.comment ) {
+                        music = el
+                    }
+                } )
+
+                var pid = music.ParentId
+                var id = music.Id
+                var file_type = record.fileType
+                file_type = file_type.replace(".", "")
+
+                if ( record.album == "" ) {
+                        this.axios
+                        .get(apiAddr + "/v1x1/dm/1/music/lyrics/ex?title="+record.title+"&artist="+record.artist, {
+                            withCredentials: true,
+                        }).then((res) => {
+                            console.log( res )
+                            this.musicAPlayer =
+                                {
+                                    lrc: res.data,
+                                    title: record.title,
+                                    artist: record.artist,
+                                    src: apiAddr + "/v1x1/dm/1/music/raw?id="+pid+"&file_type="+file_type,
+                                    pic: this.musicCover,
+                                    theme: 'pic',
+                                }
+                        })
+                    return
+                }
+                this.axios
+                .get(apiAddr + "/v1x1/dm/1/music/cover?id="+id, {
+                    withCredentials: true,
+                })
+                .then((res) => {
+                    if (err.Check(res.data)) {
+                        if ( res.data.Data != null ) {
+                            var picture = JSON.parse(res.data.Data)
+                            var dataUrl = "data:" + picture.MIMEType + ";base64," + picture.Data;
+                            this.musicCover = dataUrl
+                        }
+                        this.axios
+                        .get(apiAddr + "/v1x1/dm/1/music/lyrics/ex?title="+record.title+"&artist="+record.artist, {
+                            withCredentials: true,
+                        }).then((res) => {
+                            this.musicAPlayer =
+                                {
+                                    lrc: res.data,
+                                    title: record.title,
+                                    artist: record.artist,
+                                    src: apiAddr + "/v1x1/dm/1/music/raw?id="+pid+"&file_type="+file_type,
+                                    pic: this.musicCover,
+                                    theme: 'pic',
+                                }
+                        })
+                    } else {
+                        console.error("in /v1x1/dm/1/music/cover", res.data.Desc);
+                        bvu.Msg("错误", res.data.Desc, "danger");
+                    }
+                    console.log(res);
+                })
+                .catch((err) => {
+                    bvu.Msg("错误", err, "danger");
+                    console.error(err);
+                });
+            } catch ( ex ) {
+                console.error( ex )
             }
         },
         QueryDMResource() {
