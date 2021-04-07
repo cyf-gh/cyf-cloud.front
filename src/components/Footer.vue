@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-06 16:58:57
+ * @LastEditTime: 2021-04-08 00:03:39
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -39,7 +39,7 @@
             <a class="text-muted" href="/donate/rank">捐赠榜单</a>
           </li>
           <li>
-            <a class="text-muted" href="/info/fl">友情链接</a>
+            <a class="text-muted" href="/post/reader?id=41">友情链接</a>
           </li>
         </ul>
       </div>
