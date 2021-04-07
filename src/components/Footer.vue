@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-08 00:03:39
+ * @LastEditTime: 2021-04-08 00:11:09
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -18,10 +18,10 @@
             <a class="text-muted" href="/info/about">关于站长</a>
           </li>
           <li>
-            <a class="text-muted" href="/info/join">加入团队</a>
+            <a class="text-muted" href="/post/reader?id=43">加入团队</a>
           </li>
           <li>
-            <a class="text-muted" href="/info/contact">用户协议</a>
+            <a class="text-muted" href="/post/reader?id=42">用户协议</a>
           </li>
           <li>
             <a class="text-muted" href="/info/api/ref">API 手册</a>
