@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-01 15:42:10
+ * @LastEditTime: 2021-04-17 15:57:28
  * @FilePath: \cyf-cloud.front\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -39,6 +39,10 @@ new Vue({
   render: h => h(App),
 })
 
-
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+return routerPush.call(this, location).catch(error=> error)
+}
+Vue.use(VueRouter)
 
 

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-12-04 13:53:23
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-17 14:11:01
+ * @LastEditTime: 2021-04-17 15:52:15
  * @FilePath: \cyf-cloud.front\src\components\search\Search.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -36,7 +36,7 @@
                     </b-col>
 
                     <b-col sm="1" cols="3" class="no-pd2">
-                    <b-button class="mr-auto ml-2" variant="light" 
+                    <b-button class="mr-auto ml-2" variant="light"
                     @click="doSearch" block
                         >搜索</b-button>
                     </b-col>
@@ -108,24 +108,23 @@ export default {
         },
         doSearch() {
             try {
+                console.log( this.Text )
                 sh.AddSearchHistory(this.Text)
+                switch (this.Genre) {
+                    case "全部":
+                        this.$router.push({ path: "/search?text=" + this.Text });
+                        location.reload()
+                        break;
+                    case "文章":
+                        this.$router.push({ path: "/search/post?text=" + this.Text });
+                    break;
+                    case "用户":
+                        this.$router.push({ path: "/search/user?text=" + this.Text });
+                    break;
+                }
             } catch ( ex ) {
                 console.error( ex )
                 bvu.Warn( "添加历史记录出现了一些问题，可能会导致历史记录有问题" );
-            }
-            switch (this.Genre) {
-                case "全部":
-                    this.$router.push({ path: "/search?text=" + this.Text });
-                    location.reload()
-                    break;
-                case "文章":
-                    this.$router.push({ path: "/search/post?text=" + this.Text });
-                break;
-                case "用户":
-                    this.$router.push({ path: "/search/user?text=" + this.Text });
-                break;
-                default:
-                break;
             }
         },
         searchUrl( text ) {

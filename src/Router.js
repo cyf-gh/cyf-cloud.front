@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-02-14 16:15:04
+ * @LastEditTime: 2021-04-17 15:59:09
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -97,11 +97,10 @@ const router = new VueRouter({
     }
 })
 
-const originalPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch( err => { console.log( err ) } ) //.catch(err => err)
-}
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch( err => { console.log( err ) } ) //.catch(err => err)
+// }
 
 Vue.use(VueRouter)
-
 export default router
