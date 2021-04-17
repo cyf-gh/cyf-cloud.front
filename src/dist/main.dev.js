@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 /*
  * @Date: 2020-06-29 10:44:45
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-17 15:57:28
+ * @LastEditTime: 2021-04-17 16:07:00
  * @FilePath: \cyf-cloud.front\src\main.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -57,12 +57,3 @@ new _vue["default"]({
     return h(_App["default"]);
   }
 });
-var routerPush = VueRouter.prototype.push;
-
-VueRouter.prototype.push = function push(location) {
-  return routerPush.call(this, location)["catch"](function (error) {
-    return error;
-  });
-};
-
-_vue["default"].use(VueRouter);

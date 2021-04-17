@@ -196,10 +196,14 @@ var router = new _vueRouter["default"]({
       };
     }
   }
-}); // const originalPush = VueRouter.prototype.push
-// VueRouter.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch( err => { console.log( err ) } ) //.catch(err => err)
-// }
+});
+var routerPush = _vueRouter["default"].prototype.push;
+
+_vueRouter["default"].prototype.push = function push(location) {
+  return routerPush.call(this, location)["catch"](function (error) {
+    return error;
+  });
+};
 
 _vue["default"].use(_vueRouter["default"]);
 
