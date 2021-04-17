@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-08 00:11:09
+ * @LastEditTime: 2021-04-17 13:57:25
  * @FilePath: \cyf-cloud.front\src\components\Footer.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -65,7 +65,7 @@
         <b-col md="6">
           <small style="color:gray;">
             <br>
-            | cyf-cloud 2020 - 当前版本v1x1 - 闭源 <span id="busuanzi_container_site_pv">
+            | cyf-cloud 2020-2021 - 当前版本v1x1 - 闭源 <span id="busuanzi_container_site_pv">
             - 访问量 <span id="busuanzi_value_site_pv"></span>
               次 |
             <br>

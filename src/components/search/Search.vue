@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-12-04 13:53:23
  * @LastEditors: cyf
- * @LastEditTime: 2020-12-05 00:34:39
+ * @LastEditTime: 2021-04-17 14:11:01
  * @FilePath: \cyf-cloud.front\src\components\search\Search.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -70,6 +70,7 @@
 import sh from "../../cc/searchHistory"
 import post from "./Post"
 import user from "./User"
+import bvu from "../../cc/bvUtil"
 
 export default {
     components:{
@@ -106,7 +107,12 @@ export default {
             this.searchHistory = [];
         },
         doSearch() {
-            sh.AddSearchHistory(this.Text)
+            try {
+                sh.AddSearchHistory(this.Text)
+            } catch ( ex ) {
+                console.error( ex )
+                bvu.Warn( "添加历史记录出现了一些问题，可能会导致历史记录有问题" );
+            }
             switch (this.Genre) {
                 case "全部":
                     this.$router.push({ path: "/search?text=" + this.Text });
