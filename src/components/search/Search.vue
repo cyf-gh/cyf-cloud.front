@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-12-04 13:53:23
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-17 15:52:15
+ * @LastEditTime: 2021-04-17 16:50:20
  * @FilePath: \cyf-cloud.front\src\components\search\Search.vue
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
@@ -112,7 +112,11 @@ export default {
                 sh.AddSearchHistory(this.Text)
                 switch (this.Genre) {
                     case "全部":
-                        this.$router.push({ path: "/search?text=" + this.Text });
+                        try {
+                            this.$router.push({ path: "/search?text=" + this.Text });
+                        } catch ( ex ) {
+                            console.error( ex )
+                        }
                         location.reload()
                         break;
                     case "文章":
