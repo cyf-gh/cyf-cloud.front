@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-09-13 15:49:07
  * @LastEditors: cyf
- * @LastEditTime: 2020-11-19 11:27:09
+ * @LastEditTime: 2021-08-09 20:27:13
  * @FilePath: \cyf-cloud.front\src\cc\v1x1\Identity.js
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
@@ -21,6 +21,12 @@ function GenerateBasicIds() {
         cke.set("cid", rd.CreateUuid(), 30)
         console.log("set cid")
     }
+}
+
+function SetAtk( atk ) {
+    // 创建cid
+    cke.set("atk", atk, 30)
+    console.log("set atk")
 }
 
 function GetCid() {
@@ -102,5 +108,6 @@ export default {
     RefreshAccountInfo,
     ForceRefreshAccountInfo,
     ClearAccountInfo,
-    LogoutIfSession
+    LogoutIfSession,
+    SetAtk
 }
