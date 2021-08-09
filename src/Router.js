@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-13 20:58:42
  * @LastEditors: cyf
- * @LastEditTime: 2021-04-17 16:06:50
+ * @LastEditTime: 2021-08-05 18:49:17
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
@@ -81,7 +81,10 @@ const routes = [
     { path: '/vp/home', component: () => import("./components/vp/home" )},
     { path: '/vp/editor', component: () => import("./components/vp/editor" )},
     { path: '/info/api/ref', component: () => import("./components/v1x1/meta_ref.vue") },
-    { path: '*', redirect: '/home' }
+
+    { path: '/practice/home', component: () => import("./components/practice/home.vue") },
+    
+    { path: '*', redirect: '/home' },
 ]
 
 const router = new VueRouter({

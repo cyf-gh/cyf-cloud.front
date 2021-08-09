@@ -177,6 +177,13 @@ var routes = [{
     });
   }
 }, {
+  path: '/practice/home',
+  component: function component() {
+    return Promise.resolve().then(function () {
+      return _interopRequireWildcard(require("./components/practice/home.vue"));
+    });
+  }
+}, {
   path: '*',
   redirect: '/home'
 }];
