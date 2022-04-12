@@ -11,7 +11,7 @@
     <b-navbar fixed="top" toggleable="sm">
       <b-navbar-brand href="/home">
         <img
-          src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+          src="/favicon.ico"
           alt="cyf-cloud"
           height="25"
           width="25"

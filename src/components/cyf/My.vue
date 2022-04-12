@@ -11,7 +11,7 @@
         <b-card>
             <b-container style="border-style: dotted;border-width:2px">
             <img
-            src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+            src="/favicon.ico"
             alt="cyf"
             height="300"
             width="300"

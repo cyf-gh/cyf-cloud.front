@@ -54,7 +54,7 @@
       <b-row>
         <b-col class="text-center" md="6">
         <img
-            src="https://gitee.com/cyf-my/imgs/raw/master/assets/icon.png"
+            src="/favicon.ico"
             alt="Kitten"
             height="100"
             width="100"

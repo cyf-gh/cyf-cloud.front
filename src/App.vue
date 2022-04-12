@@ -38,7 +38,6 @@ export default {
   },
   created(){
 
-    console.clear()
     let banner =
 "%c================================================\n"+
 "             __            _                 _\n"+
