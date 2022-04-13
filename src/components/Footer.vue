@@ -65,9 +65,7 @@
         <b-col md="6">
           <small style="color:gray;">
             <br>
-            | cyf-cloud 2020-2021 - 当前版本v1x1 - 闭源 <span id="busuanzi_container_site_pv">
-            - 访问量 <span id="busuanzi_value_site_pv"></span>
-              次 |
+            | cyf-cloud 2020-2021 - 当前版本v1x1 - 闭源 |
             <br>
             | 版权 cyf 所有 - 由 cyf 维护 |
             <br>
