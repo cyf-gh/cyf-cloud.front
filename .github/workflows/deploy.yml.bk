@@ -17,12 +17,13 @@ jobs:
       with:
         command: |
           whoami
+          rm -rf /home/cyf/.web/tmp/cyf-cloud.front/
           cd /home/cyf/.web/cyf-cloud.front
           git stash
           git pull --force
           cnpm install
           sudo npm run build
-        host: jp-tyo-dvm-2.sakurafrp.com
-        username: cyf
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.PSWD }}
-        port: 16661
+        port: ${{ secrets.PORT }}

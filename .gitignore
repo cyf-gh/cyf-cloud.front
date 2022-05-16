@@ -12,6 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+.githubpages
+
 # Editor directories and files
 .idea
 .vscode

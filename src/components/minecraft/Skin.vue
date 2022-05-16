@@ -6,26 +6,23 @@
  * @Description: What is mind? No matter. What is matter? Nevermind.
 -->
 <template>
-  <div>
-    <div class="container text-center">
+    <b-container fluid="md">
+  <b-card>
       <br />
       <b-alert show variant="warning">
         <a>请不要使用国产浏览器进行注册！请使用诸如Edge Chrome等浏览器进行网站操作！</a>
       </b-alert>
       <b-button
-        href="http://se.cyf-cloud.cn:8228"
+        href="http://ppr.cyf-cloud.cn"
         target="_blank"
         security="restricted"
         sandbox
         pill
         variant="warning"
       >前往皮肤站官网</b-button>
-    </div>
-    <div class="mask">
       <br />
-      <ccMd :mdUrl="mrUrl" :divId="divId" :ccServer="ccServer" :mdData="infoMd"></ccMd>
-    </div>
-  </div>
+  </b-card>
+    </b-container>
 </template>
 
 <script>
