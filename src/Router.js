@@ -11,15 +11,13 @@ import Vue from "vue";
 import ccHome from "./components/home/Home";
 import ccHomeNL from "./components/home/HomeNoLogin";
 
-// import ccMusic from "./components/music/Music"
-// import ccMusicUpload from "./components/music/Upload"
-
 import ccAccountSignin from './components/account/Signin.vue'
 import ccAccountLogin from  './components/account/Login.vue'
 import ccAccountInfo from './components/account/Info.vue'
 import ccAccountFav from './components/account/Fav.vue'
 import ccAccountHome from './components/account/Home.vue'
 
+import ccPosts from './components/post/UserHome.vue'
 import ccPostReader from './components/post/Reader.vue'
 import ccPostHome from './components/post/Home.vue'
 
@@ -45,7 +43,7 @@ const routes = [
     { path: '/account/fav',  component: ccAccountFav },
     { path: '/user/home',  component: ccAccountHome },
     { path: '/post/editor', component: () => import('./components/post/Editor.vue') },
-    { path: '/posts', component: () => import('./components/post/UserHome.vue') },
+    { path: '/posts', ccPosts },
     { path: '/post/home', component: ccPostHome },
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: () => import('./components/post/Editor.vue') },

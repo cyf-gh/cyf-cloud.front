@@ -101,13 +101,11 @@ module.exports = {
 	// 	}
 	// },
 
-	chainWebpack: config => {
-		// 查看打包文件体积大小
-		config
-		.plugin('webpack-bundle-analyzer')
-		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-	},
-
+	// chainWebpack: config => {
+	// 	// 查看打包文件体积大小
+	// 	config
+	// 	.plugin('webpack-bundle-analyzer')
+	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 	configureWebpack: config => {
 		// config.optimization = {
 		// 	splitChunks: {
@@ -149,6 +147,13 @@ module.exports = {
 		// 	}
 		// }
 		if (isProduction) {
+			config.externals = {
+				'vue': 'Vue',
+				'vue-router': 'VueRouter',
+				'axios': 'axios',
+				'cropper.js': 'cropper.js',
+				'marked.js':'marked'
+			}
 			// 代码压缩
 			config.plugins.push(
 				new UglifyJsPlugin({
@@ -173,14 +178,7 @@ module.exports = {
 				threshold: 10240,
 				minRatio: 0.8
 			}))
-			config.externals = {
-				'vue': 'Vue',
-				'vue-router': 'VueRouter',
-				'axios': 'axios',
-				'bootstrap-vue': 'bootstrap-vue',
-				'cropper.js': 'cropper.js',
-				'marked.js':'marked'
-			}
+
 		} else {
 			console.log()
 		}
