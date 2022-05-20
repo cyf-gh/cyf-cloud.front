@@ -47,9 +47,9 @@ const routes = [
     { path: '/home', component: ccHome },
     
     { path: '/mc', component: ccMcHome },
-    { path: '/mc/map', component: ccMcWebmap },
-    { path: '/mc/skin', component: ccMcSkin },
-    { path: '/mc/about', component: ccMcAbout },
+    // { path: '/mc/map', component: ccMcWebmap },
+    // { path: '/mc/skin', component: ccMcSkin },
+    // { path: '/mc/about', component: ccMcAbout },
     
     // { path: '/music', component: ccMusic },
     // { path: '/music/upload', component: ccMusicUpload },
@@ -76,13 +76,11 @@ const routes = [
     { path: '/search/post', component: ccSearchPost},
     { path: '/search/user', component: ccSearchUser}, 
 
-    { path: '/dm1/home', component: () => import('./components/dm_1/Home.vue' ) },
+    // { path: '/dm1/home', component: () => import('./components/dm_1/Home.vue' ) },
 
-    { path: '/vp/home', component: () => import("./components/vp/home" )},
-    { path: '/vp/editor', component: () => import("./components/vp/editor" )},
+    // { path: '/vp/home', component: () => import("./components/vp/home" )},
+    // { path: '/vp/editor', component: () => import("./components/vp/editor" )},
     { path: '/info/api/ref', component: () => import("./components/v1x1/meta_ref.vue") },
-
-    { path: '/practice/home', component: () => import("./components/practice/home.vue") },
     
     { path: '*', redirect: '/home' },
 ]

@@ -30,12 +30,12 @@
                   <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBTtP.jpg">
                   <h1>Minecraft</h1>
                   <p>现在就加入我的世界！</p>
-                  <b-button href="/mc/map" pill variant="light">前往注册</b-button>
+                  <b-button href="/post/reader?id=46" pill variant="light">前往了解</b-button>
                   </b-carousel-slide>
                   <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJB6fK.jpg">
                   <h1>皮肤站点</h1>
                   <p>获取皮肤与外置登录服务</p>
-                  <b-button href="/mc/skin" pill variant="light">前往挑选</b-button>
+                  <b-button href="/post/reader?id=46" pill variant="light">前往挑选</b-button>
                   </b-carousel-slide>
                   <!-- Slides with custom text -->
                   <!-- <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBhmd.jpg">

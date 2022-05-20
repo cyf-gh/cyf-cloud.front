@@ -10,10 +10,11 @@
     <b-container v-if="apiList != null" id="table-api">
         <h2 class="text-center mt-3">API 大全<b-badge class="ml-2" variant="info" pill>v1x1</b-badge> </h2>
         <b-card v-for="aGroup in apiList" :key="aGroup.path">
-                            <h6>{{ aGroup.path }}</h6>
-                            <p v-if="aGroup.desc!=''">{{ aGroup.desc }}</p>
+                            <h6>{{ aGroup.path }}  <b-badge v-if="aGroup.desc=='Deprecated'" variant="warning" pill>Deprecated</b-badge></h6>
+                            
+                            <p v-if="aGroup.desc!=''&&aGroup.desc!='Deprecated'">{{ aGroup.desc }}</p>
                             <small>{{ aGroup.file }}</small>
-            <details class="x" open>
+            <details class="x">
                 <table>
                     <thead>
                             <td>路径</td>
@@ -90,6 +91,21 @@ export default {
 </script>
 
 <style>
+details > summary {
+  padding: 4px;
+  width: 200px;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 1px 1px 2px #bbbbbb;
+  cursor: pointer;
+}
+
+details > p {
+  background-color: #eeeeee;
+  padding: 4px;
+  margin: 0;
+  box-shadow: 1px 1px 2px #bbbbbb;
+}
 .x {
     overflow-x: auto;
 }
@@ -135,4 +151,5 @@ export default {
 .text-input {
     length: 100%;
 }
+
 </style>

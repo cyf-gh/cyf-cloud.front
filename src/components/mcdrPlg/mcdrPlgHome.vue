@@ -7,6 +7,8 @@
 -->
 <template>
   <div>
+    <ccMentionDeprecated></ccMentionDeprecated>
+
     <b-modal id="id-modal-create-scr" title="还剩几步完成脚本的生成" ref="modalCreatescr" @ok="createscr">
       <label for="id-input-mcdr-path">MCDR位于服务器的绝对路径</label>
       <b-form-input
@@ -171,10 +173,12 @@
 </template>
 
 <script>
+import ccMentionDeprecated from '../MentionDeprecated.vue'
 import apiServer from "../../server"
 import bvu from '../../cc/bvUtil'
 import rd from '../../cc/random'
 export default {
+
   mounted: function () {
     try {
       bvu.InitToast(this.$bvToast)
@@ -363,6 +367,9 @@ export default {
     validateAnswer() {
       return this.validate.sum == Number( this.validate.dig1 ) + Number( this.validate.dig2 );
     }
+  },  
+  components: {
+      ccMentionDeprecated,
   },
 };
 //curl -o .installplg.sh http://localhost:2334/v1/util/mcdr/plg/scripts?u=ee00dad9-2759-4c20-95f6-5797c5306948 | . installplg.sh

@@ -43,10 +43,10 @@
           </li>
         </ul>
       </div>
-      <div class="col-12 col-md">
+      <!-- <div class="col-12 col-md">
         <h5 style="color:gray">一言</h5>
         <small class="border d-block mb-3 text-muted px-2 py-1" id="hitokoto">正在加载一言...</small>
-      </div>
+      </div> -->
 
     </div>
     <hr>
@@ -76,7 +76,7 @@
       </b-row>
       <div class="text-center mt-4">
       <small>
-        <b-badge variant="light" href="https://se.cyf-cloud.cn:8888">国内节点</b-badge>
+        <b-badge variant="light" href="https://cc.cyf-cloud.cn:8888">国内节点</b-badge>
         <b-badge variant="light" class="ml-1" href="https://www.cyf-cloud.cn">国外节点</b-badge></small>
       </div>
     </div>
@@ -90,8 +90,8 @@ export default {
   name: "Footer"
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<!-- <script src="https://unpkg.zhimg.com/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://unpkg.zhimg.com/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
 <script>
   fetch('https://v1.hitokoto.cn')
     .then(function (res){
@@ -104,4 +104,4 @@ export default {
     .catch(function (err) {
       console.error(err);
     })
-</script>
+</script> -->

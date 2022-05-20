@@ -8,6 +8,7 @@
 
 <template>
   <div>
+  <ccMentionDeprecated></ccMentionDeprecated>
   <b-alert show variant="warning">这是一个测试版本，功能完善程度可能较低，bug较多。</b-alert>
     <b-modal id="modal-1" title="输入房间密码" ref="modalPasswd" @ok="enterLobby">
       <b-form-input
@@ -123,6 +124,7 @@
 </template>
 
 <script>
+import ccMentionDeprecated from '../MentionDeprecated.vue'
 import md5 from 'js-md5';
 import apiServer from "../../server"
 import rd from '../../cc/random'
@@ -471,6 +473,9 @@ export default {
       this.vt.isIdle = (this.vt.lobbyName == "" );
       console.log( this.vt.isIdle );
     },
+  },
+  components: {
+      ccMentionDeprecated,
   },
 };
 </script>

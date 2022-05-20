@@ -9,6 +9,7 @@
     "serve_prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
     "build_gp": "vue-cli-service build --mode githubpage",
+    "build_local": "vue-cli-service build --mode direct",
     "lint": "vue-cli-service lint",
     "ui": "vue ui"
   },
