@@ -11,16 +11,6 @@ import Vue from "vue";
 import ccHome from "./components/home/Home";
 import ccHomeNL from "./components/home/HomeNoLogin";
 
-import ccMcWebmap from "./components/minecraft/Webmap"
-import ccMcHome from "./components/minecraft/Home"
-import ccMcSkin from "./components/minecraft/Skin"
-import ccMcAbout from "./components/minecraft/About"
-
-import ccCyfBlog from "./components/cyf/Blog"
-import ccCyfDonate from "./components/cyf/Donate"
-import ccCyfDonateRank from "./components/cyf/DonateRank"
-import ccCyfInfo from "./components/cyf/My.vue"
-
 // import ccMusic from "./components/music/Music"
 // import ccMusicUpload from "./components/music/Upload"
 
@@ -30,13 +20,8 @@ import ccAccountInfo from './components/account/Info.vue'
 import ccAccountFav from './components/account/Fav.vue'
 import ccAccountHome from './components/account/Home.vue'
 
-import ccPostEditor from './components/post/Editor.vue'
 import ccPostReader from './components/post/Reader.vue'
-
-import ccPostBBS from './components/post/BBS.vue'
 import ccPostHome from './components/post/Home.vue'
-
-import ccPostUserHome from './components/post/UserHome.vue'
 
 import ccSearch from './components/search/Search.vue'
 import ccSearchPost from './components/search/Post.vue'
@@ -46,31 +31,24 @@ import ccSearchUser from './components/search/User.vue'
 const routes = [
     { path: '/home', component: ccHome },
     
-    { path: '/mc', component: ccMcHome },
-    // { path: '/mc/map', component: ccMcWebmap },
-    // { path: '/mc/skin', component: ccMcSkin },
-    // { path: '/mc/about', component: ccMcAbout },
-    
-    // { path: '/music', component: ccMusic },
-    // { path: '/music/upload', component: ccMusicUpload },
-    { path: '/donate', component: ccCyfDonate },
-    { path: '/donate/rank', component: ccCyfDonateRank },
-    { path: '/blog', component: ccCyfBlog },
+    { path: '/donate', component: () => import("./components/cyf/Donate") },
+    { path: '/donate/rank', component: () => import('./components/cyf/DonateRank') },
+    { path: '/blog', component: () => import('./components/cyf/Blog') },
     
     { path: '/cloudApp/vt', component: () => import('./components/vt/VtHome') },
     { path: '/cloudApp/util/mcdrPlg', component: () =>import('./components/mcdrPlg/mcdrPlgHome') },
 
-    { path: '/info/about', component: ccCyfInfo },
+    { path: '/info/about', component: () => import('./components/cyf/My.vue') },
     { path: '/account/signin', component: ccAccountSignin },
     { path: '/account/login', component: ccAccountLogin },
     { path: '/account/info', component: ccAccountInfo },
     { path: '/account/fav',  component: ccAccountFav },
     { path: '/user/home',  component: ccAccountHome },
-    { path: '/post/editor', component: ccPostEditor },
-    { path: '/posts', component: ccPostBBS },
+    { path: '/post/editor', component: () => import('./components/post/Editor.vue') },
+    { path: '/posts', component: () => import('./components/post/UserHome.vue') },
     { path: '/post/home', component: ccPostHome },
     { path: '/post/reader', component: ccPostReader },
-    { path: '/user', component: ccPostUserHome },
+    { path: '/user', component: () => import('./components/post/Editor.vue') },
     { path: '/home/nl', component: ccHomeNL },
     { path: '/search', component: ccSearch},
     { path: '/search/post', component: ccSearchPost},

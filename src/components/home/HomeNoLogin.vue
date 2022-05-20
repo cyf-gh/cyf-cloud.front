@@ -50,10 +50,7 @@
 
 <script>
 import Vue from 'vue'
-import VueFullPage from 'vue-fullpage.js'
 import SecNavBar from './SecNavbar'
-
-Vue.use(VueFullPage);
 
 export default {
   components: {

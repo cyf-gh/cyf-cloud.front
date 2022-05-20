@@ -28,7 +28,6 @@
     "vue-chartjs": "^3.5.1",
     "vue-cookie": "^1.1.4",
     "vue-core-image-upload": "^2.4.13",
-    "vue-fullpage.js": "^0.1.7",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.1",
     "vue-slim-cropper": "^0.1.0"

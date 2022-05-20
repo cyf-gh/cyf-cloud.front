@@ -10,6 +10,7 @@
 // 这里只列一部分，具体配置参考文档
 
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const productionGzipExtensions = ['js', 'css'];
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -61,34 +62,34 @@ module.exports = {
 	 *  有了map就可以像未加密的代码一样，准确的输出是哪一行哪一列有错。
 	 * */
 	productionSourceMap: false,
-
-	// 它支持webPack-dev-server的所有选项
-	devServer: {
-		port: 8887,
-		https: false,
-		disableHostCheck: true,
-		// 配置多个代理
-		proxy: {
-			'/vt': {
-				enable: true,
-				target: 'http://localhost:2334/v1/vt/',
-				secure: false,
-				changeOrigin: true,
-				pathRewrite: {
-					'^/vt': '', // rewrite path
-				}
-			},
-			'/v1x1': {
-				enable: true,
-				target: 'http://192.168.50.242:2334/v1x1/',
-				secure: false,
-				changeOrigin: true,
-				pathRewrite: {
-					'^/v1x1': '', // rewrite path
-				}				
-			}
-		}
-	},
+	
+	// // 它支持webPack-dev-server的所有选项
+	// devServer: {
+	// 	port: 8887,
+	// 	https: false,
+	// 	disableHostCheck: true,
+	// 	// 配置多个代理
+	// 	proxy: {
+	// 		'/vt': {
+	// 			enable: true,
+	// 			target: 'http://localhost:2334/v1/vt/',
+	// 			secure: false,
+	// 			changeOrigin: true,
+	// 			pathRewrite: {
+	// 				'^/vt': '', // rewrite path
+	// 			}
+	// 		},
+	// 		'/v1x1': {
+	// 			enable: true,
+	// 			target: 'http://192.168.50.242:2334/v1x1/',
+	// 			secure: false,
+	// 			changeOrigin: true,
+	// 			pathRewrite: {
+	// 				'^/v1x1': '', // rewrite path
+	// 			}				
+	// 		}
+	// 	}
+	// },
 	// chainWebpack: config => {
 	// 	if (isProduction) {
 	// 		// 压缩代码
@@ -100,14 +101,71 @@ module.exports = {
 	// 	}
 	// },
 
-	// chainWebpack: config => {
-	// 	// 查看打包文件体积大小
-	// 	config
-	// 	.plugin('webpack-bundle-analyzer')
-	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-	// },
+	chainWebpack: config => {
+		// 查看打包文件体积大小
+		config
+		.plugin('webpack-bundle-analyzer')
+		.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	},
 
 	configureWebpack: config => {
+		// config.optimization = {
+		// 	splitChunks: {
+		// 		// 表示选择哪些 chunks 进行分割，可选值有：async，initial和all
+		// 		chunks: "async",
+		// 		// 表示新分离出的chunk必须大于等于minSize，默认为30000，约30kb。
+		// 		minSize: 30000,
+		// 		// 表示一个模块至少应被minChunks个chunk所包含才能分割。默认为1。
+		// 		minChunks: 1,
+		// 		cacheGroups: {
+		// 			vendor: {
+		// 				chunks: 'all',
+		// 				test: /node_modules/,
+		// 				name: 'vendor',
+		// 				minChunks: 1,
+		// 				maxInitialRequests: 5,
+		// 				minSize: 0,
+		// 				priority: 100
+		// 			},
+		// 			common: {
+		// 				chunks: 'all',
+		// 				test: /[\\/]src[\\/]js[\\/]/,
+		// 				name: 'common',
+		// 				minChunks: 2,
+		// 				maxInitialRequests: 5,
+		// 				minSize: 0,
+		// 				priority: 60
+		// 			},
+		// 			styles: {
+		// 				name: 'styles',
+		// 				test: /\.(sa|sc|c)ss$/,
+		// 				chunks: 'all',
+		// 				enforce: true
+		// 			},
+		// 			runtimeChunk: {
+		// 				name: 'manifest'
+		// 			}
+		// 		}
+		// 	}
+		// }
+		if (isProduction) {
+			// 代码压缩
+			config.plugins.push(
+				new UglifyJsPlugin({
+					uglifyOptions: {
+						//生产环境自动删除console
+						warnings: false, // 若打包错误，则注释这行
+						compress: {
+							drop_debugger: true,
+							drop_console: true,
+							pure_funcs: ['console.log']
+						}
+					},
+					sourceMap: false,
+					parallel: true
+				})
+			)
+		}
 		if (isProduction) {
 			config.plugins.push(new CompressionWebpackPlugin({
 				algorithm: 'gzip',
@@ -119,6 +177,9 @@ module.exports = {
 				'vue': 'Vue',
 				'vue-router': 'VueRouter',
 				'axios': 'axios',
+				'bootstrap-vue': 'bootstrap-vue',
+				'cropper.js': 'cropper.js',
+				'marked.js':'marked'
 			}
 		} else {
 			console.log()

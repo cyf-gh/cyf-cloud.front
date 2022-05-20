@@ -6,7 +6,7 @@
  * @Description: What is mind? No matter. What is matter? Nevermind.
  */
 import Vue from 'vue'
-import { BootstrapVue, BootstrapVueIcons }from 'bootstrap-vue'
+import { BootstrapVue }from 'bootstrap-vue'
 import App from './App.vue'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -29,7 +29,7 @@ Vue.use(VueAxios,axios)
 // Vue.use(VueCropper)
 Vue.use(qs)
 Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
+// Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false
 Vue.prototype.$cookie = cookie;
 
