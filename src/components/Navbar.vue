@@ -115,23 +115,34 @@ export default {
         this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
       } catch {
         console.log( "parse failed" )
+        this.relog();
       }
-        if ( this.accountInfo == null ) {
-            this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
-            .then(res => {
-                localStorage.setItem( "cc_account_info", res.data.Data )
-                this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
-                theme.SetBgUrl(this.accountInfo.BgUrl);
-                theme.ReloadBgUrl();
-            })
-            .catch(err => {
-                console.error(err);
-            })
-        }
+      if ( this.accountInfo == null ) {
+          this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
+          .then(res => {
+              localStorage.setItem( "cc_account_info", res.data.Data )
+              this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
+              theme.SetBgUrl(this.accountInfo.BgUrl);
+              theme.ReloadBgUrl();
+          })
+          .catch(err => {
+              console.error(err);
+              this.relog();
+          })
+      }
     }
+    this.relog();
     console.log( this.accountInfo )
   },
   methods: {
+    relog() {
+      this.isLoginIn = this.accountInfo == null;
+      if ( !this.isLoginIn ) {
+        idy.ClearAccountInfo();
+        localStorage.clear();
+        bvu.Msg("提示", "账户信息已失效，请重新登录", "warning");
+      }
+    },
     doSearch(event) {
         console.log("searching...")
         sh.AddSearchHistory(this.searchText)

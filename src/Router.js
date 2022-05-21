@@ -6,7 +6,6 @@
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
 import VueRouter from 'vue-router'
-import Vue from "vue";
 
 import ccHome from "./components/home/Home";
 import ccHomeNL from "./components/home/HomeNoLogin";
@@ -17,7 +16,7 @@ import ccAccountInfo from './components/account/Info.vue'
 import ccAccountFav from './components/account/Fav.vue'
 import ccAccountHome from './components/account/Home.vue'
 
-import ccPosts from './components/post/UserHome.vue'
+import ccPosts from './components/post/BBS.vue'
 import ccPostReader from './components/post/Reader.vue'
 import ccPostHome from './components/post/Home.vue'
 
@@ -42,8 +41,8 @@ const routes = [
     { path: '/account/info', component: ccAccountInfo },
     { path: '/account/fav',  component: ccAccountFav },
     { path: '/user/home',  component: ccAccountHome },
+    { path: '/posts', component: ccPosts },
     { path: '/post/editor', component: () => import('./components/post/Editor.vue') },
-    { path: '/posts', ccPosts },
     { path: '/post/home', component: ccPostHome },
     { path: '/post/reader', component: ccPostReader },
     { path: '/user', component: () => import('./components/post/Editor.vue') },
@@ -78,6 +77,6 @@ const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
     return routerPush.call(this, location).catch( error=> error)
 }
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 
 export default router

@@ -8,12 +8,14 @@
 <template>
     <b-container class="mt-3" style="height: 100%;">
       <SecNavBar></SecNavBar>
+      <b-icon icon="exclamation-circle-fill" variant="primary"></b-icon>
               <b-carousel
                   id="carousel-1"
                   v-model="slide"
-                  :interval="7000"
+                  :interval="8000"
                   controls
                   indicators
+
                   background="#ababab"
                   style="text-shadow: 1px 1px 2px #333;"
                 >
@@ -22,17 +24,17 @@
                   <h1>账户</h1>
                   <p>本站已支持账户注册！享受更多服务！</p>
                   </b-carousel-slide> -->
-                  <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJB5TI.jpg">
+                  <b-carousel-slide img-src="https://s1.ax1x.com/2022/05/21/OX1arT.jpg">
                   <h1>博客</h1>
                   <p>将cyf-cloud作为您的首选博客</p>
                   <b-button href="/account/signin" pill variant="light">前往注册</b-button>
                   </b-carousel-slide>
-                  <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJBTtP.jpg">
+                  <b-carousel-slide img-src="https://s1.ax1x.com/2022/05/21/OX1tx0.jpg">
                   <h1>Minecraft</h1>
                   <p>现在就加入我的世界！</p>
                   <b-button href="/post/reader?id=46" pill variant="light">前往了解</b-button>
                   </b-carousel-slide>
-                  <b-carousel-slide img-src="https://s1.ax1x.com/2020/07/13/UJB6fK.jpg">
+                  <b-carousel-slide img-src="https://s1.ax1x.com/2022/05/21/OX1UMV.jpg">
                   <h1>皮肤站点</h1>
                   <p>获取皮肤与外置登录服务</p>
                   <b-button href="/post/reader?id=46" pill variant="light">前往挑选</b-button>

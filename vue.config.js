@@ -30,6 +30,7 @@ console.log( "is production >", isProduction )
 console.log( "api address >", process.env.VUE_APP_BACKEND_SERVER_ADDR )
 
 module.exports = {
+
 	// 部署生产环境和开发环境下的URL。
 	// 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
 	//例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 baseUrl 为 /my-app/。
@@ -103,10 +104,35 @@ module.exports = {
 
 	// chainWebpack: config => {
 	// 	// 查看打包文件体积大小
+	// chainWebpack: config => {
+	// 	// 查看打包文件体积大小
 	// 	config
 	// 	.plugin('webpack-bundle-analyzer')
 	// 	.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+	// },
+		
 	configureWebpack: config => {
+		// config.resolve = {
+		// 	alias: {
+		// 	  // Alias for using source of BootstrapVue
+		// 	  'bootstrap-vue$': 'bootstrap-vue/src/index.js'
+		// 	}
+		//   },
+		// config.module = {
+		// 	rules: [
+		// 		{
+		// 		test: /\.js$/,
+		// 		// Exclude transpiling `node_modules`, except `bootstrap-vue/src`
+		// 		exclude: /node_modules\/(?!bootstrap-vue\/src\/)/,
+		// 		use: {
+		// 			loader: 'babel-loader',
+		// 			options: {
+		// 			presets: ['env']
+		// 			}
+		// 		}
+		// 		}
+		// 	]
+		// },
 		// config.optimization = {
 		// 	splitChunks: {
 		// 		// 表示选择哪些 chunks 进行分割，可选值有：async，initial和all
@@ -146,14 +172,15 @@ module.exports = {
 		// 		}
 		// 	}
 		// }
+		config.externals = {
+			'vue': 'Vue',
+			'vue-router': 'VueRouter',
+			//'bootstrap-vue':'BootstrapVue',
+			'icons.js': 'icons.js',
+			'axios': 'axios',
+			'marked':'marked.js'
+		}
 		if (isProduction) {
-			config.externals = {
-				'vue': 'Vue',
-				'vue-router': 'VueRouter',
-				'axios': 'axios',
-				'cropper.js': 'cropper.js',
-				'marked.js':'marked'
-			}
 			// 代码压缩
 			config.plugins.push(
 				new UglifyJsPlugin({
