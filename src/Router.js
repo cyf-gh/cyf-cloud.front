@@ -5,7 +5,8 @@
  * @FilePath: \cyf-cloud.front\src\Router.js
  * @Description: What is mind? No matter. What is matter? Nevermin
  */
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from 'vue-router';
 
 import ccHome from "./components/home/Home";
 import ccHomeNL from "./components/home/HomeNoLogin";
@@ -77,6 +78,6 @@ const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
     return routerPush.call(this, location).catch( error=> error)
 }
-// Vue.use(VueRouter)
+Vue.use(VueRouter)
 
 export default router
