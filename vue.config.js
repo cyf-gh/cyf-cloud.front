@@ -178,7 +178,7 @@ module.exports = {
 			//'bootstrap-vue':'BootstrapVue',
 			'icons.js': 'icons.js',
 			'axios': 'axios',
-			'marked':'marked.js'
+			'marked.js':'marked'
 		}
 		if (isProduction) {
 			// 代码压缩
