@@ -120,7 +120,7 @@ export default {
       if ( this.accountInfo == null ) {
           this.axios.get(apiAddr+"/v1x1/account/private/info", { withCredentials: true })
           .then(res => {
-              localStorage.setItem( "cc_account_info", res.data.Data )
+            localStorage.setItem( "cc_account_info", res.data.Data )
               this.accountInfo = JSON.parse(localStorage.getItem("cc_account_info"));
               theme.SetBgUrl(this.accountInfo.BgUrl);
               theme.ReloadBgUrl();
@@ -131,12 +131,12 @@ export default {
           })
       }
     }
-    this.relog();
+    this.isLoginIn = ( this.accountInfo != null );
     console.log( this.accountInfo )
   },
   methods: {
     relog() {
-      this.isLoginIn = this.accountInfo == null;
+      this.isLoginIn = ( this.accountInfo != null );
       if ( !this.isLoginIn ) {
         idy.ClearAccountInfo();
         localStorage.clear();
