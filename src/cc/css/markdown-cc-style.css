@@ -1,4 +1,4 @@
-/* .ps-info {
+.ps-info {
     border:  rgba(0,0,0,.125) 1px solid;
     padding: 1rem;
     background-color: white;
@@ -32,7 +32,7 @@
     padding-right: 0;
 }
 
-.cc-md-1 em {
+/* .cc-md-1 em {
     background-color: cadetblue;
     border:1px;
     border-color: cadetblue;
@@ -54,9 +54,9 @@
     padding-top: 6px;
     padding-bottom: 6px;
     border-style: dashed;
-}
+} */
 
-.cc-md-1 blockquote {
+/* .cc-md-1 blockquote {
     padding: 20px;
     background-color: #fafafa;
     border-left: 6px solid #e6e6e6;

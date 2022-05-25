@@ -49,13 +49,10 @@ async function SetMarkdownToDiv( md_url, md_data, div_id, axios, is_cc_server = 
     return md_data
 }
 
-function SetRawMarkdownToDiv( md_data, div_id ) {
+function SetRawMarkdownToDiv( md_data, div_id, custom_css = "" ) {
     if ( md_data == "" ) {
         return
     }
-    var md2html = marked(md_data)
-    // console.log(md2html)
-    document.getElementById(div_id).innerHTML = (md2html)
     marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -66,6 +63,9 @@ function SetRawMarkdownToDiv( md_data, div_id ) {
         smartLists: true,
         smartypants: false
     })
+    var md2html = marked(md_data)
+    // console.log(md2html)
+    document.getElementById(div_id).innerHTML = (md2html) + custom_css
     // 通过读取cc-reader-index可以获得目录json
     localStorage.setItem("cc-reader-index", "[]")
     $(".c-cc-reader").find("h2,h3,h4,h5,h6").each(function(i,item){

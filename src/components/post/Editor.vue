@@ -36,6 +36,7 @@
                             id="textarea"
                             v-model="post.Text"
                             placeholder="Markdown"
+                            @keydown.tab.prevent="tabFunc()"
                             rows="10"
                             max-rows="15"
                         ></b-form-textarea>
@@ -160,6 +161,21 @@ export default {
         };
     },
     methods: {
+        insertInputTxt (id, insertTxt) {
+    var elInput = document.getElementById(id)
+    var startPos = elInput.selectionStart
+    var endPos = elInput.selectionEnd
+    if (startPos === undefined || endPos === undefined) return
+    var txt = elInput.value
+    var result = txt.substring(0, startPos) + insertTxt + txt.substring(endPos)
+    elInput.value = result
+    elInput.focus()
+    elInput.selectionStart = startPos + insertTxt.length
+    elInput.selectionEnd = startPos + insertTxt.length
+},
+tabFunc () {
+    this.insertInputTxt('textarea', '\t')
+},
         savedDraft() {
             var res = confirm("确认保存？");
             if (res) {

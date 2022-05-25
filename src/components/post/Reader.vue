@@ -32,19 +32,19 @@
                 </div>
                 <b-card class="text-center">
                     <h4 id="aaaTop">{{post.Title}}</h4>
-                    <b-badge :href="authHref" variant="primary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
-                    <b-badge :href="authHref" variant="primary" v-else>作者：{{post.Author}}</b-badge>
-                    <b-badge variant="light">阅读量：{{post.ViewedCount}}</b-badge>
-                    <b-badge variant="light">最后编辑：{{post.Date}}</b-badge>
+                    <b-badge pill :href="authHref" variant="primary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
+                    <b-badge pill :href="authHref" variant="primary" v-else>作者：{{post.Author}}</b-badge>
+                    <b-badge pill variant="light">阅读量：{{post.ViewedCount}}</b-badge>
+                    <b-badge pill variant="light">最后编辑：{{post.Date}}</b-badge>
                     <br>
-                    <b-badge variant="light" class="mr-1">标签：</b-badge>
-                    <b-badge variant="light" v-for="tag in post.Tags" :key="tag.Post" :href="tagPostHref(tag)" class="mr-1">
+                    <b-badge pill variant="light" class="mr-1">标签：</b-badge>
+                    <b-badge pill variant="light" v-for="tag in post.Tags" :key="tag.Post" :href="tagPostHref(tag)" class="mr-1">
                         {{tag}}
                     </b-badge>
                     <br>
-                    <b-badge variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
+                    <b-badge pill variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
                     <br>
-                    <b-badge variant="primary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
+                    <b-badge pill variant="primary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
                 </b-card>
                 <b-card class="cc-md-1">
                     <div id="id-cc-reader" class="c-cc-reader"></div>
@@ -54,7 +54,8 @@
                 <br>
                 <b-navbar fixed="bottom" toggleable="sm">
                     <b-nav class="mr-0">
-                        <small>本文共 {{postLength}} 字</small>
+                        <b-badge class="text-center" variant="success" v-if="getLocalCustomStyle()!=null&&getLocalCustomStyle()!=''">已加载自定义皮肤</b-badge>
+                        <small class="ml-2">本文共 {{postLength}} 字</small>
                     </b-nav>
                     <b-nav class="mx-auto">
                         <b-nav-form v-if="like != null">
@@ -156,6 +157,7 @@ export default {
             cateDate: null,
             cateTag: null,
             cateRecent: null,
+            customStyle: "",
         }
     },
     created() {
@@ -165,6 +167,7 @@ export default {
         localStorage.setItem("cc-reader-index", "[]")
         idy.InitCookie(this.$cookie);
         this.postId = this.$route.query.id
+
         this.axios.get( apiAddr + "/v1x1/post", {
             params:{id: this.postId},
             withCredentials: true
@@ -177,6 +180,7 @@ export default {
                 this.getAchieveDate()
                 this.getAchieveRecent()
                 this.getAchieveTag()
+                this.getCustomStyle()
                 this.doView()
                 this.postTitle = this.post.Title
             } else {
@@ -199,8 +203,9 @@ export default {
     updated() {
         if ( this.IndexList == null ){
             md.SetRawMarkdownToDiv(
-                    this.post.Text,
-                "id-cc-reader"
+                this.post.Text,
+                "id-cc-reader",
+                "<style>" + localStorage.getItem("cc-custom-style") + "</style>"
             )
             this.IndexList = JSON.parse( localStorage.getItem("cc-reader-index") )
             console.log(this.IndexList)
@@ -209,6 +214,34 @@ export default {
     methods: {
         tagPostHref( tagName ) {
             return "/posts?tags=" + tagName
+        },
+        getLocalCustomStyle() {
+            return localStorage.getItem("cc-custom-style")
+        }
+        ,
+        getCustomStyle() {
+            if( !idy.IsLogin() ) {
+                return;
+            }
+            // 尝试获取CustomStyle
+            this.customStyle = localStorage.getItem("cc-custom-style");
+            if ( this.customStyle == null ) {
+                this.axios.get( apiAddr + "/v1x1/post/custom/style", {
+                    withCredentials: true
+                })
+                .then(res => {
+                    if ( err.Check( res.data ) ) {
+                        this.customStyle = JSON.parse( res.data.Data )
+                        localStorage.setItem( "cc-custom-style", this.customStyle )
+                        return;
+                    } else {
+                        console.error("in post reader getCustomStyle", err.data.Desc)
+                    }
+                })
+                .catch(err => {
+                    console.error(err); 
+                })
+            }
         },
         getAchieveDate() {
              this.axios.get( apiAddr + "/v1x1/posts/achieve/date", {
