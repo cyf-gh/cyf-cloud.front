@@ -32,8 +32,8 @@
                 </div>
                 <b-card class="text-center">
                     <h4 id="aaaTop">{{post.Title}}</h4>
-                    <b-badge pill :href="authHref" variant="primary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
-                    <b-badge pill :href="authHref" variant="primary" v-else>作者：{{post.Author}}</b-badge>
+                    <b-badge pill :href="authHref" variant="secondary" v-if="post.MyPost">作者：<i>我自己</i></b-badge>
+                    <b-badge pill :href="authHref" variant="secondary" v-else>作者：{{post.Author}}</b-badge>
                     <b-badge pill variant="light">阅读量：{{post.ViewedCount}}</b-badge>
                     <b-badge pill variant="light">最后编辑：{{post.Date}}</b-badge>
                     <br>
@@ -44,7 +44,7 @@
                     <br>
                     <b-badge pill variant="light">原始链接：</b-badge> <b-badge variant="light">{{location}}</b-badge>
                     <br>
-                    <b-badge pill variant="primary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
+                    <b-badge pill variant="secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">署名-非商业性使用-禁止演绎 4.0 国际</b-badge><b-badge variant="light">转载请保留原文链接及作者</b-badge>
                 </b-card>
                 <b-card class="cc-md-1">
                     <div id="id-cc-reader" class="c-cc-reader"></div>
@@ -54,7 +54,7 @@
                 <br>
                 <b-navbar fixed="bottom" toggleable="sm">
                     <b-nav class="mr-0">
-                        <b-badge class="text-center" variant="success" v-if="getLocalCustomStyle()!=null&&getLocalCustomStyle()!=''">已加载自定义皮肤</b-badge>
+                        <b-badge class="text-center" variant="secondary" v-if="getLocalCustomStyle()!=null&&getLocalCustomStyle()!=''">已加载自定义皮肤</b-badge>
                         <small class="ml-2">本文共 {{postLength}} 字</small>
                     </b-nav>
                     <b-nav class="mx-auto">
