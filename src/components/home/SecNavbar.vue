@@ -38,7 +38,7 @@
                 variant="light"
                 text="公告"
             >
-                <b-dropdown-item href="#">开发日志</b-dropdown-item>
+                <b-dropdown-item href="/post/reader?id=52">开发日志</b-dropdown-item>
             </b-dropdown>
         </b-card>
     </b-card-group>

@@ -8,7 +8,6 @@
 <template>
     <b-container class="mt-3" style="height: 100%;">
       <SecNavBar></SecNavBar>
-      <b-icon icon="exclamation-circle-fill" variant="primary"></b-icon>
               <b-carousel
                   id="carousel-1"
                   v-model="slide"

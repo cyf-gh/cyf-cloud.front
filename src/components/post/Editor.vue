@@ -267,7 +267,7 @@ export default {
                 this.postId = this.$route.query.id;
                 this.axios
                     .get(apiAddr + "/v1x1/post", {
-                        params: { id: this.postId },
+                        params: { id: this.postId, style: "default" },
                         withCredentials: true,
                     })
                     .then((res) => {

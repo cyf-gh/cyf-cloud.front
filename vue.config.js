@@ -65,32 +65,32 @@ module.exports = {
 	productionSourceMap: false,
 	
 	// // 它支持webPack-dev-server的所有选项
-	// devServer: {
-	// 	port: 8887,
-	// 	https: false,
-	// 	disableHostCheck: true,
-	// 	// 配置多个代理
-	// 	proxy: {
-	// 		'/vt': {
-	// 			enable: true,
-	// 			target: 'http://localhost:2334/v1/vt/',
-	// 			secure: false,
-	// 			changeOrigin: true,
-	// 			pathRewrite: {
-	// 				'^/vt': '', // rewrite path
-	// 			}
-	// 		},
-	// 		'/v1x1': {
-	// 			enable: true,
-	// 			target: 'http://192.168.50.242:2334/v1x1/',
-	// 			secure: false,
-	// 			changeOrigin: true,
-	// 			pathRewrite: {
-	// 				'^/v1x1': '', // rewrite path
-	// 			}				
-	// 		}
-	// 	}
-	// },
+	devServer: {
+		port: 8887,
+		https: false,
+		disableHostCheck: true,
+		// 配置多个代理
+		proxy: {
+			'/vt': {
+				enable: true,
+				target: 'http://localhost:2334/v1/vt/',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {
+					'^/vt': '', // rewrite path
+				}
+			},
+			'/v1x1': {
+				enable: true,
+				target: 'http://192.168.50.242:2334/v1x1/',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {
+					'^/v1x1': '', // rewrite path
+				}				
+			}
+		}
+	},
 	// chainWebpack: config => {
 	// 	if (isProduction) {
 	// 		// 压缩代码

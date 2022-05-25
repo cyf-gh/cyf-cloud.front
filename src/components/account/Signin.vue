@@ -16,8 +16,8 @@
                     <b-badge
                         variant="primary"
                         target="blank"
-                        href="http://se.cyf-cloud.cn/auth/register"
-                        >如果你是MC玩家请点击这里注册皮肤站点账户</b-badge
+                        href="http://ppr.cyf-cloud.cn"
+                        >MC玩家请点击这里注册</b-badge
                     >
                 </h4>
             </div>
